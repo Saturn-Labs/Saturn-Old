@@ -4,6 +4,9 @@
     <Filter Include="Saturn">
       <UniqueIdentifier>{A21698D0-8EB8-C2A6-7773-D6FA63B449F7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Saturn\Events">
+      <UniqueIdentifier>{46B8012B-B278-7D61-7BB3-C6DEE732C23D}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Saturn.h" />
@@ -16,9 +19,30 @@
     <ClInclude Include="src\Saturn\EntryPoint.h">
       <Filter>Saturn</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\Events\ApplicationEvent.h">
+      <Filter>Saturn\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Events\Event.h">
+      <Filter>Saturn\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Events\EventCategory.h">
+      <Filter>Saturn\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Events\EventType.h">
+      <Filter>Saturn\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Events\KeyEvent.h">
+      <Filter>Saturn\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Events\MouseEvent.h">
+      <Filter>Saturn\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Log.h">
       <Filter>Saturn</Filter>
     </ClInclude>
+    <ClInclude Include="src\saturnpch.h" />
+    <ClInclude Include="src\Saturn\Window.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Saturn\Application.cpp">
@@ -27,5 +51,7 @@
     <ClCompile Include="src\Saturn\Log.cpp">
       <Filter>Saturn</Filter>
     </ClCompile>
+    <ClCompile Include="src\saturnpch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

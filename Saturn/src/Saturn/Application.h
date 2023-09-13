@@ -1,6 +1,5 @@
 #pragma once
-
-#include "Core.h"
+#include "Window.h"
 
 namespace Saturn 
 {
@@ -11,6 +10,9 @@ namespace Saturn
 		virtual ~Application();
 
 		void Run();
+	private:
+		std::unique_ptr<Window> m_Window = nullptr;
+		bool m_Running = true;
 	};
 
 	//to client

@@ -10,6 +10,11 @@ workspace "Saturn"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Saturn/vendor/GLFW/include"
+
+include "Saturn/vendor/GLFW"
+
 project "Saturn"
     location "Saturn"
     kind "SharedLib"
@@ -18,6 +23,9 @@ project "Saturn"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "saturnpch.h"
+    pchsource "Saturn/src/saturnpch.cpp"
+    
     files 
     {
         "%{prj.name}/src/**.h",
@@ -29,7 +37,15 @@ project "Saturn"
 
     includedirs
     {
-        "Saturn/vendor/spdlog/include"
+        "Saturn/vendor/spdlog/include",
+        "Saturn/src",
+        "%{IncludeDir.GLFW}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter "system:windows"
