@@ -8,7 +8,7 @@ namespace Saturn
 	public:
 		inline int GetKeyCode() const
 		{
-			m_KeyCode;
+			return m_KeyCode;
 		}
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)

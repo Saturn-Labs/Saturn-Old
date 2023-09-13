@@ -83,7 +83,8 @@
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -110,6 +111,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -137,6 +139,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -163,13 +166,17 @@
     <ClInclude Include="src\Saturn\Events\EventType.h" />
     <ClInclude Include="src\Saturn\Events\KeyEvent.h" />
     <ClInclude Include="src\Saturn\Events\MouseEvent.h" />
+    <ClInclude Include="src\Saturn\Layer.h" />
+    <ClInclude Include="src\Saturn\LayerStack.h" />
     <ClInclude Include="src\Saturn\Log.h" />
-    <ClInclude Include="src\saturnpch.h" />
     <ClInclude Include="src\Saturn\Window.h" />
+    <ClInclude Include="src\saturnpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Saturn\Application.cpp" />
+    <ClCompile Include="src\Saturn\Layer.cpp" />
+    <ClCompile Include="src\Saturn\LayerStack.cpp" />
     <ClCompile Include="src\Saturn\Log.cpp" />
     <ClCompile Include="src\saturnpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

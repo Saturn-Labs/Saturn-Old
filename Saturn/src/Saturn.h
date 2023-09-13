@@ -9,6 +9,7 @@
 #include "Saturn/Events/ApplicationEvent.h"
 #include "Saturn/Events/KeyEvent.h"
 #include "Saturn/Events/MouseEvent.h"
+#include "Saturn/Layer.h"
 
 #pragma region Entry Point
 #include "Saturn/EntryPoint.h"
