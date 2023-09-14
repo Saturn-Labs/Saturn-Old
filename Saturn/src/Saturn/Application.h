@@ -7,6 +7,8 @@
 #include "Saturn/LayerStack.h"
 #include "Saturn/Layer.h"
 
+#include "Saturn/ImGui/ImGuiLayer.h"
+
 namespace Saturn 
 {
 	class SATURNAPI Application
@@ -34,6 +36,7 @@ namespace Saturn
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window = nullptr;
+		ImGuiLayer* m_ImGuiLayer = nullptr;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	private:

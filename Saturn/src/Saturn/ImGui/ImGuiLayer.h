@@ -17,22 +17,15 @@ namespace Saturn
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnAttach() override;
-		void OnDetach() override;
-		void OnUpdate() override;
-		void OnEvent(Event& e) override;
+		virtual void OnAttach() override final;
+		virtual void OnDetach() override final;
+		virtual void OnImGuiRender() override final;
+
+		void Begin();
+		void End();
 	private:
 		inline static ImGuiKey GetImGuiKeyForKeyCode(Saturn::KeyCode keycode);
 		inline static ImGuiKey GetImGuiModForKeyCode(Saturn::KeyCode keycode);
-
-		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
-		bool OnMouseMovedEvent(MouseMovedEvent& e);
-		bool OnKeyPressedEvent(KeyPressedEvent& e);
-		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-		bool OnKeyTypedEvent(KeyTypedEvent& e);
-		bool OnWindowResizeEvent(WindowResizeEvent& e);
 	private:
 		float m_Time = 0;
 	};

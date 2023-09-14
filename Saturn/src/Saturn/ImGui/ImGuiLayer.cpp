@@ -1,8 +1,8 @@
 #include "saturnpch.h"
 #include "ImGuiLayer.h"
 #include "Saturn/Application.h"
-#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
-
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 //TEMP
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -20,57 +20,74 @@ namespace Saturn
 
 	void ImGuiLayer::OnAttach()
 	{
-		ImGui::CreateContext();
+        //SETUP IMGUI
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+		//SETUP IMGUI STYLES
 		ImGui::StyleColorsDark();
 
-		ImGuiIO& io = ImGui::GetIO();
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+        ImGuiStyle& style = ImGui::GetStyle();
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            style.WindowRounding = 0.0f;
+            style.Colors[ImGuiCol_WindowBg].w - 1.0f;
+        }
+
 
 		Application& app = Application::Get();
-		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
+        GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+		//io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
 	void ImGuiLayer::OnDetach()
 	{
-
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnUpdate()
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
+    void ImGuiLayer::OnImGuiRender()
+    {
+        static bool showDemo = true;
+        ImGui::ShowDemoWindow(&showDemo);
 
-		float time = glfwGetTime();
-		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
-		m_Time = time;
+        if (ImGui::IsKeyPressed(ImGuiKey_Z, false))
+            showDemo = !showDemo;
+    }
 
-		static bool show = true;
-		if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_Insert, false))
-			show = !show;
+    void ImGuiLayer::Begin()
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+    }
 
-		if (show)
-			ImGui::ShowDemoWindow(&show);
+    void ImGuiLayer::End()
+    {
+        ImGuiIO& io = ImGui::GetIO();
+        Application& app = Application::Get();
+        io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	}
+        // Render part
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-	void ImGuiLayer::OnEvent(Event& e)
-	{
-		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<MouseButtonPressedEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnMouseButtonPressedEvent));
-		dispatcher.Dispatch<MouseButtonReleasedEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnMouseButtonReleasedEvent));
-		dispatcher.Dispatch<MouseScrolledEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnMouseScrolledEvent));
-		dispatcher.Dispatch<MouseMovedEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnMouseMovedEvent));
-		dispatcher.Dispatch<KeyPressedEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnKeyPressedEvent));
-		dispatcher.Dispatch<KeyReleasedEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnKeyReleasedEvent));
-		dispatcher.Dispatch<KeyTypedEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnKeyTypedEvent));
-		dispatcher.Dispatch<WindowResizeEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnWindowResizeEvent));
-	}
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
+    }
 
 	inline ImGuiKey ImGuiLayer::GetImGuiKeyForKeyCode(Saturn::KeyCode keycode)
     {
@@ -204,67 +221,4 @@ namespace Saturn
                 return ImGuiKey_None;
         }
     }
-
-	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddMouseButtonEvent((int)e.GetMouseButton(), true);
-		return true;
-	}
-	bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddMouseButtonEvent((int)e.GetMouseButton(), false);
-		return true;
-	}
-	bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddMouseWheelEvent(e.GetXOffset(), e.GetYOffset());
-		return true;
-	}
-	bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddMousePosEvent(e.GetX(), e.GetY());
-        if (io.WantCaptureMouse)
-		    return true;
-        return false;
-	}
-    bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddKeyEvent(ImGuiLayer::GetImGuiKeyForKeyCode(e.GetKeyCode()), true);
-
-        ImGuiKey modKey = ImGuiLayer::GetImGuiModForKeyCode(e.GetKeyCode());
-        if (modKey != ImGuiKey_None)
-            io.AddKeyEvent(modKey, true);
-		return true;
-	}
-	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddKeyEvent(ImGuiLayer::GetImGuiKeyForKeyCode(e.GetKeyCode()), false);
-
-        ImGuiKey modKey = ImGuiLayer::GetImGuiModForKeyCode(e.GetKeyCode());
-        if (modKey != ImGuiKey_None)
-            io.AddKeyEvent(modKey, false);
-		return true;
-	}
-    bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e)
-    {
-        ImGuiIO& io = ImGui::GetIO();
-        io.AddInputCharacter(e.GetCharacter());
-        if (io.WantTextInput)
-            return true;
-        return false;
-    }
-	bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
-        io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-        glViewport(0, 0, e.GetWidth(), e.GetHeight());
-		return true;
-	}
 }

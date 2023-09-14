@@ -4,6 +4,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "Saturn/Input.h"
+#include "glm/glm.hpp"
 
 namespace Saturn 
 {
@@ -16,6 +17,9 @@ namespace Saturn
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -29,11 +33,13 @@ namespace Saturn
 			glClearColor(0.2f, 1, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
-
 			if (Input::GetKeyPressed(Saturn::KeyCode::Z))
 				ST_CORE_TRACE("Z Input test");
+
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
 		}

@@ -1,6 +1,6 @@
 workspace "Saturn"
     architecture "x64"
-    starterproject "Sandbox"
+    startproject "Sandbox"
 
     configurations
     {
@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Saturn/vendor/GLFW/include"
 IncludeDir["Glad"] = "Saturn/vendor/Glad/include"
 IncludeDir["ImGui"] = "Saturn/vendor/imgui"
+IncludeDir["glm"] = "Saturn/vendor/glm"
 
 group "Dependencies"
     include "Saturn/vendor/GLFW"
@@ -52,6 +53,7 @@ project "Saturn"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}/backends",
         "%{IncludeDir.ImGui}",
+        "%{IncludeDir.glm}"
     }
 
     links
@@ -115,7 +117,9 @@ project "Sandbox"
     includedirs
     {
         "Saturn/vendor/spdlog/include",
-        "Saturn/src"
+        "Saturn/src",
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.ImGui}"
     }
 
     links

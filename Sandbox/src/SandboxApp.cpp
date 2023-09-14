@@ -5,7 +5,7 @@ class Sandbox : public Saturn::Application
 public:
 	Sandbox()
 	{
-		PushOverlay(new Saturn::ImGuiLayer());
+		
 	}
 	
 	~Sandbox()
