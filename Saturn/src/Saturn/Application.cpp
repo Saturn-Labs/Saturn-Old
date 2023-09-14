@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "Core.h"
 #include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "Saturn/Input.h"
 
 namespace Saturn 
 {
@@ -29,6 +31,9 @@ namespace Saturn
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			if (Input::GetKeyPressed(Saturn::KeyCode::Z))
+				ST_CORE_TRACE("Z Input test");
 
 			m_Window->OnUpdate();
 		}

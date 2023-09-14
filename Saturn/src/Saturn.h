@@ -11,6 +11,9 @@
 #include "Saturn/Events/MouseEvent.h"
 #include "Saturn/ImGui/ImGuiLayer.h"
 #include "Saturn/Layer.h"
+#include "Saturn/Input.h"
+#include "Saturn/MouseButton.h"
+#include "Saturn/KeyCode.h"
 
 #pragma region Entry Point
 #include "Saturn/EntryPoint.h"

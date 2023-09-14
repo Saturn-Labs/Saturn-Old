@@ -3,11 +3,14 @@
 #include "Saturn/Events/ApplicationEvent.h"
 #include "Saturn/Events/KeyEvent.h"
 #include "Saturn/Events/MouseEvent.h"
+#include "Saturn/KeyCode.h"
 
 enum ImGuiKey;
-
 namespace Saturn
 {
+	enum class MouseButton;
+	enum class KeyCode;
+
 	class SATURNAPI ImGuiLayer : public Layer
 	{
 	public:
@@ -19,8 +22,8 @@ namespace Saturn
 		void OnUpdate() override;
 		void OnEvent(Event& e) override;
 	private:
-		inline static ImGuiKey GetImGuiForGLFWKey(int keycode);
-		inline static ImGuiKey GetImGuiModForGLFWKey(int keycode);
+		inline static ImGuiKey GetImGuiKeyForKeyCode(Saturn::KeyCode keycode);
+		inline static ImGuiKey GetImGuiModForKeyCode(Saturn::KeyCode keycode);
 
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);

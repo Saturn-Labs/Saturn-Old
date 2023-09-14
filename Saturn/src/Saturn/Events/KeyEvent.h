@@ -1,28 +1,29 @@
 #pragma once
 #include "Event.h"
+#include "Saturn/KeyCode.h"
 
 namespace Saturn
 {
 	class SATURNAPI KeyEvent : public Event
 	{
 	public:
-		inline int GetKeyCode() const
+		inline Saturn::KeyCode GetKeyCode() const
 		{
 			return m_KeyCode;
 		}
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
-		KeyEvent(int keycode)
+		KeyEvent(Saturn::KeyCode keycode)
 			: m_KeyCode(keycode) { }
 
-		int m_KeyCode;
+		Saturn::KeyCode m_KeyCode;
 	};
 
 	class SATURNAPI KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int keycode, int repeatCount)
+		KeyPressedEvent(Saturn::KeyCode keycode, int repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) { }
 
 		inline int GetRepeatCount() const
@@ -33,7 +34,7 @@ namespace Saturn
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
+			ss << "KeyPressedEvent: " << (int)m_KeyCode << " (" << m_RepeatCount << " repeats)";
 			return ss.str();
 		}
 
@@ -45,13 +46,13 @@ namespace Saturn
 	class SATURNAPI KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(int keycode)
+		KeyReleasedEvent(Saturn::KeyCode keycode)
 			: KeyEvent(keycode) { }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleaseEvent: " << m_KeyCode;
+			ss << "KeyReleaseEvent: " << (int)m_KeyCode;
 			return ss.str();
 		}
 

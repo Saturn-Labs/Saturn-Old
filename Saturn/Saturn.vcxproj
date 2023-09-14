@@ -83,8 +83,7 @@
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -111,7 +110,6 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -139,7 +137,6 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -168,23 +165,29 @@
     <ClInclude Include="src\Saturn\Events\KeyEvent.h" />
     <ClInclude Include="src\Saturn\Events\MouseEvent.h" />
     <ClInclude Include="src\Saturn\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Saturn\Input.h" />
+    <ClInclude Include="src\Saturn\KeyCode.h" />
     <ClInclude Include="src\Saturn\Layer.h" />
     <ClInclude Include="src\Saturn\LayerStack.h" />
     <ClInclude Include="src\Saturn\Log.h" />
+    <ClInclude Include="src\Saturn\MouseButton.h" />
     <ClInclude Include="src\Saturn\Window.h" />
     <ClInclude Include="src\saturnpch.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Saturn\Application.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Saturn\Input.cpp" />
     <ClCompile Include="src\Saturn\Layer.cpp" />
     <ClCompile Include="src\Saturn\LayerStack.cpp" />
     <ClCompile Include="src\Saturn\Log.cpp" />
     <ClCompile Include="src\saturnpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

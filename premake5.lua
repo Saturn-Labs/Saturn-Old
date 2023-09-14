@@ -1,5 +1,6 @@
 workspace "Saturn"
     architecture "x64"
+    starterproject "Sandbox"
 
     configurations
     {
@@ -15,14 +16,17 @@ IncludeDir["GLFW"] = "Saturn/vendor/GLFW/include"
 IncludeDir["Glad"] = "Saturn/vendor/Glad/include"
 IncludeDir["ImGui"] = "Saturn/vendor/imgui"
 
-include "Saturn/vendor/GLFW"
-include "Saturn/vendor/Glad"
-include "Saturn/vendor/imgui"
+group "Dependencies"
+    include "Saturn/vendor/GLFW"
+    include "Saturn/vendor/Glad"
+    include "Saturn/vendor/imgui"
+group ""
 
 project "Saturn"
     location "Saturn"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -72,28 +76,29 @@ project "Saturn"
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
         }
 
     filter "configurations:Debug"
         defines "ST_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "ST_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "ST_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -130,15 +135,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "ST_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "ST_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "ST_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"

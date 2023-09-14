@@ -83,19 +83,19 @@ namespace Saturn
 			{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent event(key, 0);
+					KeyPressedEvent event((Saturn::KeyCode)key, 0);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent event(key);
+					KeyReleasedEvent event((Saturn::KeyCode)key);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent event(key, 1);
+					KeyPressedEvent event((Saturn::KeyCode)key, 1);
 					data.EventCallback(event);
 					break;
 				}
@@ -116,13 +116,13 @@ namespace Saturn
 			{
 				case GLFW_PRESS:
 				{
-					MouseButtonPressedEvent event(button);
+					MouseButtonPressedEvent event((MouseButton)button);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					MouseButtonReleasedEvent event(button);
+					MouseButtonReleasedEvent event((MouseButton)button);
 					data.EventCallback(event);
 					break;
 				}
@@ -166,5 +166,10 @@ namespace Saturn
 	bool WindowsWindow::IsVSync() const
 	{
 		return m_Data.VSync;
+	}
+
+	void* WindowsWindow::GetNativeWindow() const
+	{
+		return m_Window;
 	}
 }

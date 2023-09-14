@@ -71,6 +71,10 @@
       <Filter>Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\saturnpch.h" />
+    <ClInclude Include="src\Saturn\Input.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Saturn\MouseButton.h" />
+    <ClInclude Include="src\Saturn\KeyCode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
@@ -95,5 +99,7 @@
       <Filter>Saturn</Filter>
     </ClCompile>
     <ClCompile Include="src\saturnpch.cpp" />
+    <ClCompile Include="src\Saturn\Input.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

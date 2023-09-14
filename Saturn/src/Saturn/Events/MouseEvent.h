@@ -1,5 +1,6 @@
 #pragma once
 #include "Event.h"
+#include "Saturn/MouseButton.h"
 
 namespace Saturn
 {
@@ -64,29 +65,29 @@ namespace Saturn
 	class SATURNAPI MouseButtonEvent : public Event
 	{
 	public:
-		inline int GetMouseButton() const
+		inline MouseButton GetMouseButton() const
 		{
 			return m_Button;
 		}
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryMouseButton | EventCategoryInput)
 	protected:
-		MouseButtonEvent(int button)
+		MouseButtonEvent(MouseButton button)
 			: m_Button(button) { }
 
-		int m_Button;
+		MouseButton m_Button;
 	};
 
 	class SATURNAPI MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int button)
+		MouseButtonPressedEvent(MouseButton button)
 			: MouseButtonEvent(button) { }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << m_Button;
+			ss << "MouseButtonPressedEvent: " << (int)m_Button;
 			return ss.str();
 		}
 
@@ -96,13 +97,13 @@ namespace Saturn
 	class SATURNAPI MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int button)
+		MouseButtonReleasedEvent(MouseButton button)
 			: MouseButtonEvent(button) { }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonReleasedEvent: " << m_Button;
+			ss << "MouseButtonReleasedEvent: " << (int)m_Button;
 			return ss.str();
 		}
 

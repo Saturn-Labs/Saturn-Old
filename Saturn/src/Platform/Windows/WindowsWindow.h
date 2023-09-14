@@ -31,6 +31,7 @@ namespace Saturn
 
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSync() const override;
+		virtual void* GetNativeWindow() const override;
 	private:
 		virtual void Initialize(const WindowProps& props);
 		virtual void Shutdown();

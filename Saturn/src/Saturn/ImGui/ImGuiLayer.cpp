@@ -72,9 +72,9 @@ namespace Saturn
 		dispatcher.Dispatch<WindowResizeEvent>(ST_BIND_EVENTFN(&ImGuiLayer::OnWindowResizeEvent));
 	}
 
-	inline ImGuiKey ImGuiLayer::GetImGuiForGLFWKey(int keycode)
+	inline ImGuiKey ImGuiLayer::GetImGuiKeyForKeyCode(Saturn::KeyCode keycode)
     {
-        switch (keycode)
+        switch ((int)keycode)
         {
             case GLFW_KEY_TAB: return ImGuiKey_Tab;
             case GLFW_KEY_LEFT: return ImGuiKey_LeftArrow;
@@ -184,22 +184,22 @@ namespace Saturn
             default: return ImGuiKey_None;
         }
     }
-    inline ImGuiKey ImGuiLayer::GetImGuiModForGLFWKey(int keycode)
+    inline ImGuiKey ImGuiLayer::GetImGuiModForKeyCode(Saturn::KeyCode keycode)
     {
-        switch (keycode)
+        switch ((int)keycode)
         {
             case GLFW_KEY_LEFT_CONTROL:
             case GLFW_KEY_RIGHT_CONTROL:
                 return ImGuiKey_ModCtrl;
             case GLFW_KEY_LEFT_ALT:
             case GLFW_KEY_RIGHT_ALT:
-                return ImGuiKey_ModCtrl;
+                return ImGuiKey_ModAlt;
             case GLFW_KEY_LEFT_SHIFT:
             case GLFW_KEY_RIGHT_SHIFT:
-                return ImGuiKey_ModCtrl;
+                return ImGuiKey_ModShift;
             case GLFW_KEY_LEFT_SUPER:
             case GLFW_KEY_RIGHT_SUPER:
-                return ImGuiKey_ModCtrl;
+                return ImGuiKey_ModSuper;
             default:
                 return ImGuiKey_None;
         }
@@ -208,13 +208,13 @@ namespace Saturn
 	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.AddMouseButtonEvent(e.GetMouseButton(), true);
+		io.AddMouseButtonEvent((int)e.GetMouseButton(), true);
 		return true;
 	}
 	bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.AddMouseButtonEvent(e.GetMouseButton(), false);
+		io.AddMouseButtonEvent((int)e.GetMouseButton(), false);
 		return true;
 	}
 	bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e)
@@ -234,9 +234,9 @@ namespace Saturn
     bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.AddKeyEvent(ImGuiLayer::GetImGuiForGLFWKey(e.GetKeyCode()), true);
+		io.AddKeyEvent(ImGuiLayer::GetImGuiKeyForKeyCode(e.GetKeyCode()), true);
 
-        ImGuiKey modKey = GetImGuiModForGLFWKey(e.GetKeyCode());
+        ImGuiKey modKey = ImGuiLayer::GetImGuiModForKeyCode(e.GetKeyCode());
         if (modKey != ImGuiKey_None)
             io.AddKeyEvent(modKey, true);
 		return true;
@@ -244,9 +244,9 @@ namespace Saturn
 	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.AddKeyEvent(ImGuiLayer::GetImGuiForGLFWKey(e.GetKeyCode()), false);
+		io.AddKeyEvent(ImGuiLayer::GetImGuiKeyForKeyCode(e.GetKeyCode()), false);
 
-        ImGuiKey modKey = GetImGuiModForGLFWKey(e.GetKeyCode());
+        ImGuiKey modKey = ImGuiLayer::GetImGuiModForKeyCode(e.GetKeyCode());
         if (modKey != ImGuiKey_None)
             io.AddKeyEvent(modKey, false);
 		return true;
