@@ -1,4 +1,5 @@
 #pragma once
+#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM 1
 
 #ifdef ST_PLATFORM_WINDOWS
 	#if ST_BUILD_DLL
@@ -19,3 +20,4 @@
 #endif
 
 #define BIT(x) (1 << x)
+#define ST_BIND_EVENTFN(fn) std::bind(fn, this, std::placeholders::_1)

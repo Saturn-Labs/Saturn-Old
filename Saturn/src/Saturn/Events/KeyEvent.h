@@ -57,4 +57,30 @@ namespace Saturn
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	class SATURNAPI KeyTypedEvent : public Event
+	{
+	public:
+		KeyTypedEvent(int character)
+			: m_Character(character)
+		{
+		}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: '" << (char)m_Character << "'";
+			return ss.str();
+		}
+
+		inline unsigned int GetCharacter() const
+		{
+			return m_Character;
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+	private:
+		unsigned int m_Character;
+	};
 }

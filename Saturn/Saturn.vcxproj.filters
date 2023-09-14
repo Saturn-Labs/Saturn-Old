@@ -4,6 +4,9 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
@@ -13,8 +16,14 @@
     <Filter Include="Saturn\Events">
       <UniqueIdentifier>{46B8012B-B278-7D61-7BB3-C6DEE732C23D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Saturn\ImGui">
+      <UniqueIdentifier>{4C7D338D-38E0-C231-E165-FBE7CDA78EB4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -46,6 +55,9 @@
     <ClInclude Include="src\Saturn\Events\MouseEvent.h">
       <Filter>Saturn\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\ImGui\ImGuiLayer.h">
+      <Filter>Saturn\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Layer.h">
       <Filter>Saturn</Filter>
     </ClInclude>
@@ -61,11 +73,17 @@
     <ClInclude Include="src\saturnpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Application.cpp">
       <Filter>Saturn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp">
+      <Filter>Saturn\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Layer.cpp">
       <Filter>Saturn</Filter>

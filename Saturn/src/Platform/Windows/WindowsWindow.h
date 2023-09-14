@@ -1,6 +1,7 @@
 #pragma once
 #include "Saturn/Window.h"
-#include "GLFW/glfw3.h"
+
+struct GLFWwindow;
 
 namespace Saturn
 {

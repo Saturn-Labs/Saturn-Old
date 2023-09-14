@@ -12,8 +12,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Saturn/vendor/GLFW/include"
+IncludeDir["Glad"] = "Saturn/vendor/Glad/include"
+IncludeDir["ImGui"] = "Saturn/vendor/imgui"
 
 include "Saturn/vendor/GLFW"
+include "Saturn/vendor/Glad"
+include "Saturn/vendor/imgui"
 
 project "Saturn"
     location "Saturn"
@@ -39,12 +43,18 @@ project "Saturn"
     {
         "Saturn/vendor/spdlog/include",
         "Saturn/src",
-        "%{IncludeDir.GLFW}"
+        "Saturn/vendor/GLFW/include",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}/backends",
+        "%{IncludeDir.ImGui}",
     }
 
     links
     {
         "GLFW",
+        "Glad",
+        "ImGui",
         "opengl32.lib"
     }
 
@@ -56,7 +66,8 @@ project "Saturn"
         defines
         {
             "ST_PLATFORM_WINDOWS",
-            "ST_BUILD_DLL"
+            "ST_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands

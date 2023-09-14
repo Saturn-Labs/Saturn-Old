@@ -1,11 +1,17 @@
 #include "saturnpch.h"
 #include "Application.h"
 #include "Core.h"
+#include "glad/glad.h"
 
 namespace Saturn 
 {
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
+		ST_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 	}
@@ -18,6 +24,9 @@ namespace Saturn
 	{
 		while (m_Running)
 		{
+			glClearColor(0.2f, 1, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
