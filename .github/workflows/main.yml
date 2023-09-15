@@ -4,5 +4,8 @@ on: [push]
 jobs:
   COMPILE-WINDOWS:
     runs-on: windows-latest
+    
     steps: 
+      - uses: actions/checkout@v2
+      - name: Build binaries.
       - run: call ${{ github.workspace }}/generate_projects.bat
