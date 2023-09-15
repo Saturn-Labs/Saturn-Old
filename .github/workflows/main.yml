@@ -3,9 +3,9 @@ run-name: ${{ github.actor }}
 on: [push]
 jobs:
   COMPILE-WINDOWS:
-    runs-on: windows-latest
-    
+    runs-on: [self-hosted, Windows, X64]
     steps: 
       - uses: actions/checkout@v2
       - name: Build binaries.
-      - run: call ${{ github.workspace }}/generate_projects.bat
+        run: call ${{ github.workspace }}/generate_projects.bat
+        shell: cmd
