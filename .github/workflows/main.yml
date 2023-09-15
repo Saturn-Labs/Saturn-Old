@@ -5,4 +5,4 @@ jobs:
   COMPILE-WINDOWS:
     runs-on: windows-latest
     steps: 
-      - run: ./generate_projects.bat
+      - run: ${{ github.workspace }}/../generate_projects.bat
