@@ -1,13 +1,9 @@
 #pragma once
+#include "Saturn/Types.h"
+
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM 1
 
-#ifdef ST_PLATFORM_WINDOWS
-	#if ST_BUILD_DLL
-		#define SATURNAPI __declspec(dllexport)
-	#else
-		#define SATURNAPI __declspec(dllimport)
-	#endif
-#else
+#ifndef ST_PLATFORM_WINDOWS
 	#error Saturn only supports windows.
 #endif
 

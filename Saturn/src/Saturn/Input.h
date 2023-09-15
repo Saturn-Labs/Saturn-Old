@@ -4,7 +4,7 @@
 
 namespace Saturn
 {
-	class SATURNAPI Input
+	class Input
 	{
 	public:
 		inline static bool GetKeyPressed(Saturn::KeyCode keycode)

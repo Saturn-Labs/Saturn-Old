@@ -4,7 +4,7 @@
 
 namespace Saturn
 {
-	class SATURNAPI KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		inline Saturn::KeyCode GetKeyCode() const
@@ -20,7 +20,7 @@ namespace Saturn
 		Saturn::KeyCode m_KeyCode;
 	};
 
-	class SATURNAPI KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(Saturn::KeyCode keycode, int repeatCount)
@@ -43,7 +43,7 @@ namespace Saturn
 		int m_RepeatCount;
 	};
 
-	class SATURNAPI KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(Saturn::KeyCode keycode)
@@ -59,7 +59,7 @@ namespace Saturn
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class SATURNAPI KeyTypedEvent : public Event
+	class KeyTypedEvent : public Saturn::Event
 	{
 	public:
 		KeyTypedEvent(int character)

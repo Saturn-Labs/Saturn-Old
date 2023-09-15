@@ -11,7 +11,7 @@ namespace Saturn
 	enum class MouseButton;
 	enum class KeyCode;
 
-	class SATURNAPI ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

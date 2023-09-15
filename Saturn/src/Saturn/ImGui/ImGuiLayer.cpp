@@ -35,7 +35,7 @@ namespace Saturn
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
             style.WindowRounding = 0.0f;
-            style.Colors[ImGuiCol_WindowBg].w - 1.0f;
+            //style.Colors[ImGuiCol_WindowBg].w -= 1.0f;
         }
 
 
@@ -56,7 +56,7 @@ namespace Saturn
 
     void ImGuiLayer::OnImGuiRender()
     {
-        static bool showDemo = true;
+        static bool showDemo;
         ImGui::ShowDemoWindow(&showDemo);
 
         if (ImGui::IsKeyPressed(ImGuiKey_Z, false))
@@ -74,7 +74,7 @@ namespace Saturn
     {
         ImGuiIO& io = ImGui::GetIO();
         Application& app = Application::Get();
-        io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
+        io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 
         // Render part
         ImGui::Render();

@@ -20,6 +20,27 @@ namespace Saturn
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
+
+		m_BasicShader = std::shared_ptr<Shader>(new Shader("resources/shaders/basic.vert", "resources/shaders/basic.frag"));
+		m_VertexArray = std::shared_ptr<VertexArray>(VertexArray::Create());
+		float vertices[3 * 4]{
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f,
+		};
+		m_VertexBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+		BufferLayout layout = {
+			{ ShaderDataType::Float3, "a_Position" }
+		};
+		m_VertexBuffer->SetLayout(layout);
+		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
+		unsigned int indices[6]{
+			0, 1, 2,
+			2, 3, 0,
+		};
+		m_IndexBuffer = std::shared_ptr<IndexBuffer>(IndexBuffer::Create(indices, 6));
+		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 	}
 
 	Application::~Application()
@@ -30,11 +51,15 @@ namespace Saturn
 	{
 		while (m_Running)
 		{
-			glClearColor(0.2f, 1, 1, 1);
+			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			if (Input::GetKeyPressed(Saturn::KeyCode::Z))
-				ST_CORE_TRACE("Z Input test");
+			m_BasicShader->Use();
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer().lock()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)

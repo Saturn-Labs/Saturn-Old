@@ -25,9 +25,10 @@ group ""
 
 project "Saturn"
     location "Saturn"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++17"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -64,21 +65,18 @@ project "Saturn"
         "opengl32.lib"
     }
 
+    defines
+    {
+        "_CRT_SECURE_NO_WARNINGS"
+    }
+
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines
         {
             "ST_PLATFORM_WINDOWS",
-            "ST_BUILD_DLL",
             "GLFW_INCLUDE_NONE"
-        }
-
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
         }
 
     filter "configurations:Debug"
@@ -100,7 +98,8 @@ project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++17"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -128,8 +127,6 @@ project "Sandbox"
     }
 
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines

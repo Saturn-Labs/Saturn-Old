@@ -6,7 +6,7 @@
 
 namespace Saturn
 {
-	class SATURNAPI Log
+	class Log
 	{
 	public:
 		static void Initialize();

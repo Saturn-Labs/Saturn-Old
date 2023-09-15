@@ -23,19 +23,19 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
@@ -54,32 +54,29 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\Debug-windows-x86_64\Saturn\</OutDir>
     <IntDir>..\bin-int\Debug-windows-x86_64\Saturn\</IntDir>
     <TargetName>Saturn</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Release-windows-x86_64\Saturn\</OutDir>
     <IntDir>..\bin-int\Release-windows-x86_64\Saturn\</IntDir>
     <TargetName>Saturn</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Dist-windows-x86_64\Saturn\</OutDir>
     <IntDir>..\bin-int\Dist-windows-x86_64\Saturn\</IntDir>
     <TargetName>Saturn</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>ST_PLATFORM_WINDOWS;ST_BUILD_DLL;GLFW_INCLUDE_NONE;ST_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -90,19 +87,17 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Debug-windows-x86_64\Saturn\Saturn.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Saturn\Saturn.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Saturn\Saturn.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Saturn\Saturn.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>ST_PLATFORM_WINDOWS;ST_BUILD_DLL;GLFW_INCLUDE_NONE;ST_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -117,19 +112,17 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Release-windows-x86_64\Saturn\Saturn.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\Saturn\Saturn.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Saturn\Saturn.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Saturn\Saturn.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>ST_PLATFORM_WINDOWS;ST_BUILD_DLL;GLFW_INCLUDE_NONE;ST_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -144,14 +137,15 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Dist-windows-x86_64\Saturn\Saturn.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Saturn\Saturn.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Saturn\Saturn.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Saturn\Saturn.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Saturn.h" />
@@ -164,6 +158,7 @@
     <ClInclude Include="src\Saturn\Events\EventType.h" />
     <ClInclude Include="src\Saturn\Events\KeyEvent.h" />
     <ClInclude Include="src\Saturn\Events\MouseEvent.h" />
+    <ClInclude Include="src\Saturn\IO\IO.h" />
     <ClInclude Include="src\Saturn\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Saturn\Input.h" />
     <ClInclude Include="src\Saturn\KeyCode.h" />
@@ -171,22 +166,36 @@
     <ClInclude Include="src\Saturn\LayerStack.h" />
     <ClInclude Include="src\Saturn\Log.h" />
     <ClInclude Include="src\Saturn\MouseButton.h" />
+    <ClInclude Include="src\Saturn\Rendering\Buffer.h" />
+    <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h" />
+    <ClInclude Include="src\Saturn\Rendering\Renderer.h" />
+    <ClInclude Include="src\Saturn\Rendering\Shader.h" />
+    <ClInclude Include="src\Saturn\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Saturn\Types.h" />
     <ClInclude Include="src\Saturn\Window.h" />
     <ClInclude Include="src\saturnpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Saturn\Application.cpp" />
+    <ClCompile Include="src\Saturn\IO\IO.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Saturn\Input.cpp" />
     <ClCompile Include="src\Saturn\Layer.cpp" />
     <ClCompile Include="src\Saturn\LayerStack.cpp" />
     <ClCompile Include="src\Saturn\Log.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\Buffer.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\Shader.cpp" />
     <ClCompile Include="src\saturnpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

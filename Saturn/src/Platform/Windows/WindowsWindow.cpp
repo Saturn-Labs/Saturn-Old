@@ -7,6 +7,8 @@
 #include "Saturn/Events/KeyEvent.h"
 #include "Saturn/Events/MouseEvent.h"
 
+#include "Platform/OpenGL/OpenGLContext.h"
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
@@ -40,7 +42,8 @@ namespace Saturn
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		ST_CORE_INFO("Creating new window on Windows Platform, \"{0}\" - ({1}, {2})", props.Title, props.Width, props.Height);
+
+		ST_CORE_TRACE("Creating new window on Windows Platform, \"{0}\" - ({1}, {2})", props.Title, props.Width, props.Height);
 
 		if (!s_GLFWInitialized)
 		{
@@ -52,9 +55,11 @@ namespace Saturn
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		ST_CORE_ASSERT(status, "Failure on trying to initialize \"Glad\".");
+		m_Context = new OpenGLContext(m_Window);
+
+		m_Context->InitializeContext();
+		
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -132,14 +137,14 @@ namespace Saturn
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			MouseScrolledEvent event(xOffset, yOffset);
+			MouseScrolledEvent event((float)xOffset, (float)yOffset);
 			data.EventCallback(event);
 		});
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			MouseMovedEvent event(xPos, yPos);
+			MouseMovedEvent event((float)xPos, (float)yPos);
 			data.EventCallback(event);
 		});
 		glfwSetErrorCallback(GLFWErrorCallback);
@@ -154,7 +159,7 @@ namespace Saturn
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

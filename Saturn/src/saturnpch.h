@@ -9,6 +9,7 @@
 #include <functional>
 #include <sstream>
 #include <vector>
+#include <filesystem>
 #include <map>
 #include <unordered_map>
 #include <unordered_set>

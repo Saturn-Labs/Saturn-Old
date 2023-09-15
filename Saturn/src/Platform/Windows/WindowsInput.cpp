@@ -26,7 +26,7 @@ namespace Saturn
 		GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double x;
 		glfwGetCursorPos(window, &x, NULL);
-		return x;
+		return (float)x;
 	}
 
 	float WindowsInput::GetMouseYImpl()
@@ -34,6 +34,6 @@ namespace Saturn
 		GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double y;
 		glfwGetCursorPos(window, NULL, &y);
-		return y;
+		return (float)y;
 	}
 }

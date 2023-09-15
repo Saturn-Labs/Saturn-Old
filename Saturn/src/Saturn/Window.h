@@ -19,7 +19,7 @@ namespace Saturn
 	};
 
 	//Interface for window-based platforms
-	class SATURNAPI Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

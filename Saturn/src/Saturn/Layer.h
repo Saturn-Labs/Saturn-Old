@@ -5,7 +5,7 @@
 
 namespace Saturn
 {
-	class SATURNAPI Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");

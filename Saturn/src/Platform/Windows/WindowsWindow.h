@@ -1,5 +1,6 @@
 #pragma once
 #include "Saturn/Window.h"
+#include "Saturn/Rendering/GraphicsContext.h"
 
 struct GLFWwindow;
 
@@ -37,6 +38,7 @@ namespace Saturn
 		virtual void Shutdown();
 
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

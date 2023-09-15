@@ -3,7 +3,7 @@
 
 namespace Saturn
 {
-	class SATURNAPI WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
@@ -32,7 +32,7 @@ namespace Saturn
 		unsigned int m_Width, m_Height;
 	};
 
-	class SATURNAPI WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() 
@@ -43,7 +43,7 @@ namespace Saturn
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class SATURNAPI AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent()
@@ -54,7 +54,7 @@ namespace Saturn
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class SATURNAPI AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent()
@@ -65,7 +65,7 @@ namespace Saturn
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class SATURNAPI AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent()

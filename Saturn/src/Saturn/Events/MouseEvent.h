@@ -4,7 +4,7 @@
 
 namespace Saturn
 {
-	class SATURNAPI MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -33,7 +33,7 @@ namespace Saturn
 		float m_MouseX, m_MouseY;
 	};
 
-	class SATURNAPI MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset)
@@ -62,7 +62,7 @@ namespace Saturn
 		float m_XOffset, m_YOffset;
 	};
 
-	class SATURNAPI MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline MouseButton GetMouseButton() const
@@ -78,7 +78,7 @@ namespace Saturn
 		MouseButton m_Button;
 	};
 
-	class SATURNAPI MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(MouseButton button)
@@ -94,10 +94,10 @@ namespace Saturn
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class SATURNAPI MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(MouseButton button)
+		MouseButtonReleasedEvent(Saturn::MouseButton button)
 			: MouseButtonEvent(button) { }
 
 		std::string ToString() const override
