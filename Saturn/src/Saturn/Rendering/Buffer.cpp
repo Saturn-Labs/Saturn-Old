@@ -9,7 +9,7 @@ namespace Saturn
 	{
 		switch (Renderer::GetRendererAPI())
 		{
-			case RendererAPI::OpenGL:
+			case RendererAPI::API::OpenGL:
 				return new OpenGLVertexBuffer(vertices, size);
 				break;
 		}
@@ -20,7 +20,7 @@ namespace Saturn
 	{
 		switch (Renderer::GetRendererAPI())
 		{
-			case RendererAPI::OpenGL:
+			case RendererAPI::API::OpenGL:
 				return new OpenGLIndexBuffer(indices, size);
 				break;
 		}

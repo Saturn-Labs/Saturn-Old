@@ -12,6 +12,8 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+#include "Saturn/Input.h"
+
 namespace Saturn
 {
 	static bool s_GLFWInitialized = false;
@@ -88,18 +90,26 @@ namespace Saturn
 			{
 				case GLFW_PRESS:
 				{
+					Input::GetFrameKeyMap()[(Saturn::KeyCode)key] = Saturn::InputState::Down;
+					Input::GetStateKeyMap()[(Saturn::KeyCode)key] = Saturn::InputState::Down;
+
 					KeyPressedEvent event((Saturn::KeyCode)key, 0);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
+					Input::GetFrameKeyMap()[(Saturn::KeyCode)key] = Saturn::InputState::Up;
+					Input::GetStateKeyMap()[(Saturn::KeyCode)key] = Saturn::InputState::Up;
+
 					KeyReleasedEvent event((Saturn::KeyCode)key);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
+					Input::GetRepeatKeyMap()[(Saturn::KeyCode)key] = Saturn::InputState::Down;
+
 					KeyPressedEvent event((Saturn::KeyCode)key, 1);
 					data.EventCallback(event);
 					break;
@@ -121,12 +131,18 @@ namespace Saturn
 			{
 				case GLFW_PRESS:
 				{
+					Input::GetFrameMouseButtonMap()[(MouseButton)button] = InputState::Down;
+					Input::GetStateMouseButtonMap()[(MouseButton)button] = InputState::Down;
+
 					MouseButtonPressedEvent event((MouseButton)button);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
+					Input::GetFrameMouseButtonMap()[(MouseButton)button] = InputState::Up;
+					Input::GetStateMouseButtonMap()[(MouseButton)button] = InputState::Up;
+
 					MouseButtonReleasedEvent event((MouseButton)button);
 					data.EventCallback(event);
 					break;
@@ -135,6 +151,8 @@ namespace Saturn
 		});
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
+			Input::MouseScrollDelta = glm::vec2((float)xOffset, (float)yOffset);
+
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			MouseScrolledEvent event((float)xOffset, (float)yOffset);
@@ -142,6 +160,8 @@ namespace Saturn
 		});
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
+			Input::MousePosition = glm::vec2((float)xPos, (float)yPos);
+
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			MouseMovedEvent event((float)xPos, (float)yPos);
@@ -158,6 +178,7 @@ namespace Saturn
 
 	void WindowsWindow::OnUpdate()
 	{
+		Input::ResetKeyStates();
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}

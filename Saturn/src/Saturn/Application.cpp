@@ -1,10 +1,13 @@
 #include "saturnpch.h"
 #include "Application.h"
 #include "Core.h"
-#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "Saturn/Input.h"
 #include "glm/glm.hpp"
+
+#include "Saturn/Rendering/Renderer.h"
+
+
 
 namespace Saturn 
 {
@@ -20,27 +23,6 @@ namespace Saturn
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-
-		m_BasicShader = std::shared_ptr<Shader>(new Shader("resources/shaders/basic.vert", "resources/shaders/basic.frag"));
-		m_VertexArray = std::shared_ptr<VertexArray>(VertexArray::Create());
-		float vertices[3 * 4]{
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
-		};
-		m_VertexBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
-		BufferLayout layout = {
-			{ ShaderDataType::Float3, "a_Position" }
-		};
-		m_VertexBuffer->SetLayout(layout);
-		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
-		unsigned int indices[6]{
-			0, 1, 2,
-			2, 3, 0,
-		};
-		m_IndexBuffer = std::shared_ptr<IndexBuffer>(IndexBuffer::Create(indices, 6));
-		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 	}
 
 	Application::~Application()
@@ -51,12 +33,8 @@ namespace Saturn
 	{
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			m_BasicShader->Use();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer().lock()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include "Saturn/IO/IO.h"
 #include "glad/glad.h"
+#include "glm/gtc/type_ptr.hpp"
 
 namespace Saturn
 {
@@ -23,6 +24,15 @@ namespace Saturn
 	{
 		if (IsValid())
 			glUseProgram(m_Id);
+	}
+
+	void Shader::SetUniformMat4(const std::string& name, const glm::mat4& mat4) const
+	{
+		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		if (uniformLocation != -1)
+			glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(mat4));
+		else
+			ST_CORE_WARN("Trying to write on a invalid uniform \"{0}\" {1}", name, uniformLocation);
 	}
 
 	UInt32 Shader::CompileShaderProgram(const std::string& vertex, const std::string& fragment)

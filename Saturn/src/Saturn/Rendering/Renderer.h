@@ -1,23 +1,31 @@
 #pragma once
+#include "RendererAPI.h"
+#include "RenderCommand.h"
+#include "OrthographicCamera.h"
+#include "Shader.h"
 
 namespace Saturn
 {
-	enum class RendererAPI
-	{
-		None = 0,
-		OpenGL,
-		Direct3D,
-		Vulkan,
-		Metal
-	};
-
 	class Renderer
 	{
-		static RendererAPI s_RendererAPI;
 	public:
-		inline static RendererAPI GetRendererAPI()
+		static void BeginScene(OrthographicCamera& camera);
+		static void EndScene();
+
+		static void Submit(const std::shared_ptr<Shader> shader, const std::shared_ptr<VertexArray>& vertexArray);
+
+		inline static RendererAPI::API GetRendererAPI()
 		{
-			return s_RendererAPI;
+			return RendererAPI::GetRendererAPI();
 		}
+
+	public:
+	private:
+		struct SceneData
+		{
+			glm::mat4 ViewProjection = glm::mat4(1.0f);
+		};
+
+		static SceneData* m_SceneData;
 	};
 }

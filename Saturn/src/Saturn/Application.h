@@ -12,6 +12,7 @@
 #include "Rendering/Shader.h"
 #include "Rendering/Buffer.h"
 #include "Rendering/VertexArray.h"
+#include "Saturn/Rendering/OrthographicCamera.h"
 
 namespace Saturn 
 {
@@ -43,11 +44,6 @@ namespace Saturn
 		ImGuiLayer* m_ImGuiLayer = nullptr;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_BasicShader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<VertexBuffer> m_VertexBuffer;
-		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 	private:
 		static Application* s_Instance;
 	};

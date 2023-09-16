@@ -11,11 +11,11 @@ namespace Saturn
 	{
 		switch (Renderer::GetRendererAPI())
 		{
-			case RendererAPI::None:
+			case RendererAPI::API::None:
 				ST_CORE_ASSERT(false, "[Saturn rendering error] Render API none not supported!");
 				return nullptr;
 
-			case RendererAPI::OpenGL:
+			case RendererAPI::API::OpenGL:
 				return new OpenGLVertexArray();
 		}
 

@@ -1,5 +1,9 @@
 #pragma once
 
+#pragma region Entry Point
+#include "Saturn/EntryPoint.h"
+#pragma endregion
+
 #include <stdio.h>
 #include "Saturn/Application.h"
 #include "Saturn/Log.h"
@@ -14,7 +18,9 @@
 #include "Saturn/Input.h"
 #include "Saturn/MouseButton.h"
 #include "Saturn/KeyCode.h"
-
-#pragma region Entry Point
-#include "Saturn/EntryPoint.h"
-#pragma endregion
+#include "Saturn/Rendering/Buffer.h"
+#include "Saturn/Rendering/OrthographicCamera.h"
+#include "Saturn/Rendering/RenderCommand.h"
+#include "Saturn/Rendering/Renderer.h"
+#include "Saturn/Rendering/Shader.h"
+#include "Saturn/Rendering/VertexArray.h"

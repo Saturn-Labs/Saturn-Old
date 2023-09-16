@@ -145,8 +145,8 @@
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Saturn.h" />
     <ClInclude Include="src\Saturn\Application.h" />
@@ -168,7 +168,10 @@
     <ClInclude Include="src\Saturn\MouseButton.h" />
     <ClInclude Include="src\Saturn\Rendering\Buffer.h" />
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h" />
+    <ClInclude Include="src\Saturn\Rendering\OrthographicCamera.h" />
+    <ClInclude Include="src\Saturn\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Saturn\Rendering\Renderer.h" />
+    <ClInclude Include="src\Saturn\Rendering\RendererAPI.h" />
     <ClInclude Include="src\Saturn\Rendering\Shader.h" />
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h" />
     <ClInclude Include="src\Saturn\Types.h" />
@@ -178,8 +181,8 @@
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Saturn\Application.cpp" />
     <ClCompile Include="src\Saturn\IO\IO.cpp" />
@@ -190,12 +193,15 @@
     <ClCompile Include="src\Saturn\LayerStack.cpp" />
     <ClCompile Include="src\Saturn\Log.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Buffer.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\saturnpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
