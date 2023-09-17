@@ -1,19 +1,17 @@
-#include "saturnpch.h"
-#include "WindowsWindow.h"
-#include "Saturn/Core.h"
-#include "Saturn/Log.h"
+#include "SaturnPch.h"
+#include "Platform/Windows/WindowsWindow.h"
+#include "Platform/OpenGL/OpenGLContext.h"
+
+#include "Saturn/Input/Input.h"
+#include "Saturn/Core/Core.h"
+#include "Saturn/Core/Time.h"
+#include "Saturn/IO/Log.h"
 
 #include "Saturn/Events/ApplicationEvent.h"
 #include "Saturn/Events/KeyEvent.h"
 #include "Saturn/Events/MouseEvent.h"
 
-#include "Platform/OpenGL/OpenGLContext.h"
-
-#include "glad/glad.h"
 #include "GLFW/glfw3.h"
-
-#include "Saturn/Input.h"
-#include "Saturn/Core/Time.h"
 
 namespace Saturn
 {
@@ -67,6 +65,14 @@ namespace Saturn
 		SetVSync(true);
 
 		// GLFW WINDOW EVENTS
+		glfwSetWindowIconifyCallback(m_Window, [](GLFWwindow* window, int iconified)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			data.IsMinimized = iconified == 0 ? false : true;
+
+			WindowMinimizeEvent event;
+			data.EventCallback(event);
+		});
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);

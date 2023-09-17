@@ -1,5 +1,5 @@
 #pragma once
-#include "Saturn/Types.h"
+#include "Saturn/Common/Types.h"
 #include <memory>
 
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM 1

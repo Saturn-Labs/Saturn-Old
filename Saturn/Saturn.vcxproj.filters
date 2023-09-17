@@ -16,11 +16,20 @@
     <Filter Include="src\Saturn">
       <UniqueIdentifier>{D9EFF62D-C5A7-387B-2EAF-11D71A86D36B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Saturn\CGO">
+      <UniqueIdentifier>{A120482D-8DEE-3B33-7682-AC5962EF1798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\Camera">
+      <UniqueIdentifier>{3116159C-9D2C-1332-E6A3-9E5352F9E3B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\Camera\Controllers">
+      <UniqueIdentifier>{1766A5D1-837E-8CFB-4C2B-1C95B8022195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\Common">
+      <UniqueIdentifier>{F18E129D-5DA5-1033-A61C-9C541272E1BA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Saturn\Core">
       <UniqueIdentifier>{D1E34CD6-3D6F-BA9A-4680-3D8FB28A169B}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Saturn\ECS">
-      <UniqueIdentifier>{A328482D-8FF6-3B33-788A-AC5964F71798}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Saturn\Events">
       <UniqueIdentifier>{9D2D37A2-0944-3538-52BB-C059BE1006C0}</UniqueIdentifier>
@@ -31,8 +40,17 @@
     <Filter Include="src\Saturn\ImGui">
       <UniqueIdentifier>{C32354A0-AF1C-73F2-D84E-5877C4A652FE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Saturn\Input">
+      <UniqueIdentifier>{985E55A0-8457-74F2-AD89-597799E153FE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\Main">
+      <UniqueIdentifier>{ED2252D6-59AE-BF9A-62BF-428FCEC91B9B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Saturn\Rendering">
       <UniqueIdentifier>{661C377A-52AB-C043-FBC9-D43EE737D1E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\Shader">
+      <UniqueIdentifier>{5FB1DFC1-CBC7-DD57-143F-69798094AEDF}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -66,20 +84,32 @@
     <ClInclude Include="src\Saturn.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Application.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\CGO\Transform.h">
+      <Filter>src\Saturn\CGO</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Core.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Camera\Controllers\OrthoCameraController.h">
+      <Filter>src\Saturn\Camera\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Camera\OrthoCamera.h">
+      <Filter>src\Saturn\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Common\Types.h">
+      <Filter>src\Saturn\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Core\Application.h">
+      <Filter>src\Saturn\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Core\Core.h">
+      <Filter>src\Saturn\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Core\EntryPoint.h">
+      <Filter>src\Saturn\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Core\Time.h">
       <Filter>src\Saturn\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\ECS\Transform.h">
-      <Filter>src\Saturn\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Saturn\EntryPoint.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Core\Window.h">
+      <Filter>src\Saturn\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\ApplicationEvent.h">
       <Filter>src\Saturn\Events</Filter>
@@ -102,34 +132,31 @@
     <ClInclude Include="src\Saturn\IO\IO.h">
       <Filter>src\Saturn\IO</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\IO\Log.h">
+      <Filter>src\Saturn\IO</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\ImGui\ImGuiLayer.h">
       <Filter>src\Saturn\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Input.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Input\Input.h">
+      <Filter>src\Saturn\Input</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\KeyCode.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Input\KeyCode.h">
+      <Filter>src\Saturn\Input</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Layer.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Input\MouseButton.h">
+      <Filter>src\Saturn\Input</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\LayerStack.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Main\Layer.h">
+      <Filter>src\Saturn\Main</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Log.h">
-      <Filter>src\Saturn</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Saturn\MouseButton.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Main\LayerStack.h">
+      <Filter>src\Saturn\Main</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\Buffer.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h">
-      <Filter>src\Saturn\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Saturn\Rendering\OrthographicCamera.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\RenderCommand.h">
@@ -141,9 +168,6 @@
     <ClInclude Include="src\Saturn\Rendering\RendererAPI.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Rendering\Shader.h">
-      <Filter>src\Saturn\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\Texture.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
@@ -153,13 +177,16 @@
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Types.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Shader\Shader.h">
+      <Filter>src\Saturn\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Window.h">
-      <Filter>src\Saturn</Filter>
+    <ClInclude Include="src\Saturn\Shader\ShaderLib.h">
+      <Filter>src\Saturn\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\saturnpch.h">
+    <ClInclude Include="src\Saturn\Shader\ShaderPreprocessor.h">
+      <Filter>src\Saturn\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SaturnPch.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="vendor\stb\stb_image.h">
@@ -188,13 +215,22 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\Application.cpp">
-      <Filter>src\Saturn</Filter>
+    <ClCompile Include="src\Saturn\CGO\Transform.cpp">
+      <Filter>src\Saturn\CGO</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\ECS\Transform.cpp">
-      <Filter>src\Saturn\ECS</Filter>
+    <ClCompile Include="src\Saturn\Camera\Controllers\OrthoCameraController.cpp">
+      <Filter>src\Saturn\Camera\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Camera\OrthoCamera.cpp">
+      <Filter>src\Saturn\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Core\Application.cpp">
+      <Filter>src\Saturn\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\IO\IO.cpp">
+      <Filter>src\Saturn\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\IO\Log.cpp">
       <Filter>src\Saturn\IO</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\ImGui\ImGuiBuild.cpp">
@@ -203,22 +239,16 @@
     <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp">
       <Filter>src\Saturn\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\Input.cpp">
-      <Filter>src\Saturn</Filter>
+    <ClCompile Include="src\Saturn\Input\Input.cpp">
+      <Filter>src\Saturn\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\Layer.cpp">
-      <Filter>src\Saturn</Filter>
+    <ClCompile Include="src\Saturn\Main\Layer.cpp">
+      <Filter>src\Saturn\Main</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\LayerStack.cpp">
-      <Filter>src\Saturn</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Saturn\Log.cpp">
-      <Filter>src\Saturn</Filter>
+    <ClCompile Include="src\Saturn\Main\LayerStack.cpp">
+      <Filter>src\Saturn\Main</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\Buffer.cpp">
-      <Filter>src\Saturn\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Saturn\Rendering\OrthographicCamera.cpp">
       <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\RenderCommand.cpp">
@@ -230,9 +260,6 @@
     <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp">
       <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\Rendering\Shader.cpp">
-      <Filter>src\Saturn\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\Texture.cpp">
       <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
@@ -242,7 +269,16 @@
     <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp">
       <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="src\saturnpch.cpp">
+    <ClCompile Include="src\Saturn\Shader\Shader.cpp">
+      <Filter>src\Saturn\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Shader\ShaderLib.cpp">
+      <Filter>src\Saturn\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Shader\ShaderPreprocessor.cpp">
+      <Filter>src\Saturn\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SaturnPch.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stb\stb_image.cpp">

@@ -1,7 +1,6 @@
-#include "saturnpch.h"
-#include "Texture2D.h"
-
+#include "SaturnPch.h"
 #include "Platform/OpenGL/OpenGLTexture2D.h"
+#include "Saturn/Rendering/Texture2D.h"
 #include "Saturn/Rendering/Renderer.h"
 
 namespace Saturn

@@ -1,5 +1,5 @@
 #pragma once
-#include "Saturn/Rendering/Shader.h"
+#include "Saturn/Shader/Shader.h"
 #include <glm/glm.hpp>
 
 namespace Saturn

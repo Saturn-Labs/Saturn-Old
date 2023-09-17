@@ -1,6 +1,6 @@
-#include "saturnpch.h"
-#include "Buffer.h"
-#include "Renderer.h"
+#include "SaturnPch.h"
+#include "Saturn/Rendering/Buffer.h"
+#include "Saturn/Rendering/Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Saturn

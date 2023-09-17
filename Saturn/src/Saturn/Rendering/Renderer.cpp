@@ -1,6 +1,6 @@
-#include "saturnpch.h"
-#include "Renderer.h"
+#include "SaturnPch.h"
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "Saturn/Rendering/Renderer.h"
 
 namespace Saturn
 {
@@ -11,7 +11,17 @@ namespace Saturn
 		RenderCommand::Initialize();
 	}
 
-	void Renderer::BeginScene(OrthographicCamera& camera)
+	void Renderer::OnWindowResize(UInt32 x, UInt32 y, UInt32 width, UInt32 height)
+	{
+		RenderCommand::SetViewport(x, y, width, height);
+	}
+
+	float Renderer::GetTime()
+	{
+		return RenderCommand::GetTime();
+	}
+
+	void Renderer::BeginScene(const OrthoCamera& camera)
 	{
 		m_SceneData->ViewProjection = camera.GetViewProjectionMatrix();
 	}

@@ -1,13 +1,13 @@
 #include "SandboxLayer.h"
-#include "imgui.h"
-#include "Platform/OpenGL/OpenGLShader.h"
-#include "Platform/OpenGL/OpenGLTexture2D.h"
+
 #include "Saturn/Shader/ShaderPreprocessor.h"
-#include "Saturn/Application.h"
+#include "Saturn/Events/EventType.h"
+#include "Saturn/Core/Application.h"
+
+#include "imgui.h"
 
 SandboxLayer::SandboxLayer()
-	: Saturn::Layer("SandboxLayer"),
-	  m_Camera(-1.6f, 1.6f, -0.9f, 0.9f, -30, 1000)
+	: Saturn::Layer("SandboxLayer"), m_CameraController(1280.0f / 720.0f, true)
 {
 	Saturn::Application::Get().GetWindow().SetVSync(false);
 
@@ -58,7 +58,9 @@ void SandboxLayer::OnDetach()
 
 void SandboxLayer::OnUpdate(Saturn::Time time)
 {
-	Saturn::Renderer::BeginScene(m_Camera);
+	m_CameraController.OnUpdate(time);
+
+	Saturn::Renderer::BeginScene(m_CameraController.GetCamera());
 
 	Saturn::Transform transform;
 
@@ -92,4 +94,5 @@ void SandboxLayer::OnImGuiRender()
 
 void SandboxLayer::OnEvent(Saturn::Event& event)
 {
+	m_CameraController.OnEvent(event);
 }

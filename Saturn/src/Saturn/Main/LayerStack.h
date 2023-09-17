@@ -1,6 +1,6 @@
 #pragma once
-#include "Layer.h"
-#include "Core.h"
+#include "Saturn/Main/Layer.h"
+#include "Saturn/Core/Core.h"
 
 namespace Saturn
 {

@@ -3,10 +3,11 @@
 
 namespace Saturn
 {
-	class OrthographicCamera
+	class OrthoCamera
 	{
 	public:
-		OrthographicCamera(float left, float right, float bottom, float top, float near = -1.0f, float far = 1.0f);
+		OrthoCamera(float left, float right, float bottom, float top, float zNear = -1.0f, float zFar = 1.0f);
+		void SetProjection(float left, float right, float bottom, float top);
 
 		inline void SetPosition(glm::vec3 position)
 		{

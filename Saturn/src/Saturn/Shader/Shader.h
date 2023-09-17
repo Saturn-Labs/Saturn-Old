@@ -1,6 +1,7 @@
 #pragma once
-#include "Saturn/Core.h"
+#include "Saturn/Core/Core.h"
 #include <glm/glm.hpp>
+#include <string>
 
 namespace Saturn
 {

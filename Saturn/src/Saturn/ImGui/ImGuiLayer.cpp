@@ -1,8 +1,11 @@
-#include "saturnpch.h"
-#include "ImGuiLayer.h"
-#include "Saturn/Application.h"
+#include "SaturnPch.h"
+#include "Saturn/Core/Application.h"
+#include "Saturn/ImGui/ImGuiLayer.h"
+
+//IMGUI
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
+
 //TEMP
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>

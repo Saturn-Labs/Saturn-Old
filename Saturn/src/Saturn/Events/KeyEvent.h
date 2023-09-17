@@ -1,6 +1,6 @@
 #pragma once
-#include "Event.h"
-#include "Saturn/KeyCode.h"
+#include "Saturn/Input/KeyCode.h"
+#include "Saturn/Events/Event.h"
 
 namespace Saturn
 {

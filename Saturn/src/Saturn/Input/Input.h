@@ -1,6 +1,6 @@
 #pragma once
-#include "Saturn/KeyCode.h"
-#include "Saturn/MouseButton.h"
+#include "Saturn/Input/KeyCode.h"
+#include "Saturn/Input/MouseButton.h"
 #include "glm/glm.hpp"
 
 namespace Saturn

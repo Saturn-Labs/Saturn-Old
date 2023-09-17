@@ -1,5 +1,5 @@
-#include "saturnpch.h"
-#include "OpenGLContext.h"
+#include "SaturnPch.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
@@ -10,8 +10,6 @@ namespace Saturn
 		: m_WindowHandle(windowHandle)
 	{
 		ST_CORE_ASSERT(windowHandle, "Window handle doesnt exists!");
-
-		
 	}
 
 	void OpenGLContext::InitializeContext()

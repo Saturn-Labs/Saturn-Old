@@ -1,6 +1,6 @@
 #pragma once
-#include "Saturn/Core.h"
-#include "Buffer.h"
+#include "Saturn/Rendering/Buffer.h"
+#include "Saturn/Core/Core.h"
 
 namespace Saturn
 {

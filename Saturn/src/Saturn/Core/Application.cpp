@@ -1,12 +1,7 @@
-#include "saturnpch.h"
-#include "Application.h"
-#include "Core.h"
-#include "GLFW/glfw3.h"
-#include <glad/glad.h>
-#include "Saturn/Input.h"
-#include "glm/glm.hpp"
-
+#include "SaturnPch.h"
+#include "Saturn/Core/Application.h"
 #include "Saturn/Rendering/Renderer.h"
+#include "Saturn/Core/Core.h"
 #include "Saturn/Core/Time.h"
 
 namespace Saturn 
@@ -31,32 +26,22 @@ namespace Saturn
 	{
 	}
 
-	inline static void GLErr(GLenum source,
-		GLenum type,
-		GLuint id,
-		GLenum severity,
-		GLsizei length,
-		const GLchar* message,
-		const void* userParam)
-	{
-		ST_CORE_ERROR("[OpenGL Error] 0x{0:x} - 0x{1:x} - 0x{2:x}, {3}", type, id, severity, message);
-	}
-
 	void Application::Run() 
 	{
-		glDebugMessageCallback(GLErr, 0);
-
 		while (m_Running)
 		{
-			float time = (float)glfwGetTime();
+			float time = Renderer::GetTime();
 			Time deltaTime = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
 
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate(deltaTime);
+			if (!m_Minimized)
+			{
+				for (Layer* layer : m_LayerStack)
+					layer->OnUpdate(deltaTime);
+			}
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
@@ -71,6 +56,8 @@ namespace Saturn
 	{
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
+		dispatcher.Dispatch<WindowResizeEvent>(std::bind(&Application::OnWindowResize, this, std::placeholders::_1));
+		dispatcher.Dispatch<WindowMinimizeEvent>(std::bind(&Application::OnWindowMinimize, this, std::placeholders::_1));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
@@ -94,5 +81,19 @@ namespace Saturn
 	{
 		m_Running = false;
 		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() > 0 && e.GetHeight() > 0)
+			m_Minimized = false;
+		Renderer::OnWindowResize(0, 0, e.GetWidth(), e.GetHeight());
+		return false;
+	}
+
+	bool Application::OnWindowMinimize(WindowMinimizeEvent& e)
+	{
+		m_Minimized = true;
+		return false;
 	}
 }

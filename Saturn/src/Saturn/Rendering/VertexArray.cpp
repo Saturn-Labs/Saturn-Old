@@ -1,9 +1,7 @@
-#include "saturnpch.h"
-#include "VertexArray.h"
-
-#include "Renderer.h"
-
+#include "SaturnPch.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
+#include "Saturn/Rendering/VertexArray.h"
+#include "Saturn/Rendering/Renderer.h"
 
 namespace Saturn
 {

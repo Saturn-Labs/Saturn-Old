@@ -1,6 +1,6 @@
-#include "saturnpch.h"
-#include "ShaderLib.h"
-#include "Saturn/Core.h"
+#include "SaturnPch.h"
+#include "Saturn/Shader/ShaderLib.h"
+#include "Saturn/Core/Core.h"
 
 namespace Saturn
 {

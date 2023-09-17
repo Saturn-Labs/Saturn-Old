@@ -1,6 +1,6 @@
 #pragma once
-#include "Event.h"
-#include "Saturn/MouseButton.h"
+#include "Saturn/Input/MouseButton.h"
+#include "Saturn/Events/Event.h"
 
 namespace Saturn
 {

@@ -1,6 +1,6 @@
 #pragma once
-#include "Saturn/Window.h"
 #include "Saturn/Rendering/GraphicsContext.h"
+#include "Saturn/Core/Window.h"
 
 struct GLFWwindow;
 
@@ -45,6 +45,7 @@ namespace Saturn
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
+			bool IsMinimized;
 
 			EventCallbackFn EventCallback;
 		};

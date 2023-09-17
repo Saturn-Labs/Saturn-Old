@@ -1,6 +1,8 @@
 #pragma once
 #include "glm/glm.hpp"
 #include "Saturn/Rendering/VertexArray.h"
+#include "Saturn/Common/Types.h"
+#include "Saturn/Core/Core.h"
 #include <memory>
 
 namespace Saturn
@@ -21,6 +23,8 @@ namespace Saturn
 
 	public:
 		virtual void Initialize() = 0;
+		virtual void SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height) = 0;
+		virtual float GetTime() = 0;
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void Clear() = 0;
 

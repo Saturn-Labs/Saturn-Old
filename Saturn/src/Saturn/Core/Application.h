@@ -1,18 +1,12 @@
 #pragma once
-#include "Window.h"
-
+#include "Saturn/Core/Window.h"
 #include "Saturn/Events/ApplicationEvent.h"
 #include "Saturn/Events/KeyEvent.h"
 #include "Saturn/Events/MouseEvent.h"
-#include "Saturn/LayerStack.h"
-#include "Saturn/Layer.h"
-
+#include "Saturn/Main/LayerStack.h"
+#include "Saturn/Main/Layer.h"
 #include "Saturn/ImGui/ImGuiLayer.h"
-
-#include "Rendering/Shader.h"
-#include "Rendering/Buffer.h"
-#include "Rendering/VertexArray.h"
-#include "Saturn/Rendering/OrthographicCamera.h"
+#include "Saturn/IO/Log.h"
 
 namespace Saturn 
 {
@@ -39,11 +33,14 @@ namespace Saturn
 		}
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
+		bool OnWindowMinimize(WindowMinimizeEvent& e);
 
 	private:
 		Scoped<Window> m_Window = nullptr;
 		ImGuiLayer* m_ImGuiLayer = nullptr;
 		bool m_Running = true;
+		bool m_Minimized = false;
 		LayerStack m_LayerStack;
 		float m_LastFrameTime = 0.0f;
 

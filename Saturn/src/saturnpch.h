@@ -14,7 +14,10 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <array>
-#include "Saturn/Log.h"
+#include <cctype>
+#include <regex>
+
+#include "Saturn/IO/Log.h"
 
 #ifdef ST_PLATFORM_WINDOWS
 #include <Windows.h>

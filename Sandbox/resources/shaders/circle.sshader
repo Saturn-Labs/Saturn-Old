@@ -19,8 +19,6 @@ program:
         void frag()
         {
             fragCoord = gl_FragCoord;
-
-            f_Color = u_Color * fragCoord;
         }
     :fragment
 :program

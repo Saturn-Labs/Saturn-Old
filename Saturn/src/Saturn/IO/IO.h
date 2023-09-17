@@ -1,6 +1,7 @@
 #pragma once
-#include "Saturn/Core.h"
-#include "Saturn/Log.h"
+#include "Saturn/Core/Core.h"
+#include "Saturn/IO/Log.h"
+
 #include <stdexcept>
 #include <optional>
 #include <vector>

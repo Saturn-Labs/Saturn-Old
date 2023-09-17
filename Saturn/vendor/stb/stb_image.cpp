@@ -1,5 +1,5 @@
-#include "saturnpch.h"
-#include "Saturn/Core.h"
+#include "SaturnPch.h"
+#include "Saturn/Core/Core.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

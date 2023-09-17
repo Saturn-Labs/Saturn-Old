@@ -34,8 +34,8 @@ project "Saturn"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    pchheader "saturnpch.h"
-    pchsource "Saturn/src/saturnpch.cpp"
+    pchheader "SaturnPch.h"
+    pchsource "Saturn/src/SaturnPch.cpp"
     
     files 
     {

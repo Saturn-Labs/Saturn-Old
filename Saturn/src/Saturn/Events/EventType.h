@@ -1,21 +1,25 @@
 #pragma once
 
-enum class EventType
+namespace Saturn
 {
-	None = 0,
-	WindowClose,
-	WindowResize,
-	WindowFocus,
-	WindowLostFocus,
-	WindowMoved,
-	AppTick,
-	AppUpdate,
-	AppRender,
-	KeyPressed,
-	KeyReleased,
-	KeyTyped,
-	MouseButtonPressed,
-	MouseButtonReleased,
-	MouseMoved,
-	MouseScrolled
-};
+	enum class EventType
+	{
+		None = 0,
+		WindowClose,
+		WindowMinimize,
+		WindowResize,
+		WindowFocus,
+		WindowLostFocus,
+		WindowMoved,
+		AppTick,
+		AppUpdate,
+		AppRender,
+		KeyPressed,
+		KeyReleased,
+		KeyTyped,
+		MouseButtonPressed,
+		MouseButtonReleased,
+		MouseMoved,
+		MouseScrolled
+	};
+}

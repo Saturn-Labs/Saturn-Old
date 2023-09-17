@@ -1,8 +1,26 @@
 #pragma once
-#include "Event.h"
+#include "Saturn/Events/Event.h"
 
 namespace Saturn
 {
+	class WindowMinimizeEvent : public Event
+	{
+	public:
+		WindowMinimizeEvent()
+		{
+		}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "WindowMinimizeEvent";
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(WindowMinimize)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
 	class WindowResizeEvent : public Event
 	{
 	public:

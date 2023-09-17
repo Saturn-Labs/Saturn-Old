@@ -1,7 +1,7 @@
 #pragma once
-#include "saturnpch.h"
-#include "Core.h"
-#include "Events/Event.h"
+#include "SaturnPch.h"
+#include "Saturn/Events/Event.h"
+#include "Saturn/Core/Core.h"
 #include "Saturn/Core/Time.h"
 
 namespace Saturn

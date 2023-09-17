@@ -7,6 +7,8 @@ namespace Saturn
 	{
 	public:
 		virtual void Initialize() override final;
+		virtual void SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height) override final;
+		virtual float GetTime() override final;
 		virtual void SetClearColor(const glm::vec4& color) override final;
 		virtual void Clear() override final;
 

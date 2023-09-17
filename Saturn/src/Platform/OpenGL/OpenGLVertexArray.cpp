@@ -1,5 +1,5 @@
-#include "saturnpch.h"
-#include "OpenGLVertexArray.h"
+#include "SaturnPch.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 #include "glad/glad.h"
 
 namespace Saturn
@@ -65,7 +65,7 @@ namespace Saturn
 				ShaderDataTypeToGLBaseType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*)element.Offset
+				reinterpret_cast<const void*>(element.Offset)
 			);
 			index++;
 		}

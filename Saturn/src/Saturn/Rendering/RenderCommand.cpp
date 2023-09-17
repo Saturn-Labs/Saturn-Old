@@ -1,6 +1,5 @@
-#include "saturnpch.h"
-#include "RenderCommand.h"
-
+#include "SaturnPch.h"
+#include "Saturn/Rendering/RenderCommand.h"
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 namespace Saturn

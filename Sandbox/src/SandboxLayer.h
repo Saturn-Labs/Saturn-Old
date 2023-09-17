@@ -1,16 +1,17 @@
 #pragma once
-#include "Saturn/Layer.h"
-#include "Saturn/Rendering/Shader.h"
+#include "Saturn/Main/Layer.h"
+#include "Saturn/Shader/Shader.h"
+#include "Saturn/Shader/ShaderLib.h"
 #include "Saturn/Rendering/Buffer.h"
-#include "Saturn/Rendering/VertexArray.h"
-#include "Saturn/Rendering/OrthographicCamera.h"
 #include "Saturn/Rendering/Renderer.h"
-#include "Saturn/Input.h"
-#include "Saturn/Core/Time.h"
-#include "Saturn/CGO/Transform.h"
-#include "Saturn/Core.h"
 #include "Saturn/Rendering/Texture2D.h"
-#include "Saturn/Rendering/ShaderLib.h"
+#include "Saturn/Rendering/VertexArray.h"
+#include "Saturn/Camera/Controllers/OrthoCameraController.h"
+
+#include "Saturn/CGO/Transform.h"
+#include "Saturn/Input/Input.h"
+#include "Saturn/Core/Time.h"
+#include "Saturn/Core/Core.h"
 
 #include <memory>
 
@@ -33,7 +34,7 @@ private:
 	Saturn::Ref<Saturn::IndexBuffer> m_IndexBuffer = nullptr;
 	Saturn::Ref<Saturn::Texture2D> m_Texture = nullptr;
 
-	Saturn::OrthographicCamera m_Camera;
+	Saturn::OrthoCameraController m_CameraController;
 
 	glm::vec3 m_Position = glm::vec3();
 	glm::vec3 m_Rotation = glm::vec3();

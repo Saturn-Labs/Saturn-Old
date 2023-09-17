@@ -1,7 +1,10 @@
 #pragma once
-#include "saturnpch.h"
-#include "EventType.h"
-#include "EventCategory.h"
+#include <string>
+#include <functional>
+#include <iostream>
+
+#include "Saturn/Events/EventCategory.h"
+#include "Saturn/Events/EventType.h"
 
 namespace Saturn
 {

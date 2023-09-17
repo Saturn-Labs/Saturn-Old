@@ -1,11 +1,5 @@
-#include "saturnpch.h"
-#include <iostream>
-#include <algorithm>
-#include <cctype>
-#include <string>
-#include <regex>
-
-#include "ShaderPreprocessor.h"
+#include "SaturnPch.h"
+#include "Saturn/Shader/ShaderPreprocessor.h"
 
 namespace Saturn
 {

@@ -1,7 +1,8 @@
-#include "saturnpch.h"
-#include "OpenGLRendererAPI.h"
+#include "SaturnPch.h"
+#include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 #include "glad/glad.h"
+#include "GLFW/glfw3.h"
 
 namespace Saturn
 {
@@ -9,6 +10,16 @@ namespace Saturn
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	void OpenGLRendererAPI::SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height)
+	{
+		glViewport((int)x, (int)y, (int)width, (int)height);
+	}
+
+	float OpenGLRendererAPI::GetTime()
+	{
+		return (float)glfwGetTime();
 	}
 	 
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)

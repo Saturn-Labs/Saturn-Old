@@ -74,7 +74,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>SaturnPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -95,7 +95,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>SaturnPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -120,7 +120,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>SaturnPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -151,11 +151,15 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Saturn.h" />
-    <ClInclude Include="src\Saturn\Application.h" />
-    <ClInclude Include="src\Saturn\Core.h" />
+    <ClInclude Include="src\Saturn\CGO\Transform.h" />
+    <ClInclude Include="src\Saturn\Camera\Controllers\OrthoCameraController.h" />
+    <ClInclude Include="src\Saturn\Camera\OrthoCamera.h" />
+    <ClInclude Include="src\Saturn\Common\Types.h" />
+    <ClInclude Include="src\Saturn\Core\Application.h" />
+    <ClInclude Include="src\Saturn\Core\Core.h" />
+    <ClInclude Include="src\Saturn\Core\EntryPoint.h" />
     <ClInclude Include="src\Saturn\Core\Time.h" />
-    <ClInclude Include="src\Saturn\ECS\Transform.h" />
-    <ClInclude Include="src\Saturn\EntryPoint.h" />
+    <ClInclude Include="src\Saturn\Core\Window.h" />
     <ClInclude Include="src\Saturn\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Saturn\Events\Event.h" />
     <ClInclude Include="src\Saturn\Events\EventCategory.h" />
@@ -163,28 +167,25 @@
     <ClInclude Include="src\Saturn\Events\KeyEvent.h" />
     <ClInclude Include="src\Saturn\Events\MouseEvent.h" />
     <ClInclude Include="src\Saturn\IO\IO.h" />
+    <ClInclude Include="src\Saturn\IO\Log.h" />
     <ClInclude Include="src\Saturn\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Saturn\Input.h" />
-    <ClInclude Include="src\Saturn\KeyCode.h" />
-    <ClInclude Include="src\Saturn\Layer.h" />
-    <ClInclude Include="src\Saturn\LayerStack.h" />
-    <ClInclude Include="src\Saturn\Log.h" />
-    <ClInclude Include="src\Saturn\MouseButton.h" />
+    <ClInclude Include="src\Saturn\Input\Input.h" />
+    <ClInclude Include="src\Saturn\Input\KeyCode.h" />
+    <ClInclude Include="src\Saturn\Input\MouseButton.h" />
+    <ClInclude Include="src\Saturn\Main\Layer.h" />
+    <ClInclude Include="src\Saturn\Main\LayerStack.h" />
     <ClInclude Include="src\Saturn\Rendering\Buffer.h" />
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h" />
-    <ClInclude Include="src\Saturn\Rendering\OrthographicCamera.h" />
     <ClInclude Include="src\Saturn\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Saturn\Rendering\Renderer.h" />
     <ClInclude Include="src\Saturn\Rendering\RendererAPI.h" />
-    <ClInclude Include="src\Saturn\Rendering\Shader.h" />
-    <ClInclude Include="src\Saturn\Rendering\ShaderLib.h" />
     <ClInclude Include="src\Saturn\Rendering\Texture.h" />
     <ClInclude Include="src\Saturn\Rendering\Texture2D.h" />
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Saturn\Shader\Shader.h" />
+    <ClInclude Include="src\Saturn\Shader\ShaderLib.h" />
     <ClInclude Include="src\Saturn\Shader\ShaderPreprocessor.h" />
-    <ClInclude Include="src\Saturn\Types.h" />
-    <ClInclude Include="src\Saturn\Window.h" />
-    <ClInclude Include="src\saturnpch.h" />
+    <ClInclude Include="src\SaturnPch.h" />
     <ClInclude Include="vendor\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -195,29 +196,30 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture2D.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\Saturn\Application.cpp" />
-    <ClCompile Include="src\Saturn\ECS\Transform.cpp" />
+    <ClCompile Include="src\Saturn\CGO\Transform.cpp" />
+    <ClCompile Include="src\Saturn\Camera\Controllers\OrthoCameraController.cpp" />
+    <ClCompile Include="src\Saturn\Camera\OrthoCamera.cpp" />
+    <ClCompile Include="src\Saturn\Core\Application.cpp" />
     <ClCompile Include="src\Saturn\IO\IO.cpp" />
+    <ClCompile Include="src\Saturn\IO\Log.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Saturn\Input.cpp" />
-    <ClCompile Include="src\Saturn\Layer.cpp" />
-    <ClCompile Include="src\Saturn\LayerStack.cpp" />
-    <ClCompile Include="src\Saturn\Log.cpp" />
+    <ClCompile Include="src\Saturn\Input\Input.cpp" />
+    <ClCompile Include="src\Saturn\Main\Layer.cpp" />
+    <ClCompile Include="src\Saturn\Main\LayerStack.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Buffer.cpp" />
-    <ClCompile Include="src\Saturn\Rendering\OrthographicCamera.cpp" />
     <ClCompile Include="src\Saturn\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Renderer.cpp" />
     <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp" />
-    <ClCompile Include="src\Saturn\Rendering\Shader.cpp" />
-    <ClCompile Include="src\Saturn\Rendering\ShaderLib.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Texture.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Texture2D.cpp" />
     <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp" />
-    <ClCompile Include="src\saturnpch.cpp">
+    <ClCompile Include="src\Saturn\Shader\Shader.cpp" />
+    <ClCompile Include="src\Saturn\Shader\ShaderLib.cpp" />
+    <ClCompile Include="src\Saturn\Shader\ShaderPreprocessor.cpp" />
+    <ClCompile Include="src\SaturnPch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Saturn\Shader\ShaderPreprocessor.cpp" />
     <ClCompile Include="vendor\stb\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>

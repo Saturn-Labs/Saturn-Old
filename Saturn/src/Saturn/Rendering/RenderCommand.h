@@ -1,5 +1,5 @@
 #pragma once
-#include "RendererAPI.h"
+#include "Saturn/Rendering/RendererAPI.h"
 
 namespace Saturn
 {
@@ -9,6 +9,16 @@ namespace Saturn
 		inline static void Initialize()
 		{
 			s_RendererAPI->Initialize();
+		}
+
+		inline static void SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height)
+		{
+			s_RendererAPI->SetViewport(x, y, width, height);
+		}
+
+		inline static float GetTime()
+		{
+			return s_RendererAPI->GetTime();
 		}
 
 		inline static void SetClearColor(const glm::vec4& color)

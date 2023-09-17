@@ -1,7 +1,7 @@
-#include "saturnpch.h"
-#include "Shader.h"
-#include "RendererAPI.h"
+#include "SaturnPch.h"
+#include "Saturn/Rendering/RendererAPI.h"
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "Saturn/Shader/Shader.h"
 
 namespace Saturn
 {
