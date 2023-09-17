@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Saturn/vendor/GLFW/include"
 IncludeDir["Glad"] = "Saturn/vendor/Glad/include"
 IncludeDir["ImGui"] = "Saturn/vendor/imgui"
 IncludeDir["glm"] = "Saturn/vendor/glm"
+IncludeDir["stb"] = "Saturn/vendor/stb"
 
 group "Dependencies"
     include "Saturn/vendor/GLFW"
@@ -41,6 +42,8 @@ project "Saturn"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.hpp",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb/stb_image.h",
+        "%{prj.name}/vendor/stb/stb_image.cpp",
         "%{prj.name}/src/**.cc",
         "%{prj.name}/src/**.c"
     }
@@ -54,7 +57,8 @@ project "Saturn"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}/backends",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb}"
     }
 
     links

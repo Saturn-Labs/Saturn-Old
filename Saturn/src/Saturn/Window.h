@@ -1,6 +1,7 @@
 #pragma once
 #include "saturnpch.h"
 #include "Saturn/Events/Event.h"
+#include "Saturn/Core/Time.h"
 
 namespace Saturn
 {
@@ -25,7 +26,7 @@ namespace Saturn
 		using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() { }
-		virtual void OnUpdate() = 0;
+		virtual void OnUpdate(Time time) = 0;
 
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;

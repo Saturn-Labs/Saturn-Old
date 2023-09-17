@@ -40,10 +40,13 @@ namespace Saturn
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
-		std::unique_ptr<Window> m_Window = nullptr;
+	private:
+		Scoped<Window> m_Window = nullptr;
 		ImGuiLayer* m_ImGuiLayer = nullptr;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
+
 	private:
 		static Application* s_Instance;
 	};

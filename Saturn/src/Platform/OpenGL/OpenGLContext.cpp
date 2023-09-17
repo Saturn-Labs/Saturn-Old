@@ -10,6 +10,8 @@ namespace Saturn
 		: m_WindowHandle(windowHandle)
 	{
 		ST_CORE_ASSERT(windowHandle, "Window handle doesnt exists!");
+
+		
 	}
 
 	void OpenGLContext::InitializeContext()

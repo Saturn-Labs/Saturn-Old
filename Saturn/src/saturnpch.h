@@ -13,6 +13,7 @@
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
+#include <array>
 #include "Saturn/Log.h"
 
 #ifdef ST_PLATFORM_WINDOWS

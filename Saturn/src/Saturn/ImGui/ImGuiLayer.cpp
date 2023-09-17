@@ -56,11 +56,7 @@ namespace Saturn
 
     void ImGuiLayer::OnImGuiRender()
     {
-        static bool showDemo;
-        ImGui::ShowDemoWindow(&showDemo);
-
-        if (ImGui::IsKeyPressed(ImGuiKey_Z, false))
-            showDemo = !showDemo;
+        
     }
 
     void ImGuiLayer::Begin()

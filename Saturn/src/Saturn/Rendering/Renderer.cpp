@@ -1,9 +1,15 @@
 #include "saturnpch.h"
 #include "Renderer.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Saturn
 {
 	Renderer::SceneData* Renderer::m_SceneData = new SceneData();
+
+	void Renderer::Initialize()
+	{
+		RenderCommand::Initialize();
+	}
 
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
@@ -14,10 +20,12 @@ namespace Saturn
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader> shader, const std::shared_ptr<VertexArray>& vertexArray)
+	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transformation)
 	{
-		shader->Use();
-		shader->SetUniformMat4("u_ViewProjection", m_SceneData->ViewProjection);
+		shader->Bind();
+		shader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjection);
+		shader->UploadUniformMat4("u_Transformation", transformation);
+
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}

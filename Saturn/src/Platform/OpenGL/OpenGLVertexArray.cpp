@@ -47,7 +47,7 @@ namespace Saturn
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& buffer)
+	void OpenGLVertexArray::AddVertexBuffer(const Saturn::Ref<VertexBuffer>& buffer)
 	{
 		ST_CORE_ASSERT(buffer->GetLayout().GetElements().size(), "The VertexBuffer doesn't contain any layout!");
 		
@@ -72,7 +72,7 @@ namespace Saturn
 		m_VertexBuffers.push_back(buffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& buffer)
+	void OpenGLVertexArray::SetIndexBuffer(const Saturn::Ref<IndexBuffer>& buffer)
 	{
 		glBindVertexArray(m_Id);
 		buffer->Bind();

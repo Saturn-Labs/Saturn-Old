@@ -1,192 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Platform">
-      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\OpenGL">
-      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
+    <Filter Include="src\Platform">
+      <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\Windows">
-      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Saturn">
-      <UniqueIdentifier>{A21698D0-8EB8-C2A6-7773-D6FA63B449F7}</UniqueIdentifier>
+    <Filter Include="src\Platform\Windows">
+      <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Saturn\Events">
-      <UniqueIdentifier>{46B8012B-B278-7D61-7BB3-C6DEE732C23D}</UniqueIdentifier>
+    <Filter Include="src\Saturn">
+      <UniqueIdentifier>{D9EFF62D-C5A7-387B-2EAF-11D71A86D36B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Saturn\IO">
-      <UniqueIdentifier>{09FD0136-7567-B6AC-BEA5-67522A4F9401}</UniqueIdentifier>
+    <Filter Include="src\Saturn\Core">
+      <UniqueIdentifier>{D1E34CD6-3D6F-BA9A-4680-3D8FB28A169B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Saturn\ImGui">
-      <UniqueIdentifier>{4C7D338D-38E0-C231-E165-FBE7CDA78EB4}</UniqueIdentifier>
+    <Filter Include="src\Saturn\ECS">
+      <UniqueIdentifier>{A328482D-8FF6-3B33-788A-AC5964F71798}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Saturn\Rendering">
-      <UniqueIdentifier>{6F12CA12-5B0B-E964-843D-CEE97095C870}</UniqueIdentifier>
+    <Filter Include="src\Saturn\Events">
+      <UniqueIdentifier>{9D2D37A2-0944-3538-52BB-C059BE1006C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\IO">
+      <UniqueIdentifier>{E05EBC75-4C1F-38AC-155A-812981D97C88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\ImGui">
+      <UniqueIdentifier>{C32354A0-AF1C-73F2-D84E-5877C4A652FE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Saturn\Rendering">
+      <UniqueIdentifier>{661C377A-52AB-C043-FBC9-D43EE737D1E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\stb">
+      <UniqueIdentifier>{8BD3C5A8-778B-07F6-E092-E051CC69A2E6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture2D.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn.h" />
+    <ClInclude Include="src\Saturn.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Application.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Core.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Core\Time.h">
+      <Filter>src\Saturn\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\ECS\Transform.h">
+      <Filter>src\Saturn\ECS</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\EntryPoint.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\ApplicationEvent.h">
-      <Filter>Saturn\Events</Filter>
+      <Filter>src\Saturn\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\Event.h">
-      <Filter>Saturn\Events</Filter>
+      <Filter>src\Saturn\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\EventCategory.h">
-      <Filter>Saturn\Events</Filter>
+      <Filter>src\Saturn\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\EventType.h">
-      <Filter>Saturn\Events</Filter>
+      <Filter>src\Saturn\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\KeyEvent.h">
-      <Filter>Saturn\Events</Filter>
+      <Filter>src\Saturn\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\MouseEvent.h">
-      <Filter>Saturn\Events</Filter>
+      <Filter>src\Saturn\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\IO\IO.h">
-      <Filter>Saturn\IO</Filter>
+      <Filter>src\Saturn\IO</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\ImGui\ImGuiLayer.h">
-      <Filter>Saturn\ImGui</Filter>
+      <Filter>src\Saturn\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Input.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\KeyCode.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Layer.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\LayerStack.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Log.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\MouseButton.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\Buffer.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\OrthographicCamera.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\RenderCommand.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\Renderer.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\RendererAPI.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\Shader.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Rendering\Texture.h">
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Rendering\Texture2D.h">
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Types.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Window.h">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClInclude>
-    <ClInclude Include="src\saturnpch.h" />
+    <ClInclude Include="src\saturnpch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\stb\stb_image.h">
+      <Filter>vendor\stb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture2D.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Application.cpp">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\ECS\Transform.cpp">
+      <Filter>src\Saturn\ECS</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\IO\IO.cpp">
-      <Filter>Saturn\IO</Filter>
+      <Filter>src\Saturn\IO</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\ImGui\ImGuiBuild.cpp">
-      <Filter>Saturn\ImGui</Filter>
+      <Filter>src\Saturn\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp">
-      <Filter>Saturn\ImGui</Filter>
+      <Filter>src\Saturn\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Input.cpp">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Layer.cpp">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\LayerStack.cpp">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Log.cpp">
-      <Filter>Saturn</Filter>
+      <Filter>src\Saturn</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\Buffer.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\OrthographicCamera.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\RenderCommand.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\Renderer.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\Shader.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Rendering\Texture.cpp">
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Rendering\Texture2D.cpp">
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp">
-      <Filter>Saturn\Rendering</Filter>
+      <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="src\saturnpch.cpp" />
+    <ClCompile Include="src\saturnpch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\stb\stb_image.cpp">
+      <Filter>vendor\stb</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

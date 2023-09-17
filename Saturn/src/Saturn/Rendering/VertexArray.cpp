@@ -7,7 +7,7 @@
 
 namespace Saturn
 {
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetRendererAPI())
 		{
@@ -16,7 +16,7 @@ namespace Saturn
 				return nullptr;
 
 			case RendererAPI::API::OpenGL:
-				return new OpenGLVertexArray();
+				return Ref<OpenGLVertexArray>(new OpenGLVertexArray());
 		}
 
 		ST_CORE_ASSERT(false, "[Saturn rendering error] Invalid Render API!");

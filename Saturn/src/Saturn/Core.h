@@ -1,5 +1,6 @@
 #pragma once
 #include "Saturn/Types.h"
+#include <memory>
 
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM 1
 
@@ -21,3 +22,12 @@
 
 #define BIT(x) (1 << x)
 #define ST_BIND_EVENTFN(fn) std::bind(fn, this, std::placeholders::_1)
+
+namespace Saturn
+{
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+	template<typename T>
+	using Scoped = std::unique_ptr<T>;
+};

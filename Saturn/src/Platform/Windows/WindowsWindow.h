@@ -12,7 +12,7 @@ namespace Saturn
 		WindowsWindow(const WindowProps& props);
 		virtual ~WindowsWindow();
 
-		virtual void OnUpdate() override;
+		virtual void OnUpdate(Time time) override;
 
 		inline virtual unsigned int GetWidth() const override
 		{

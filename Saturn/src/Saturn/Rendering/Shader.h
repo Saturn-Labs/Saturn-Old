@@ -1,26 +1,41 @@
 #pragma once
-#include <string>
 #include "Saturn/Core.h"
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
 namespace Saturn
 {
 	class Shader
 	{
 	public:
-		Shader(const std::string& vertexFile, const std::string& fragmentFile);
-		~Shader();
+		Shader(const std::string& name);
+		virtual ~Shader() = default;
+		virtual void Bind() = 0;
+		virtual void Unbind() = 0;
 
-		void Use();
-		inline bool IsValid() const
+		virtual Int32 GetUniformLocation(const std::string& name) = 0;
+
+		virtual void UploadUniformFloat(const std::string& name, float value) const = 0;
+		virtual void UploadUniformFloat2(const std::string& name, const glm::vec2 vec2) const = 0;
+		virtual void UploadUniformFloat3(const std::string& name, const glm::vec3 vec3) const = 0;
+		virtual void UploadUniformFloat4(const std::string& name, const glm::vec4 vec4) const = 0;
+
+		virtual void UploadUniformInt(const std::string& name, int value) const = 0;
+		virtual void UploadUniformInt2(const std::string& name, const glm::vec2 vec2) const = 0;
+		virtual void UploadUniformInt3(const std::string& name, const glm::vec3 vec3) const = 0;
+		virtual void UploadUniformInt4(const std::string& name, const glm::vec4 vec4) const = 0;
+
+		virtual void UploadUniformMat3(const std::string& name, const glm::mat3& mat3) const = 0;
+		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& mat4) const = 0;
+
+		inline const std::string& GetName() const
 		{
-			return m_Id != -1;
+			return m_Name;
 		}
+	public:
+		static Ref<Shader> Create(const std::string& sshaderFile);
+		static Ref<Shader> Create(const std::string& name, const std::string& sshaderSrc);
 
-		void SetUniformMat4(const std::string& name, const glm::mat4& mat4) const;
-
-		static UInt32 CompileShaderProgram(const std::string& vertex, const std::string& fragment);
 	private:
-		UInt32 m_Id = 0;
+		std::string m_Name;
 	};
 }

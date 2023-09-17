@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -98,7 +98,7 @@
       <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,7 +123,7 @@
       <PrecompiledHeaderFile>saturnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ST_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;ST_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\imgui\backends;vendor\imgui;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -146,11 +146,15 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture2D.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Saturn.h" />
     <ClInclude Include="src\Saturn\Application.h" />
     <ClInclude Include="src\Saturn\Core.h" />
+    <ClInclude Include="src\Saturn\Core\Time.h" />
+    <ClInclude Include="src\Saturn\ECS\Transform.h" />
     <ClInclude Include="src\Saturn\EntryPoint.h" />
     <ClInclude Include="src\Saturn\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Saturn\Events\Event.h" />
@@ -173,18 +177,26 @@
     <ClInclude Include="src\Saturn\Rendering\Renderer.h" />
     <ClInclude Include="src\Saturn\Rendering\RendererAPI.h" />
     <ClInclude Include="src\Saturn\Rendering\Shader.h" />
+    <ClInclude Include="src\Saturn\Rendering\ShaderLib.h" />
+    <ClInclude Include="src\Saturn\Rendering\Texture.h" />
+    <ClInclude Include="src\Saturn\Rendering\Texture2D.h" />
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Saturn\Shader\ShaderPreprocessor.h" />
     <ClInclude Include="src\Saturn\Types.h" />
     <ClInclude Include="src\Saturn\Window.h" />
     <ClInclude Include="src\saturnpch.h" />
+    <ClInclude Include="vendor\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture2D.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Saturn\Application.cpp" />
+    <ClCompile Include="src\Saturn\ECS\Transform.cpp" />
     <ClCompile Include="src\Saturn\IO\IO.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Saturn\ImGui\ImGuiLayer.cpp" />
@@ -198,10 +210,15 @@
     <ClCompile Include="src\Saturn\Rendering\Renderer.cpp" />
     <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\ShaderLib.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\Texture.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\Texture2D.cpp" />
     <ClCompile Include="src\Saturn\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\saturnpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Saturn\Shader\ShaderPreprocessor.cpp" />
+    <ClCompile Include="vendor\stb\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

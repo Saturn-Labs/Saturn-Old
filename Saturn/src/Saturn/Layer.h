@@ -2,6 +2,7 @@
 #include "saturnpch.h"
 #include "Core.h"
 #include "Events/Event.h"
+#include "Saturn/Core/Time.h"
 
 namespace Saturn
 {
@@ -13,7 +14,7 @@ namespace Saturn
 
 		virtual void OnAttach() { }
 		virtual void OnDetach() { }
-		virtual void OnUpdate() { }
+		virtual void OnUpdate(Time time) { }
 		virtual void OnImGuiRender() { }
 		virtual void OnEvent(Event& event) { }
 

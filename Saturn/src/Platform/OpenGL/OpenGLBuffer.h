@@ -1,5 +1,6 @@
 #pragma once
 #include "Saturn/Rendering/Buffer.h"
+#include "glad/glad.h"
 
 namespace Saturn
 {
@@ -7,7 +8,7 @@ namespace Saturn
 	{
 		friend class VertexBuffer;
 	protected:
-		OpenGLVertexBuffer(float* vertices, UInt32 size);
+		OpenGLVertexBuffer(float* vertices, UInt32 size, Int32 drawMode = GL_STATIC_DRAW);
 	public:
 		virtual ~OpenGLVertexBuffer();
 
@@ -25,7 +26,7 @@ namespace Saturn
 	{
 		friend class IndexBuffer;
 	protected:
-		OpenGLIndexBuffer(UInt32* indices, UInt32 size);
+		OpenGLIndexBuffer(UInt32* indices, UInt32 size, Int32 drawMode = GL_STATIC_DRAW);
 	public:
 		virtual ~OpenGLIndexBuffer();
 

@@ -5,11 +5,11 @@
 
 namespace Saturn
 {
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, UInt32 size)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, UInt32 size, Int32 drawMode)
 	{
 		glCreateBuffers(1, &m_Id);
 		glBindBuffer(GL_ARRAY_BUFFER, m_Id);
-		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, size, vertices, drawMode);
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
@@ -39,12 +39,12 @@ namespace Saturn
 
 	//====================================================================//
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(UInt32* indices, UInt32 count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(UInt32* indices, UInt32 count, Int32 drawMode)
 		: m_Count(count)
 	{
 		glCreateBuffers(1, &m_Id);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Id);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(UInt32), indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(UInt32), indices, drawMode);
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()

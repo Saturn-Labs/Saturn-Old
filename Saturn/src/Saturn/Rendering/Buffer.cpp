@@ -5,23 +5,23 @@
 
 namespace Saturn
 {
-	VertexBuffer* VertexBuffer::Create(float* vertices, UInt32 size)
+	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, UInt32 size, Int32 drawMode)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:
-				return new OpenGLVertexBuffer(vertices, size);
+				return Ref<VertexBuffer>(new OpenGLVertexBuffer(vertices, size, drawMode));
 				break;
 		}
 		return nullptr;
 	}
 
-	IndexBuffer* IndexBuffer::Create(UInt32* indices, UInt32 size)
+	Ref<IndexBuffer> IndexBuffer::Create(UInt32* indices, UInt32 size, Int32 drawMode)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:
-				return new OpenGLIndexBuffer(indices, size);
+				return Ref<IndexBuffer>(new OpenGLIndexBuffer(indices, size, drawMode));
 				break;
 		}
 		return nullptr;

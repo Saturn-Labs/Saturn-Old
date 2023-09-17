@@ -23,4 +23,8 @@
 #include "Saturn/Rendering/RenderCommand.h"
 #include "Saturn/Rendering/Renderer.h"
 #include "Saturn/Rendering/Shader.h"
+#include "Saturn/Shader/ShaderPreprocessor.h"
+#include "Saturn/Rendering/Texture.h"
+#include "Saturn/Rendering/Texture2D.h"
 #include "Saturn/Rendering/VertexArray.h"
+#include "Saturn/Core/Time.h"

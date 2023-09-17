@@ -13,6 +13,7 @@
 #include "GLFW/glfw3.h"
 
 #include "Saturn/Input.h"
+#include "Saturn/Core/Time.h"
 
 namespace Saturn
 {
@@ -176,7 +177,7 @@ namespace Saturn
 			glfwDestroyWindow(m_Window);
 	}
 
-	void WindowsWindow::OnUpdate()
+	void WindowsWindow::OnUpdate(Time time)
 	{
 		Input::ResetKeyStates();
 		glfwPollEvents();

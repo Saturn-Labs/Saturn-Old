@@ -1,4 +1,5 @@
 #pragma once
+#include "Saturn/Core.h"
 
 namespace Saturn
 {
@@ -37,7 +38,7 @@ namespace Saturn
 			case ShaderDataType::Mat3:
 				return 4 * 3 * 3;
 			case ShaderDataType::Mat4:
-				return 4^3;
+				return 4 * 4 * 4;
 			case ShaderDataType::Bool:
 				return 1;
 		}
@@ -78,9 +79,9 @@ namespace Saturn
 				case ShaderDataType::Int4:
 					return 4;
 				case ShaderDataType::Mat3:
-					return 3 ^ 2;
+					return 3 * 3;
 				case ShaderDataType::Mat4:
-					return 4 ^ 2;
+					return 4 * 4;
 				case ShaderDataType::Bool:
 					return 1;
 			}
@@ -162,7 +163,7 @@ namespace Saturn
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
 
-		static VertexBuffer* Create(float* vertices, UInt32 size);
+		static Ref<VertexBuffer> Create(float* vertices, UInt32 size, Int32 drawMode = 0x88E4);
 	};
 
 	class IndexBuffer
@@ -177,6 +178,6 @@ namespace Saturn
 
 		virtual UInt32 GetCount() const = 0;
 
-		static IndexBuffer* Create(UInt32* indices, UInt32 count);
+		static Ref<IndexBuffer> Create(UInt32* indices, UInt32 count, Int32 drawMode = 0x88E4);
 	};
 }

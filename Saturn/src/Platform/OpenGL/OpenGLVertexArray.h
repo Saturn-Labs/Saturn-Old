@@ -15,10 +15,10 @@ namespace Saturn
 		virtual void Bind() const override final;
 		virtual void Unbind() const override final;
 
-		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& buffer) override final;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& buffer) override final;
+		virtual void AddVertexBuffer(const Ref<VertexBuffer>& buffer) override final;
+		virtual void SetIndexBuffer(const Ref<IndexBuffer>& buffer) override final;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() const override final
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffer() const override final
 		{
 			return m_VertexBuffers;
 		}
@@ -30,7 +30,7 @@ namespace Saturn
 	private:
 		UInt32 m_Id = 0;
 
-		std::vector<std::shared_ptr<VertexBuffer>> m_VertexBuffers = {};
-		std::shared_ptr<IndexBuffer> m_IndexBuffer = nullptr;
+		std::vector<Ref<VertexBuffer>> m_VertexBuffers = {};
+		Ref<IndexBuffer> m_IndexBuffer = nullptr;
 	};
 }

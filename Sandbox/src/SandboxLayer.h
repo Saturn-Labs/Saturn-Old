@@ -6,37 +6,37 @@
 #include "Saturn/Rendering/OrthographicCamera.h"
 #include "Saturn/Rendering/Renderer.h"
 #include "Saturn/Input.h"
+#include "Saturn/Core/Time.h"
+#include "Saturn/CGO/Transform.h"
+#include "Saturn/Core.h"
+#include "Saturn/Rendering/Texture2D.h"
+#include "Saturn/Rendering/ShaderLib.h"
 
 #include <memory>
 
 class SandboxLayer : public Saturn::Layer
 {
 public:
-	std::shared_ptr<Saturn::Shader> m_BasicShader = nullptr;
-	std::shared_ptr<Saturn::VertexArray> m_VertexArray = nullptr;
-	std::shared_ptr<Saturn::VertexBuffer> m_VertexBuffer = nullptr;
-	std::shared_ptr<Saturn::IndexBuffer> m_IndexBuffer = nullptr;
-
-	Saturn::OrthographicCamera m_Camera;
-
-	float x = 0;
-	float xsin = 0;
-	float xdegInc = 0.03f;
-	float xdeg = 0;
-
-	float y = 0;
-	float ysin = 0;
-	float ydegInc = 0.07f;
-	float ydeg = 0;
-
-	float rotZ = 0;
-	float rotZInc = 0.95f;
-
 	SandboxLayer();
 	virtual ~SandboxLayer();
 	virtual void OnAttach();
 	virtual void OnDetach();
-	virtual void OnUpdate();
+	virtual void OnUpdate(Saturn::Time time);
 	virtual void OnImGuiRender();
 	virtual void OnEvent(Saturn::Event& event);
+
+private:
+	Saturn::ShaderLibrary m_ShaderLibrary;
+
+	Saturn::Ref<Saturn::VertexArray> m_VertexArray = nullptr;
+	Saturn::Ref<Saturn::VertexBuffer> m_VertexBuffer = nullptr;
+	Saturn::Ref<Saturn::IndexBuffer> m_IndexBuffer = nullptr;
+	Saturn::Ref<Saturn::Texture2D> m_Texture = nullptr;
+
+	Saturn::OrthographicCamera m_Camera;
+
+	glm::vec3 m_Position = glm::vec3();
+	glm::vec3 m_Rotation = glm::vec3();
+	glm::vec3 m_Scale = glm::vec3(1.0f);
+	glm::vec4 m_Color = glm::vec4(1.0f);
 };
