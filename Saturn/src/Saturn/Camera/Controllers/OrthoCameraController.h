@@ -5,6 +5,8 @@
 #include "Saturn/Events/Event.h"
 #include "Saturn/Core/Time.h"
 #include <glm/glm.hpp>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 namespace Saturn
 {
@@ -52,6 +54,6 @@ namespace Saturn
 		float m_CameraRotation = 0.0f;
 
 		float m_CameraMoveSpeed = 3.0f;
-		float m_CameraRotationSpeed = 180.0f;
+		float m_CameraRotationSpeed = (float)M_PI;
 	};
 }

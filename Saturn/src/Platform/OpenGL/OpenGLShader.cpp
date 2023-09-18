@@ -14,6 +14,7 @@ namespace Saturn
 	OpenGLShader::OpenGLShader(const std::string& sshaderFile)
 		: Shader(std::filesystem::path(sshaderFile).stem().string())
 	{
+		ST_PROFILE_FUNCTION();
 		ShaderData data = ShaderPreprocessor::Preprocess(IO::File::ReadAllText(sshaderFile));
 		if (data.valid)
 		{
@@ -26,6 +27,7 @@ namespace Saturn
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& src)
 		: Shader(name)
 	{
+		ST_PROFILE_FUNCTION();
 		ShaderData data = ShaderPreprocessor::Preprocess(src);
 		if (data.valid)
 		{
@@ -41,6 +43,7 @@ namespace Saturn
 
 	void OpenGLShader::Bind()
 	{
+		ST_PROFILE_FUNCTION();
 		glUseProgram(m_Id);
 	}
 	void OpenGLShader::Unbind()
@@ -50,6 +53,8 @@ namespace Saturn
 
 	Int32 OpenGLShader::GetUniformLocation(const std::string& name)
 	{
+		ST_PROFILE_FUNCTION();
+
 		if (m_UniformLocationCache.find(name) == m_UniformLocationCache.end())
 		{
 			Int32 location = glGetUniformLocation(m_Id, name.c_str());
@@ -82,6 +87,8 @@ namespace Saturn
 	}
 	void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3 vec3)
 	{
+		ST_PROFILE_FUNCTION();
+
 		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform3f(uniformLocation, vec3.x, vec3.y, vec3.z);
@@ -99,6 +106,8 @@ namespace Saturn
 
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
 	{
+		ST_PROFILE_FUNCTION();
+
 		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform1i(uniformLocation, value);
@@ -140,6 +149,8 @@ namespace Saturn
 	}
 	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& mat4)
 	{
+		ST_PROFILE_FUNCTION();
+
 		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(mat4));

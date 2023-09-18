@@ -7,6 +7,7 @@ namespace Saturn
 {
 	Ref<Texture2D> Texture2D::Create(const std::string& path, bool retain_data)
 	{
+		ST_PROFILE_FUNCTION();
 		switch (RendererAPI::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:
@@ -18,6 +19,7 @@ namespace Saturn
 
 	Ref<Texture2D> Texture2D::Create(UInt32 width, UInt32 height, UInt32 channels)
 	{
+		ST_PROFILE_FUNCTION();
 		switch (RendererAPI::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:

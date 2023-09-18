@@ -17,7 +17,11 @@
 #include <cctype>
 #include <regex>
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #include "Saturn/IO/Log.h"
+#include "Saturn/Debug/Instrumentor.h"
 
 #ifdef ST_PLATFORM_WINDOWS
 #include <Windows.h>

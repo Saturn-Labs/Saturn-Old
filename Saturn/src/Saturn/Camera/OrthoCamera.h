@@ -1,5 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
+#include "Saturn/Debug/Instrumentor.h"
 
 namespace Saturn
 {
@@ -11,12 +12,17 @@ namespace Saturn
 
 		inline void SetPosition(glm::vec3 position)
 		{
+			ST_PROFILE_FUNCTION();
+
 			m_Position = position;
 			RecalculateViewMatrix();
 		}
 
+		//IN RADIANS PLEASE
 		inline void SetRotation(float rotation)
 		{
+			ST_PROFILE_FUNCTION();
+
 			m_Rotation = rotation;
 			RecalculateViewMatrix();
 		}
@@ -26,6 +32,7 @@ namespace Saturn
 			return m_Position;
 		}
 
+		//IN RADIANS
 		inline float GetRotation() const
 		{
 			return m_Rotation;
@@ -43,6 +50,8 @@ namespace Saturn
 
 		inline const glm::mat4& GetViewProjectionMatrix() const
 		{
+			ST_PROFILE_FUNCTION();
+
 			return m_ViewProjection;
 		}
 	private:

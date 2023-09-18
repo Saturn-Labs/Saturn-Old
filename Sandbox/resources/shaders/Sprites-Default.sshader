@@ -19,7 +19,7 @@ program:
 
         uniform sampler2D TextureSample;
         uniform vec4 TintColor;
-
+        
         void frag()
         {
             Fragment_Out_Color = texture(TextureSample, FragmentTextureUV) * TintColor;

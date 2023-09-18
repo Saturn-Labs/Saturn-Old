@@ -10,6 +10,7 @@ namespace Saturn
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path, bool retain_data)
 		: m_Path(path), m_RetainData(retain_data)
 	{
+		ST_PROFILE_FUNCTION();
 		stbi_set_flip_vertically_on_load(1);
 
 		int width, height, channels;
@@ -57,6 +58,7 @@ namespace Saturn
 	OpenGLTexture2D::OpenGLTexture2D(UInt32 width, UInt32 height, int channels)
 		: m_Path("..."), m_Width(width), m_Height(height), m_Channels(channels), m_RetainData(true)
 	{
+		ST_PROFILE_FUNCTION();
 		m_TextureData = new unsigned char[width * height * channels];
 
 		switch (m_Channels)
@@ -119,6 +121,7 @@ namespace Saturn
 
 	void OpenGLTexture2D::Bind(UInt32 slot) const
 	{
+		ST_PROFILE_FUNCTION();
 		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_Id);
 	}

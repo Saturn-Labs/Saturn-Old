@@ -8,14 +8,21 @@ namespace Saturn
 {
 	void OpenGLRendererAPI::Initialize()
 	{
+		ST_PROFILE_FUNCTION();
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		//glFrontFace(GL_CW);
 	}
 
 	void OpenGLRendererAPI::SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height)
 	{
+		ST_PROFILE_FUNCTION();
+
 		glViewport((int)x, (int)y, (int)width, (int)height);
 	}
 
@@ -41,6 +48,8 @@ namespace Saturn
 
 	void OpenGLRendererAPI::DrawIndexed(const VertexArray* vertexArray)
 	{
+		ST_PROFILE_FUNCTION();
+
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer().lock().get()->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 }

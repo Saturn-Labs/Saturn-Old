@@ -28,6 +28,9 @@
     <Filter Include="src\Saturn\Core">
       <UniqueIdentifier>{D1E34CD6-3D6F-BA9A-4680-3D8FB28A169B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Saturn\Debug">
+      <UniqueIdentifier>{0FB9F59F-FBB1-14F2-24E4-F976103CF4FD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Saturn\Events">
       <UniqueIdentifier>{9D2D37A2-0944-3538-52BB-C059BE1006C0}</UniqueIdentifier>
     </Filter>
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="src\Saturn\Core\Window.h">
       <Filter>src\Saturn\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Debug\Instrumentor.h">
+      <Filter>src\Saturn\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Events\ApplicationEvent.h">
       <Filter>src\Saturn\Events</Filter>

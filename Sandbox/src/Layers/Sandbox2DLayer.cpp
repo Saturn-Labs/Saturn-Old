@@ -28,10 +28,15 @@ namespace Sandbox
 
 	void Sandbox2DLayer::OnUpdate(Saturn::Time time)
 	{
-		m_OrthoCameraController.OnUpdate(time);
+		ST_PROFILE_FUNCTION();
 
-		Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-		Saturn::RenderCommand::Clear();
+		{
+			ST_PROFILE_SCOPE("RENDER CLEAR SCREEN AND CAMERA MATRIX");
+			m_OrthoCameraController.OnUpdate(time);
+
+			Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			Saturn::RenderCommand::Clear();
+		}
 
 		if (m_Attached)
 		{
@@ -39,26 +44,30 @@ namespace Sandbox
 			//m_ColorShader->UploadUniformFloat4("u_TintColor", m_TintColor);
 			//m_GradientShader->UploadUniformFloat("u_Time", Saturn::Renderer::GetTime());
 			//m_GradientShader->UploadUniformFloat2("u_Resolution", { Saturn::Application::Get().GetWindow().GetWidth(), Saturn::Application::Get().GetWindow().GetHeight() });
-
-			Saturn::Renderer2D::BeginScene(m_OrthoCameraController.GetCamera());
-
-			Saturn::Renderer2D::DrawQuad({ m_Position, m_RadianRotation / 3.14159265f * 180.0f, m_Scale }, m_Color);
-
-			//Saturn::Renderer::Submit(m_ColorShader, m_VertexArray.get(), m_Transform.GetTransformationMatrix());
-			/*for (int x = 0; x < 10; x++)
 			{
-				for (int y = 0; y < 10; y++)
-				{
-					Saturn::Renderer2D::DrawQuad({ glm::vec3(m_Position.x + x, m_Position.y + y, 0), m_RadianRotation / 3.14159265f * 180.0f, glm::vec3(1.0f)}, m_Texture, glm::vec4(m_Color.r * ((float)x / 10.0f), m_Color.g * ((float)y / 10.0f), m_Color.b, m_Color.a));
-				}
-			}*/
+				ST_PROFILE_SCOPE("BeginScene");
+				Saturn::Renderer2D::BeginScene(m_OrthoCameraController.GetCamera());
+			}
+			{
+				ST_PROFILE_SCOPE("DrawCall");
+				Saturn::Renderer2D::DrawQuad(Saturn::TransformationMatrix{ m_Position, m_RadianRotation, m_Scale }, m_Texture, m_Color);
+			}
+			{
+				ST_PROFILE_SCOPE("EndScene");
+				Saturn::Renderer2D::EndScene();
+			}
 
-			Saturn::Renderer2D::EndScene();
+
+			//Saturn::Renderer::BeginScene(m_OrthoCameraController.GetCamera());
+			//Saturn::Renderer::DrawCube(Saturn::TransformationMatrix{ m_Position, m_RadianRotation, m_Scale }, m_Texture, m_Color);
+			//Saturn::Renderer::EndScene();
 		}
 	}
 
 	void Sandbox2DLayer::OnImGuiRender()
 	{
+		ST_PROFILE_FUNCTION();
+
 		if (m_Attached && m_ShowImGuiLayer && m_ImGuiIO)
 		{
 			ImGui::Begin("Sandbox2DLayer properties", &m_ShowImGuiLayer);

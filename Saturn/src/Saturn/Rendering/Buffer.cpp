@@ -7,6 +7,7 @@ namespace Saturn
 {
 	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, UInt32 size, Int32 drawMode)
 	{
+		ST_PROFILE_FUNCTION();
 		switch (Renderer::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:
@@ -18,6 +19,7 @@ namespace Saturn
 
 	Ref<IndexBuffer> IndexBuffer::Create(UInt32* indices, UInt32 size, Int32 drawMode)
 	{
+		ST_PROFILE_FUNCTION();
 		switch (Renderer::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:

@@ -58,7 +58,8 @@ namespace Saturn
 
 	void Renderer2D::DrawQuad(const TransformationMatrix& transform, const glm::vec4& color)
 	{
-		s_Data->DefaultTexture->Bind();
+		ST_PROFILE_FUNCTION();
+		s_Data->DefaultTexture->Bind(0);
 		s_Data->SpritesDefaultShader->Bind();
 		s_Data->SpritesDefaultShader->UploadUniformFloat4("TintColor", color);
 		s_Data->SpritesDefaultShader->UploadUniformMat4("ObjectTransformation", transform);
@@ -69,7 +70,8 @@ namespace Saturn
 
 	void Renderer2D::DrawQuad(const Saturn::TransformationMatrix& transform, const Ref<Texture2D>& texture, const glm::vec4& color)
 	{
-		texture->Bind();
+		ST_PROFILE_FUNCTION();
+		texture->Bind(0);
 		s_Data->SpritesDefaultShader->Bind();
 		s_Data->SpritesDefaultShader->UploadUniformFloat4("TintColor", color);
 		s_Data->SpritesDefaultShader->UploadUniformMat4("ObjectTransformation", transform);

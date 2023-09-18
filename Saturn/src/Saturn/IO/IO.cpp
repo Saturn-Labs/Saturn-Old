@@ -5,6 +5,7 @@ namespace Saturn::IO
 {
 	bool File::Exists(const std::string& path)
 	{
+		ST_PROFILE_FUNCTION();
 		if (FILE* file = fopen(path.c_str(), "r"))
 		{
 			fclose(file);
@@ -18,6 +19,7 @@ namespace Saturn::IO
 
 	std::string File::ReadAllText(const std::string& path)
 	{
+		ST_PROFILE_FUNCTION();
 		if (!File::Exists(path))
 		{
 			ST_CORE_ERROR("[Saturn::IO Exception] Trying to read all text from a non-existent file \"{0}\"", path);
@@ -41,6 +43,7 @@ namespace Saturn::IO
 
 	std::vector<std::string> File::ReadAllLines(const std::string& path)
 	{
+		ST_PROFILE_FUNCTION();
 		if (!File::Exists(path))
 		{
 			ST_CORE_ERROR("[Saturn::IO Exception] Trying to read all text from a non-existent file \"{0}\"", path);

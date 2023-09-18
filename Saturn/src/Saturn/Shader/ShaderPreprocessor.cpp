@@ -5,6 +5,7 @@ namespace Saturn
 {
 	ShaderData ShaderPreprocessor::Preprocess(const std::string& sshader)
 	{
+		ST_PROFILE_FUNCTION();
 		if (!sshader.empty())
 		{
 			std::string version = "#version ";

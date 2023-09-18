@@ -159,6 +159,7 @@
     <ClInclude Include="src\Saturn\Core\EntryPoint.h" />
     <ClInclude Include="src\Saturn\Core\Time.h" />
     <ClInclude Include="src\Saturn\Core\Window.h" />
+    <ClInclude Include="src\Saturn\Debug\Instrumentor.h" />
     <ClInclude Include="src\Saturn\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Saturn\Events\Event.h" />
     <ClInclude Include="src\Saturn\Events\EventCategory.h" />

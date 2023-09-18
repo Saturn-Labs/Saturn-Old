@@ -7,6 +7,7 @@ namespace Saturn
 {
 	Ref<VertexArray> VertexArray::Create()
 	{
+		ST_PROFILE_FUNCTION();
 		switch (Renderer::GetRendererAPI())
 		{
 			case RendererAPI::API::None:

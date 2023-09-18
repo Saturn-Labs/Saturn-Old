@@ -24,21 +24,29 @@ namespace Saturn
 
 	Window* Window::Create(const WindowProps& props)
 	{
+		ST_PROFILE_FUNCTION();
+
 		return new WindowsWindow(props);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		ST_PROFILE_FUNCTION();
+
 		Initialize(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		ST_PROFILE_FUNCTION();
+
 		Shutdown();
 	}
 
 	void WindowsWindow::Initialize(const WindowProps& props)
 	{
+		ST_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -185,6 +193,8 @@ namespace Saturn
 
 	void WindowsWindow::OnUpdate(Time time)
 	{
+		ST_PROFILE_FUNCTION();
+
 		Input::ResetKeyStates();
 		glfwPollEvents();
 		m_Context->SwapBuffers();
@@ -192,6 +202,8 @@ namespace Saturn
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		ST_PROFILE_FUNCTION();
+
 		glfwSwapInterval(enabled ? 1 : 0);
 		m_Data.VSync = enabled;
 	}

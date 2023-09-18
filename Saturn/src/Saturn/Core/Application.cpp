@@ -29,6 +29,7 @@ namespace Saturn
 
 	void Application::Run() 
 	{
+		ST_PROFILE_FUNCTION();
 		while (m_Running)
 		{
 			float time = Renderer::GetTime();
@@ -52,6 +53,7 @@ namespace Saturn
 
 	void Application::OnEvent(Event& event)
 	{
+		ST_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
 		dispatcher.Dispatch<WindowResizeEvent>(std::bind(&Application::OnWindowResize, this, std::placeholders::_1));
