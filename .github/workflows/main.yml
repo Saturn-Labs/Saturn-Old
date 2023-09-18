@@ -3,7 +3,7 @@ run-name: ${{ github.actor }}
 on: [push]
 jobs:
   COMPILE-WINDOWS:
-    runs-on: [self-hosted, Windows, X64]
+    runs-on: [Windows, X64]
     steps: 
       - uses: actions/checkout@v2
       - name: Build binaries.
