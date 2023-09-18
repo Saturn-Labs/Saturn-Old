@@ -31,8 +31,14 @@ namespace Saturn
 			s_RendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray)
+		inline static void SetDrawMode(DrawMode mode = DrawMode::Full)
 		{
+			s_RendererAPI->SetDrawMode(mode);
+		}
+
+		inline static void DrawIndexed(const VertexArray* vertexArray)
+		{
+			vertexArray->Bind();
 			s_RendererAPI->DrawIndexed(vertexArray);
 		}
 

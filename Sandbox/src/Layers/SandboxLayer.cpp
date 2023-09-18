@@ -1,5 +1,6 @@
 #include "SandboxLayer.h"
 
+#include "Saturn/Rendering/RenderCommand.h"
 #include "Saturn/Shader/ShaderPreprocessor.h"
 #include "Saturn/Events/EventType.h"
 #include "Saturn/Core/Application.h"
@@ -60,13 +61,10 @@ void SandboxLayer::OnUpdate(Saturn::Time time)
 {
 	m_CameraController.OnUpdate(time);
 
+	Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+	Saturn::RenderCommand::Clear();
+
 	Saturn::Renderer::BeginScene(m_CameraController.GetCamera());
-
-	Saturn::Transform transform;
-
-	transform.Position = m_Position;
-	transform.Rotation = m_Rotation;
-	transform.Scale = m_Scale;
 
 	static auto& texDefaultShader = m_ShaderLibrary.Get("textures-default");
 	texDefaultShader->UploadUniformFloat4("u_Color", m_Color);
@@ -74,7 +72,7 @@ void SandboxLayer::OnUpdate(Saturn::Time time)
 	//static auto& circleShader = m_ShaderLibrary.Get("circle");
 	//circleShader->UploadUniformFloat4("u_Color", m_Color);
 
-	Saturn::Renderer::Submit(texDefaultShader, m_VertexArray, transform.GetTransformationMatrix());
+	Saturn::Renderer::Submit(texDefaultShader, m_VertexArray, Saturn::TransformationMatrix{ m_Position, m_Rotation, m_Scale });
 	Saturn::Renderer::EndScene();
 }
 

@@ -1,4 +1,5 @@
 #include "SaturnPch.h"
+#include "Saturn/Core/EntryPoint.h"
 #include "Saturn/Core/Application.h"
 #include "Saturn/Rendering/Renderer.h"
 #include "Saturn/Core/Core.h"
@@ -33,9 +34,6 @@ namespace Saturn
 			float time = Renderer::GetTime();
 			Time deltaTime = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			RenderCommand::Clear();
 
 			if (!m_Minimized)
 			{

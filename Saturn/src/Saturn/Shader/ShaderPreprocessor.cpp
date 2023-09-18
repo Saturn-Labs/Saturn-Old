@@ -121,6 +121,7 @@ namespace Saturn
 						inVertexBlock = true;
 						findedVertex = true;
 						parsedVert += "#define vert main\n";
+						parsedVert += "#define Vertex_Out_Position gl_Position\n";
 					}
 					if (line.find("fragment:") != line.npos)
 					{
@@ -133,6 +134,8 @@ namespace Saturn
 						inFragmentBlock = true;
 						findedFragment = true;
 						parsedFrag += "#define frag main\n";
+						parsedFrag += "#define Fragment_Out_Color FragOutColor\n";
+						parsedFrag += "layout(location = 0) out vec4 FragOutColor;\n";
 					}
 				}
 

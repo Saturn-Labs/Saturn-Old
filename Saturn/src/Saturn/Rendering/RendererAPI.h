@@ -7,7 +7,12 @@
 
 namespace Saturn
 {
-
+	enum class DrawMode : int
+	{
+		Full = 0,
+		Wireframe = 1,
+		VertexPoint = 2,
+	};
 
 	class RendererAPI
 	{
@@ -28,7 +33,9 @@ namespace Saturn
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void Clear() = 0;
 
-		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) = 0;
+		virtual void SetDrawMode(DrawMode mode) = 0;
+
+		virtual void DrawIndexed(const VertexArray* vertexArray) = 0;
 
 		inline static API GetRendererAPI()
 		{

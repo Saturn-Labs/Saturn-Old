@@ -1,5 +1,6 @@
 #pragma once
 #include "Saturn/Common/Types.h"
+#include "Saturn/IO/Log.h"
 #include <memory>
 
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM 1
@@ -27,7 +28,17 @@ namespace Saturn
 {
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
+	template<typename T, typename... Args>
+	constexpr Ref<T> CreateRef(Args&&... args)
+	{
+		return std::make_shared<T>(std::forward<Args>(args)...);
+	}
 
 	template<typename T>
 	using Scoped = std::unique_ptr<T>;
+	template<typename T, typename... Args>
+	constexpr Scoped<T> CreateScoped(Args&&... args)
+	{
+		return std::make_unique<T>(std::forward<Args>(args)...);
+	}
 };

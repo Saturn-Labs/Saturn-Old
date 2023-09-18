@@ -1,16 +1,17 @@
 #include <Saturn.h>
 
-#include "SandboxLayer.h"
+#include "Layers/SandboxLayer.h"
+#include "Layers/Sandbox2DLayer.h"
 
-class Sandbox : public Saturn::Application
+class SandboxApp : public Saturn::Application
 {
 public:
-	Sandbox()
+	SandboxApp()
 	{
-		PushLayer(new SandboxLayer());
+		PushLayer(new Sandbox::Sandbox2DLayer());
 	}
 	
-	~Sandbox()
+	~SandboxApp()
 	{
 
 	}
@@ -18,5 +19,5 @@ public:
 
 Saturn::Application* Saturn::CreateApplication()
 {
-	return new Sandbox();
+	return new SandboxApp();
 }

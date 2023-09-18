@@ -1,9 +1,5 @@
 #pragma once
 
-#pragma region Entry Point
-#include "Saturn/Core/EntryPoint.h"
-#pragma endregion
-
 #include <stdio.h>
 
 #include "Saturn/Events/Event.h"
@@ -23,6 +19,7 @@
 #include "Saturn/Rendering/Texture2D.h"
 #include "Saturn/Rendering/VertexArray.h"
 #include "Saturn/Rendering/Buffer.h"
+#include "Saturn/Rendering/Renderer2D.h"
 
 #include "Saturn/Camera/Controllers/OrthoCameraController.h"
 #include "Saturn/Camera/OrthoCamera.h"
@@ -38,3 +35,7 @@
 #include "Saturn/Main/Layer.h"
 #include "Saturn/Main/LayerStack.h"
 #include "Saturn/ImGui/ImGuiLayer.h"
+
+#include "Saturn/Rendering/TransformationMatrix.h"
+
+#include <imgui.h>

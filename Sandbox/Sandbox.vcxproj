@@ -134,11 +134,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandboxLayer.h" />
+    <ClInclude Include="src\Layers\Sandbox2DLayer.h" />
+    <ClInclude Include="src\Layers\SandboxLayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Layers\Sandbox2DLayer.cpp" />
+    <ClCompile Include="src\Layers\SandboxLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
-    <ClCompile Include="src\SandboxLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Saturn\Saturn.vcxproj">

@@ -11,14 +11,12 @@ program:
         }
     :vertex
     fragment:
-        layout(location = 0) out vec4 f_Color;
+        layout(location = 0) out vec4 finalColor;
         uniform vec4 u_Color;
-
-        vec4 fragCoord;
 
         void frag()
         {
-            fragCoord = gl_FragCoord;
+            finalColor = u_Color;
         }
     :fragment
 :program

@@ -1,13 +1,12 @@
-//saturn shader - .sshader
 program:
     version: "330 core"
-    global: "//this comment will be paste in vertex block and fragment block"
     vertex:
         layout(location = 0) in vec3 a_Position;
         layout(location = 1) in vec2 a_TexCoord;
+        out vec2 v_TexCoord;
+
         uniform mat4 u_ViewProjection;
         uniform mat4 u_Transformation;
-        out vec2 v_TexCoord;
 
         void vert() 
         {
@@ -16,14 +15,15 @@ program:
         }
     :vertex
     fragment:
-        layout(location = 0) out vec4 f_Color;
+        layout(location = 0) out vec4 finalColor;
+        in vec2 v_TexCoord;
+
         uniform sampler2D u_Texture;
         uniform vec4 u_Color;
-        in vec2 v_TexCoord;
         
         void frag() 
         {
-            f_Color = texture(u_Texture, v_TexCoord) * u_Color;
+            finalColor = texture(u_Texture, v_TexCoord) * u_Color;
         }
     :fragment
 :program

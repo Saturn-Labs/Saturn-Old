@@ -10,6 +10,8 @@ namespace Saturn
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void OpenGLRendererAPI::SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height)
@@ -32,8 +34,13 @@ namespace Saturn
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const Saturn::Ref<VertexArray>& vertexArray)
+	void OpenGLRendererAPI::SetDrawMode(DrawMode mode)
 	{
-		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer().lock()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glPolygonMode(GL_FRONT_AND_BACK, (mode == DrawMode::Full ? GL_FILL : (mode == DrawMode::Wireframe ? GL_LINE : GL_POINT)));
+	}
+
+	void OpenGLRendererAPI::DrawIndexed(const VertexArray* vertexArray)
+	{
+		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer().lock().get()->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 }

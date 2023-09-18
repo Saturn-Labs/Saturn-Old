@@ -9,6 +9,6 @@ namespace Saturn
 		virtual ~Texture2D() = default;
 	public:
 		static Ref<Texture2D> Create(const std::string& path, bool retain_data = false);
-		static Ref<Texture2D> Create(UInt32 width, UInt32 height);
+		static Ref<Texture2D> Create(UInt32 width, UInt32 height, UInt32 channels);
 	};
 }

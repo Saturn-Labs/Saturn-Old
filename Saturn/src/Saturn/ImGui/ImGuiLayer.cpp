@@ -1,6 +1,7 @@
 #include "SaturnPch.h"
 #include "Saturn/Core/Application.h"
 #include "Saturn/ImGui/ImGuiLayer.h"
+#include "Saturn/Input/Input.h"
 
 //IMGUI
 #include "backends/imgui_impl_glfw.h"
@@ -59,7 +60,23 @@ namespace Saturn
 
     void ImGuiLayer::OnImGuiRender()
     {
-        
+        if (m_IsOpen)
+        {
+            ImGui::Begin("Saturn Engine controls", &m_IsOpen);
+            if (ImGui::TreeNode("RendererAPI Controls"))
+            {
+                ImGui::SliderInt("Draw Mode", (int*)&m_CurrentDrawMode, 0, 2, (m_CurrentDrawMode == DrawMode::Full ? "Full" : (m_CurrentDrawMode == DrawMode::Wireframe ? "Wireframe" : "VertexPoint")));
+                ImGui::Button("Update RendererAPI flags.");
+                if (ImGui::IsItemClicked())
+                {
+                    RenderCommand::SetDrawMode(m_CurrentDrawMode);
+                }
+                ImGui::TreePop();
+            }
+            ImGui::End();
+        }
+        if (Input::GetKeyDown(KeyCode::PageUp))
+            m_IsOpen = !m_IsOpen;
     }
 
     void ImGuiLayer::Begin()

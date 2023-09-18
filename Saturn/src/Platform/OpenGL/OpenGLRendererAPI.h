@@ -12,6 +12,8 @@ namespace Saturn
 		virtual void SetClearColor(const glm::vec4& color) override final;
 		virtual void Clear() override final;
 
-		virtual void DrawIndexed(const Saturn::Ref<VertexArray>& vertexArray) override final;
+		virtual void SetDrawMode(DrawMode mode) override final;
+
+		virtual void DrawIndexed(const VertexArray* vertexArray) override final;
 	};
 }

@@ -16,9 +16,6 @@
     <Filter Include="src\Saturn">
       <UniqueIdentifier>{D9EFF62D-C5A7-387B-2EAF-11D71A86D36B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Saturn\CGO">
-      <UniqueIdentifier>{A120482D-8DEE-3B33-7682-AC5962EF1798}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Saturn\Camera">
       <UniqueIdentifier>{3116159C-9D2C-1332-E6A3-9E5352F9E3B9}</UniqueIdentifier>
     </Filter>
@@ -83,9 +80,6 @@
     </ClInclude>
     <ClInclude Include="src\Saturn.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Saturn\CGO\Transform.h">
-      <Filter>src\Saturn\CGO</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Camera\Controllers\OrthoCameraController.h">
       <Filter>src\Saturn\Camera\Controllers</Filter>
@@ -165,6 +159,9 @@
     <ClInclude Include="src\Saturn\Rendering\Renderer.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\Rendering\Renderer2D.h">
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\RendererAPI.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
@@ -172,6 +169,9 @@
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\Texture2D.h">
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Rendering\TransformationMatrix.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h">
@@ -215,9 +215,6 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Saturn\CGO\Transform.cpp">
-      <Filter>src\Saturn\CGO</Filter>
-    </ClCompile>
     <ClCompile Include="src\Saturn\Camera\Controllers\OrthoCameraController.cpp">
       <Filter>src\Saturn\Camera\Controllers</Filter>
     </ClCompile>
@@ -255,6 +252,9 @@
       <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\Renderer.cpp">
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Saturn\Rendering\Renderer2D.cpp">
       <Filter>src\Saturn\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp">

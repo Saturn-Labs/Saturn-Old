@@ -17,11 +17,12 @@ namespace Saturn
 		virtual UInt32 GetChannels() const override final;
 
 		virtual void Bind(UInt32 slot = 0) const override final;
+		virtual void Unbind(UInt32 slot = 0) const override final;
+
+		virtual void SetData(void* data, UInt32 size = 0) override final;
 
 		virtual unsigned char* GetNativeTextureData() const override final;
 		virtual UInt32 GetTextureNativeID() const override final;
-
-		void EditSubImage(int x, int y, int width, int height, unsigned char* data);
 	private:
 		bool m_RetainData = false;
 
@@ -31,6 +32,9 @@ namespace Saturn
 		UInt32 m_Height = 1;
 		UInt32 m_Channels = 0;
 
+		Int32 m_Format = 0;
+		Int32 m_InternalFormat = 0;
+		
 		UInt32 m_Id = 0;
 
 		unsigned char* m_TextureData = nullptr;

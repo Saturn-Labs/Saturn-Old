@@ -64,83 +64,83 @@ namespace Saturn
 		return m_UniformLocationCache[name];
 	}
 
-	void OpenGLShader::UploadUniformFloat(const std::string& name, float value) const
+	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform1f(uniformLocation, value);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2 vec2) const
+	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2 vec2)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform2f(uniformLocation, vec2.x, vec2.y);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3 vec3) const
+	void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3 vec3)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform3f(uniformLocation, vec3.x, vec3.y, vec3.z);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4 vec4) const
+	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4 vec4)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform4f(uniformLocation, vec4.x, vec4.y, vec4.z, vec4.w);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
 
-	void OpenGLShader::UploadUniformInt(const std::string& name, int value) const
+	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform1i(uniformLocation, value);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformInt2(const std::string& name, const glm::vec2 vec2) const
+	void OpenGLShader::UploadUniformInt2(const std::string& name, const glm::vec2 vec2)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform2i(uniformLocation, (int)vec2.x, (int)vec2.y);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformInt3(const std::string& name, const glm::vec3 vec3) const
+	void OpenGLShader::UploadUniformInt3(const std::string& name, const glm::vec3 vec3)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform3i(uniformLocation, (int)vec3.x, (int)vec3.y, (int)vec3.z);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformInt4(const std::string& name, const glm::vec4 vec4) const
+	void OpenGLShader::UploadUniformInt4(const std::string& name, const glm::vec4 vec4)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniform4i(uniformLocation, (int)vec4.x, (int)vec4.y, (int)vec4.z, (int)vec4.w);
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
 
-	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& mat3) const
+	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& mat3)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniformMatrix3fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(mat3));
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}
-	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& mat4) const
+	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& mat4)
 	{
-		Int32 uniformLocation = glGetUniformLocation(m_Id, name.c_str());
+		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(mat4));
 		else

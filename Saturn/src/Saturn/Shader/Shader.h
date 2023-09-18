@@ -15,18 +15,18 @@ namespace Saturn
 
 		virtual Int32 GetUniformLocation(const std::string& name) = 0;
 
-		virtual void UploadUniformFloat(const std::string& name, float value) const = 0;
-		virtual void UploadUniformFloat2(const std::string& name, const glm::vec2 vec2) const = 0;
-		virtual void UploadUniformFloat3(const std::string& name, const glm::vec3 vec3) const = 0;
-		virtual void UploadUniformFloat4(const std::string& name, const glm::vec4 vec4) const = 0;
+		virtual void UploadUniformFloat(const std::string& name, float value) = 0;
+		virtual void UploadUniformFloat2(const std::string& name, const glm::vec2 vec2) = 0;
+		virtual void UploadUniformFloat3(const std::string& name, const glm::vec3 vec3) = 0;
+		virtual void UploadUniformFloat4(const std::string& name, const glm::vec4 vec4) = 0;
 
-		virtual void UploadUniformInt(const std::string& name, int value) const = 0;
-		virtual void UploadUniformInt2(const std::string& name, const glm::vec2 vec2) const = 0;
-		virtual void UploadUniformInt3(const std::string& name, const glm::vec3 vec3) const = 0;
-		virtual void UploadUniformInt4(const std::string& name, const glm::vec4 vec4) const = 0;
+		virtual void UploadUniformInt(const std::string& name, int value) = 0;
+		virtual void UploadUniformInt2(const std::string& name, const glm::vec2 vec2) = 0;
+		virtual void UploadUniformInt3(const std::string& name, const glm::vec3 vec3) = 0;
+		virtual void UploadUniformInt4(const std::string& name, const glm::vec4 vec4) = 0;
 
-		virtual void UploadUniformMat3(const std::string& name, const glm::mat3& mat3) const = 0;
-		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& mat4) const = 0;
+		virtual void UploadUniformMat3(const std::string& name, const glm::mat3& mat3) = 0;
+		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& mat4) = 0;
 
 		inline const std::string& GetName() const
 		{

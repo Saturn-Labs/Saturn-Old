@@ -10,18 +10,18 @@ namespace Saturn
 		switch (RendererAPI::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:
-				return Ref<OpenGLTexture2D>(new OpenGLTexture2D(path, retain_data));
+				return CreateRef<OpenGLTexture2D>(path, retain_data);
 				break;
 		}
 		return nullptr;
 	}
 
-	Ref<Texture2D> Texture2D::Create(UInt32 width, UInt32 height)
+	Ref<Texture2D> Texture2D::Create(UInt32 width, UInt32 height, UInt32 channels)
 	{
 		switch (RendererAPI::GetRendererAPI())
 		{
 			case RendererAPI::API::OpenGL:
-				return Ref<OpenGLTexture2D>(new OpenGLTexture2D(width, height));
+				return CreateRef<OpenGLTexture2D>(width, height, channels);
 				break;
 		}
 		return nullptr;

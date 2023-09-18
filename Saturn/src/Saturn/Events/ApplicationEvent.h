@@ -1,5 +1,6 @@
 #pragma once
 #include "Saturn/Events/Event.h"
+#include <sstream>
 
 namespace Saturn
 {

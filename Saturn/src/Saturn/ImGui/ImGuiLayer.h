@@ -4,6 +4,7 @@
 #include "Saturn/Events/KeyEvent.h"
 #include "Saturn/Input/KeyCode.h"
 #include "Saturn/Main/Layer.h"
+#include "Saturn/Rendering/RenderCommand.h"
 
 enum ImGuiKey;
 namespace Saturn
@@ -28,5 +29,7 @@ namespace Saturn
 		inline static ImGuiKey GetImGuiModForKeyCode(Saturn::KeyCode keycode);
 	private:
 		float m_Time = 0;
+		bool m_IsOpen = false;
+		DrawMode m_CurrentDrawMode = DrawMode::Full;
 	};
 }

@@ -20,9 +20,14 @@ namespace Saturn
 		{
 			return s_ClientLogger;
 		}
+		inline static bool IsInitialized()
+		{
+			return s_Initialized;
+		}
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		static bool s_Initialized;
 	};
 }
 

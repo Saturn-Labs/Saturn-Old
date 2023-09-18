@@ -151,7 +151,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Saturn.h" />
-    <ClInclude Include="src\Saturn\CGO\Transform.h" />
     <ClInclude Include="src\Saturn\Camera\Controllers\OrthoCameraController.h" />
     <ClInclude Include="src\Saturn\Camera\OrthoCamera.h" />
     <ClInclude Include="src\Saturn\Common\Types.h" />
@@ -178,9 +177,11 @@
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h" />
     <ClInclude Include="src\Saturn\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Saturn\Rendering\Renderer.h" />
+    <ClInclude Include="src\Saturn\Rendering\Renderer2D.h" />
     <ClInclude Include="src\Saturn\Rendering\RendererAPI.h" />
     <ClInclude Include="src\Saturn\Rendering\Texture.h" />
     <ClInclude Include="src\Saturn\Rendering\Texture2D.h" />
+    <ClInclude Include="src\Saturn\Rendering\TransformationMatrix.h" />
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h" />
     <ClInclude Include="src\Saturn\Shader\Shader.h" />
     <ClInclude Include="src\Saturn\Shader\ShaderLib.h" />
@@ -196,7 +197,6 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture2D.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\Saturn\CGO\Transform.cpp" />
     <ClCompile Include="src\Saturn\Camera\Controllers\OrthoCameraController.cpp" />
     <ClCompile Include="src\Saturn\Camera\OrthoCamera.cpp" />
     <ClCompile Include="src\Saturn\Core\Application.cpp" />
@@ -210,6 +210,7 @@
     <ClCompile Include="src\Saturn\Rendering\Buffer.cpp" />
     <ClCompile Include="src\Saturn\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Saturn\Rendering\Renderer2D.cpp" />
     <ClCompile Include="src\Saturn\Rendering\RendererAPI.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Texture.cpp" />
     <ClCompile Include="src\Saturn\Rendering\Texture2D.cpp" />
