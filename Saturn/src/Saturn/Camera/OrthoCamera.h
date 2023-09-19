@@ -7,6 +7,9 @@ namespace Saturn
 	class OrthoCamera
 	{
 	public:
+		glm::vec3 Position = glm::vec3();
+		float Rotation = 0.0f;
+
 		OrthoCamera(float left, float right, float bottom, float top, float zNear = -1.0f, float zFar = 1.0f);
 		void SetProjection(float left, float right, float bottom, float top);
 
@@ -14,28 +17,24 @@ namespace Saturn
 		{
 			ST_PROFILE_FUNCTION();
 
-			m_Position = position;
-			RecalculateViewMatrix();
+			Position = position;
 		}
-
 		//IN RADIANS PLEASE
 		inline void SetRotation(float rotation)
 		{
 			ST_PROFILE_FUNCTION();
 
-			m_Rotation = rotation;
-			RecalculateViewMatrix();
+			Rotation = rotation;
 		}
 
 		inline const glm::vec3& GetPosition() const
 		{
-			return m_Position;
+			return Position;
 		}
-
 		//IN RADIANS
 		inline float GetRotation() const
 		{
-			return m_Rotation;
+			return Rotation;
 		}
 
 		inline const glm::mat4& GetProjectionMatrix() const
@@ -43,25 +42,7 @@ namespace Saturn
 			return m_Projection;
 		}
 
-		inline const glm::mat4& GetViewMatrix() const
-		{
-			return m_View;
-		}
-
-		inline const glm::mat4& GetViewProjectionMatrix() const
-		{
-			ST_PROFILE_FUNCTION();
-
-			return m_ViewProjection;
-		}
-	private:
-		void RecalculateViewMatrix();
 	private:
 		glm::mat4 m_Projection = glm::mat4(1.0f);
-		glm::mat4 m_View = glm::mat4(1.0f);
-		glm::mat4 m_ViewProjection = glm::mat4(1.0f);
-
-		glm::vec3 m_Position = glm::vec3();
-		float m_Rotation = 0.0f;
 	};
 }

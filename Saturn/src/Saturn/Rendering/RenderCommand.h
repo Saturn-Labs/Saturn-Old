@@ -42,6 +42,12 @@ namespace Saturn
 			s_RendererAPI->DrawIndexed(vertexArray);
 		}
 
+		inline static void DrawIndexed(const VertexArray* vertexArray, UInt32 count)
+		{
+			vertexArray->Bind();
+			s_RendererAPI->DrawIndexed(vertexArray, count);
+		}
+
 	private:
 		static RendererAPI* s_RendererAPI;
 	};

@@ -15,5 +15,6 @@ namespace Saturn
 		virtual void SetDrawMode(DrawMode mode) override final;
 
 		virtual void DrawIndexed(const VertexArray* vertexArray) override final;
+		virtual void DrawIndexed(const VertexArray* vertexArray, UInt32 count) override final;
 	};
 }

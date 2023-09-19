@@ -13,6 +13,6 @@ namespace Saturn
 	class ShaderPreprocessor
 	{
 	public:
-		static ShaderData Preprocess(const std::string& sshader);
+		static ShaderData Preprocess(const std::string& baseIncPath, const std::string& sshader);
 	};
 }

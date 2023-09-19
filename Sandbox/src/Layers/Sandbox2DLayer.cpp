@@ -29,38 +29,26 @@ namespace Sandbox
 	void Sandbox2DLayer::OnUpdate(Saturn::Time time)
 	{
 		ST_PROFILE_FUNCTION();
-
-		{
-			ST_PROFILE_SCOPE("RENDER CLEAR SCREEN AND CAMERA MATRIX");
-			m_OrthoCameraController.OnUpdate(time);
-
-			Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			Saturn::RenderCommand::Clear();
-		}
+		m_OrthoCameraController.OnUpdate(time);
+		Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		Saturn::RenderCommand::Clear();
 
 		if (m_Attached)
 		{
-			//m_ColorShader->Bind();
-			//m_ColorShader->UploadUniformFloat4("u_TintColor", m_TintColor);
-			//m_GradientShader->UploadUniformFloat("u_Time", Saturn::Renderer::GetTime());
-			//m_GradientShader->UploadUniformFloat2("u_Resolution", { Saturn::Application::Get().GetWindow().GetWidth(), Saturn::Application::Get().GetWindow().GetHeight() });
+			Saturn::Renderer2D::ResetStats();
+			Saturn::Renderer2D::BeginScene(m_OrthoCameraController.GetCamera());
+			
+			for (float x = -10.0f; x < 10.0f; x += 0.5f)
 			{
-				ST_PROFILE_SCOPE("BeginScene");
-				Saturn::Renderer2D::BeginScene(m_OrthoCameraController.GetCamera());
-			}
-			{
-				ST_PROFILE_SCOPE("DrawCall");
-				Saturn::Renderer2D::DrawQuad(Saturn::TransformationMatrix{ m_Position, m_RadianRotation, m_Scale }, m_Texture, m_Color);
-			}
-			{
-				ST_PROFILE_SCOPE("EndScene");
-				Saturn::Renderer2D::EndScene();
+				for (float y = -10.0f; y < 10.0f; y += 0.5f)
+				{
+					glm::vec4 color = { (x + 10.0f) / 10.0f, 0.3f, (y + 10.0f) / 10.0f, 1.0f };
+
+					Saturn::Renderer2D::DrawQuad(glm::vec3(x, y, 0), m_RadianRotation, glm::vec3(0.5f), color * m_Color);
+				}
 			}
 
-
-			//Saturn::Renderer::BeginScene(m_OrthoCameraController.GetCamera());
-			//Saturn::Renderer::DrawCube(Saturn::TransformationMatrix{ m_Position, m_RadianRotation, m_Scale }, m_Texture, m_Color);
-			//Saturn::Renderer::EndScene();
+			Saturn::Renderer2D::EndScene();
 		}
 	}
 
@@ -81,6 +69,15 @@ namespace Sandbox
 			}
 			ImGui::Spacing();
 			ImGui::ColorEdit4("Quad Tint Color", &m_Color[0]);
+			ImGui::ColorEdit4("Light Color", &m_LightColor[0]);
+
+			if (ImGui::TreeNode("Light Position"))
+			{
+				ImGui::SliderFloat("X", &m_LightPosition[0], -2.0f, 2.0f);
+				ImGui::SliderFloat("Y", &m_LightPosition[1], -2.0f, 2.0f);
+				ImGui::SliderFloat("Z", &m_LightPosition[2], -2.0f, 2.0f);
+				ImGui::TreePop();
+			}
 
 			if (ImGui::TreeNode("Position"))
 			{

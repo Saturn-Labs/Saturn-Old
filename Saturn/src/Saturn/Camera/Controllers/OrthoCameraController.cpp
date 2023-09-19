@@ -56,7 +56,6 @@ namespace Saturn
 	bool OrthoCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		m_ZoomLevel -= e.GetYOffset() / 5;
-		m_ZoomLevel = std::min(m_ZoomLevel, m_MaxZoomLevel);
 		m_ZoomLevel = std::max(m_ZoomLevel, m_MinZoomLevel);
 
 		m_OrthoCamera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);

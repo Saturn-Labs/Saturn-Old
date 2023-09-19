@@ -28,6 +28,8 @@ namespace Saturn
 		virtual void UploadUniformMat3(const std::string& name, const glm::mat3& mat3) = 0;
 		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& mat4) = 0;
 
+		virtual void UploadUniformIntArray(const std::string& name, int* values, UInt32 count) = 0;
+
 		inline const std::string& GetName() const
 		{
 			return m_Name;

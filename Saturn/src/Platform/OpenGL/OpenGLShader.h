@@ -10,6 +10,8 @@ namespace Saturn
 		OpenGLShader(const std::string& sshaderFile);
 		OpenGLShader(const std::string& name, const std::string& sshaderSrc);
 
+		void ReadUniforms();
+
 		virtual ~OpenGLShader();
 		virtual void Bind() override final;
 		virtual void Unbind() override final;
@@ -29,9 +31,12 @@ namespace Saturn
 		virtual void UploadUniformMat3(const std::string& name, const glm::mat3& mat3) override;
 		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& mat4) override;
 
+		virtual void UploadUniformIntArray(const std::string& name, int* values, UInt32 count) override;
+
 		static UInt32 CompileOpenGLShaderProgram(const std::string& vertex, const std::string& fragment);
 	private:
 		UInt32 m_Id;
+		Int32 m_UniformCount = 0;
 		std::unordered_map<std::string, Int32> m_UniformLocationCache;
 	};
 }

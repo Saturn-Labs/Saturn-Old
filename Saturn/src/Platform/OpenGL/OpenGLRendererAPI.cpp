@@ -16,7 +16,7 @@ namespace Saturn
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
-		//glFrontFace(GL_CW);
+		glFrontFace(GL_CCW);
 	}
 
 	void OpenGLRendererAPI::SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height)
@@ -51,5 +51,12 @@ namespace Saturn
 		ST_PROFILE_FUNCTION();
 
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer().lock().get()->GetCount(), GL_UNSIGNED_INT, nullptr);
+	}
+
+	void OpenGLRendererAPI::DrawIndexed(const VertexArray* vertexArray, UInt32 count)
+	{
+		ST_PROFILE_FUNCTION();
+
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
 }

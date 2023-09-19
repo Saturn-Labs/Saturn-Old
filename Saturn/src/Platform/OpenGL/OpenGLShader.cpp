@@ -15,10 +15,17 @@ namespace Saturn
 		: Shader(std::filesystem::path(sshaderFile).stem().string())
 	{
 		ST_PROFILE_FUNCTION();
-		ShaderData data = ShaderPreprocessor::Preprocess(IO::File::ReadAllText(sshaderFile));
+		ShaderData data = ShaderPreprocessor::Preprocess(std::filesystem::path(sshaderFile).parent_path().string(), IO::File::ReadAllText(sshaderFile));
 		if (data.valid)
 		{
 			m_Id = OpenGLShader::CompileOpenGLShaderProgram(data.vertex, data.fragment);
+
+			#if 1
+			ST_CORE_TRACE("SSPP VTX: \n{0}", data.vertex);
+			ST_CORE_TRACE("SSPP FRG: \n{0}", data.fragment);
+			#endif
+
+			ReadUniforms();
 		}
 		else
 			m_Id = -1;
@@ -28,14 +35,36 @@ namespace Saturn
 		: Shader(name)
 	{
 		ST_PROFILE_FUNCTION();
-		ShaderData data = ShaderPreprocessor::Preprocess(src);
+		ShaderData data = ShaderPreprocessor::Preprocess("resources/shaders", src);
 		if (data.valid)
 		{
 			m_Id = OpenGLShader::CompileOpenGLShaderProgram(data.vertex, data.fragment);
+			ReadUniforms();
 		}
 		else
 			m_Id = -1;
 	}
+
+	void OpenGLShader::ReadUniforms()
+	{
+		GLint i;
+		GLint count;
+
+		GLint size; // size of the variable
+		GLenum type; // type of the variable (float, vec3 or mat4, etc)
+
+		const GLsizei bufSize = 32; // maximum name length
+		GLchar name[bufSize]; // variable name in GLSL
+		GLsizei length; // name
+
+		glGetProgramiv(m_Id, GL_ACTIVE_UNIFORMS, &m_UniformCount);
+		for (int i = 0; i < m_UniformCount; i++)
+		{
+			glGetActiveUniform(m_Id, (GLuint)i, bufSize, &length, &size, &type, name);
+			m_UniformLocationCache[name] = i;
+		}
+	}
+
 	OpenGLShader::~OpenGLShader()
 	{
 		glDeleteProgram(m_Id);
@@ -55,7 +84,8 @@ namespace Saturn
 	{
 		ST_PROFILE_FUNCTION();
 
-		if (m_UniformLocationCache.find(name) == m_UniformLocationCache.end())
+		auto it = m_UniformLocationCache.find(name);
+		if (it == m_UniformLocationCache.end())
 		{
 			Int32 location = glGetUniformLocation(m_Id, name.c_str());
 			if (location == -1)
@@ -66,7 +96,7 @@ namespace Saturn
 			m_UniformLocationCache[name] = location;
 			return location;
 		}
-		return m_UniformLocationCache[name];
+		return it->second;
 	}
 
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
@@ -154,6 +184,19 @@ namespace Saturn
 		Int32 uniformLocation = GetUniformLocation(name);
 		if (uniformLocation != -1)
 			glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(mat4));
+		else
+			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
+	}
+
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values, UInt32 count)
+	{
+		ST_PROFILE_FUNCTION();
+
+		Int32 uniformLocation = GetUniformLocation(name);
+		if (uniformLocation != -1)
+		{
+			glUniform1iv(uniformLocation, count, values);
+		}
 		else
 			ST_CORE_WARN("[{0}] Trying to use a invalid uniform location \"{1}\"", __FUNCTION__, name);
 	}

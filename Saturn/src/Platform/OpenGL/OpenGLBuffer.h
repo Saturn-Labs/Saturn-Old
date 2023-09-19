@@ -10,6 +10,7 @@ namespace Saturn
 		friend class VertexBuffer;
 	protected:
 		OpenGLVertexBuffer(float* vertices, UInt32 size, Int32 drawMode = GL_STATIC_DRAW);
+		OpenGLVertexBuffer(UInt32 size, Int32 drawMode = GL_DYNAMIC_DRAW);
 	public:
 		virtual ~OpenGLVertexBuffer();
 
@@ -18,6 +19,8 @@ namespace Saturn
 
 		virtual void SetLayout(const BufferLayout& layout) override final;
 		virtual const BufferLayout& GetLayout() const override final;
+
+		virtual void SetData(void* data, UInt32 size) override final;
 	private:
 		UInt32 m_Id = 0;
 		BufferLayout m_Layout;

@@ -1,28 +1,56 @@
 program:
     version: "330 core"
     vertex:
-        layout(location = 0) in vec3 VertexPosition;
-        layout(location = 1) in vec2 TextureUV;
-        out vec2 FragmentTextureUV;
+        //smath functions
+        includefile: "maths.sshaderinc"
 
-        uniform mat4 ViewProjectionMatrix;
-        uniform mat4 ObjectTransformation;
+        layout(location = 0) in vec3 VertexPosition;
+        layout(location = 1) in vec4 Color;
+        layout(location = 2) in vec2 TextureCoord;
+        layout(location = 3) in float TextureIndex;
+
+        layout(location = 4) in vec3 ModelPosition;
+        layout(location = 5) in vec3 ModelRotation;
+        layout(location = 6) in vec3 ModelScale;
+
+        out vec2 FragmentTextureCoord;
+        out vec4 FragmentColor;
+        out float FragmentTextureIndex;
+
+        uniform mat4 Projection;
+        uniform vec3 CameraPosition;
+        uniform float CameraRotation;
 
         void vert()
         {
-            FragmentTextureUV = TextureUV;
-            Vertex_Out_Position = ViewProjectionMatrix * ObjectTransformation * vec4(VertexPosition, 1.0);
+            FragmentColor = Color;
+            FragmentTextureCoord = TextureCoord;
+            FragmentTextureIndex = TextureIndex;
+
+            mat4 identity = mat4(1.0);
+            mat4 model = smath_translate(identity, ModelPosition) * 
+                smath_rotate(identity, ModelRotation.x, vec3(1, 0, 0)) *
+                smath_rotate(identity, ModelRotation.y, vec3(0, 1, 0)) *
+                smath_rotate(identity, ModelRotation.z, vec3(0, 0, 1)) *
+                smath_scale(identity, ModelScale);
+
+            mat4 view = smath_translate(identity, CameraPosition) *
+                smath_rotate(identity, CameraRotation, vec3(0, 0, 1));
+
+            Vertex_Out_Position = Projection * view * model *
+                vec4(VertexPosition, 1.0);
         }
     :vertex
     fragment:
-        in vec2 FragmentTextureUV;
+        includefile: "multisamplers.sshaderinc"
 
-        uniform sampler2D TextureSample;
-        uniform vec4 TintColor;
-        
+        in vec2 FragmentTextureCoord;
+        in vec4 FragmentColor;
+        in float FragmentTextureIndex;
+
         void frag()
         {
-            Fragment_Out_Color = texture(TextureSample, FragmentTextureUV) * TintColor;
+            Fragment_Out_Color = texture(getSamplerForIndex(int(FragmentTextureIndex)), FragmentTextureCoord) * FragmentColor;
         }
     :fragment
 :program

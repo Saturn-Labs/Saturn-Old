@@ -23,6 +23,11 @@ namespace Saturn
 
 		virtual unsigned char* GetNativeTextureData() const override final;
 		virtual UInt32 GetTextureNativeID() const override final;
+
+		virtual bool operator==(const Texture& other) const override final
+		{
+			return m_Id == other.GetTextureNativeID();
+		}
 	private:
 		bool m_RetainData = false;
 

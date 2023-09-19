@@ -24,6 +24,9 @@ namespace Sandbox
 
 		glm::vec4 m_Color = glm::vec4(1.0f);
 
+		glm::vec3 m_LightPosition = glm::vec3(0.0f);
+		glm::vec4 m_LightColor = glm::vec4(1.0f);
+
 		Saturn::Ref<Saturn::Texture2D> m_Texture;
 
 		bool m_ShowImGuiLayer = false;

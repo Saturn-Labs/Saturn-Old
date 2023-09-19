@@ -122,13 +122,12 @@ namespace Saturn
 	void OpenGLTexture2D::Bind(UInt32 slot) const
 	{
 		ST_PROFILE_FUNCTION();
-		glActiveTexture(GL_TEXTURE0 + slot);
-		glBindTexture(GL_TEXTURE_2D, m_Id);
+		glBindTextureUnit(slot, m_Id);
 	}
 
 	void OpenGLTexture2D::Unbind(UInt32 slot) const
 	{
-		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindTextureUnit(slot, 0);
 	}
 
 	void OpenGLTexture2D::SetData(void* data, UInt32 size)

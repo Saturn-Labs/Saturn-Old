@@ -159,6 +159,9 @@
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\Rendering\Helper.h">
+      <Filter>src\Saturn\Rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Rendering\RenderCommand.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>

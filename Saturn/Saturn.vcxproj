@@ -176,6 +176,7 @@
     <ClInclude Include="src\Saturn\Main\LayerStack.h" />
     <ClInclude Include="src\Saturn\Rendering\Buffer.h" />
     <ClInclude Include="src\Saturn\Rendering\GraphicsContext.h" />
+    <ClInclude Include="src\Saturn\Rendering\Helper.h" />
     <ClInclude Include="src\Saturn\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Saturn\Rendering\Renderer.h" />
     <ClInclude Include="src\Saturn\Rendering\Renderer2D.h" />

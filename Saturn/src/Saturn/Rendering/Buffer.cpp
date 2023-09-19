@@ -17,6 +17,18 @@ namespace Saturn
 		return nullptr;
 	}
 
+	Ref<VertexBuffer> VertexBuffer::Create(UInt32 size, Int32 drawMode)
+	{
+		ST_PROFILE_FUNCTION();
+		switch (Renderer::GetRendererAPI())
+		{
+			case RendererAPI::API::OpenGL:
+				return Ref<VertexBuffer>(new OpenGLVertexBuffer(size, drawMode));
+				break;
+		}
+		return nullptr;
+	}
+
 	Ref<IndexBuffer> IndexBuffer::Create(UInt32* indices, UInt32 size, Int32 drawMode)
 	{
 		ST_PROFILE_FUNCTION();

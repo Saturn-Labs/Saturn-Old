@@ -1,1 +1,1 @@
-{"otherData": {},"traceEvents":[{},{"cat":"function","dur":15670,"name":"Saturn::WindowsWindow::~WindowsWindow(void)","ph":"X","pid":0,"tid":3724,"ts":10305954232.400}]}
+{"otherData": {},"traceEvents":[{},{"cat":"function","dur":30192,"name":"Saturn::WindowsWindow::~WindowsWindow(void)","ph":"X","pid":0,"tid":17976,"ts":23276845144.400}]}

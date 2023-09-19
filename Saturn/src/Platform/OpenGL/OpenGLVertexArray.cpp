@@ -54,20 +54,19 @@ namespace Saturn
 		glBindVertexArray(m_Id);
 		buffer->Bind();
 
-		UInt32 index = 0;
 		const BufferLayout& layout = buffer->GetLayout();
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(index);
+			glEnableVertexAttribArray(m_IndexAttrib);
 			glVertexAttribPointer(
-				index,
+				m_IndexAttrib,
 				element.GetComponentCount(),
 				ShaderDataTypeToGLBaseType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
 				reinterpret_cast<const void*>(element.Offset)
 			);
-			index++;
+			m_IndexAttrib++;
 		}
 		m_VertexBuffers.push_back(buffer);
 	}

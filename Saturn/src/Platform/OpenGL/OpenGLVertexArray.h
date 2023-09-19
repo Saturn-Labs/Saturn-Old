@@ -29,6 +29,7 @@ namespace Saturn
 		}
 	private:
 		UInt32 m_Id = 0;
+		UInt32 m_IndexAttrib = 0;
 
 		std::vector<Ref<VertexBuffer>> m_VertexBuffers = {};
 		Ref<IndexBuffer> m_IndexBuffer = nullptr;

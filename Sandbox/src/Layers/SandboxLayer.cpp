@@ -64,7 +64,7 @@ void SandboxLayer::OnUpdate(Saturn::Time time)
 	Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Saturn::RenderCommand::Clear();
 
-	Saturn::Renderer::BeginScene(m_CameraController.GetCamera());
+	Saturn::Renderer::BeginScene(m_CameraController.GetCamera(), {});
 
 	static auto& texDefaultShader = m_ShaderLibrary.Get("textures-default");
 	texDefaultShader->UploadUniformFloat4("u_Color", m_Color);

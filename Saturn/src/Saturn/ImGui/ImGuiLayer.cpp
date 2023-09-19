@@ -2,6 +2,7 @@
 #include "Saturn/Core/Application.h"
 #include "Saturn/ImGui/ImGuiLayer.h"
 #include "Saturn/Input/Input.h"
+#include "Saturn/Rendering/Renderer2D.h"
 
 //IMGUI
 #include "backends/imgui_impl_glfw.h"
@@ -71,6 +72,18 @@ namespace Saturn
                 {
                     RenderCommand::SetDrawMode(m_CurrentDrawMode);
                 }
+
+                if (ImGui::TreeNode("Renderer2D"))
+                {
+                    auto& stats = Renderer2D::GetStats();
+                    ImGui::Text("Draw Calls: %i", stats.DrawCalls);
+                    ImGui::Text("Quad Count: %i", stats.QuadsCount);
+                    ImGui::Text("Vertices Count: %i", stats.GetVertexCount());
+                    ImGui::Text("Indices Count: %i", stats.GetIndicesCount());
+
+                    ImGui::TreePop();
+                }
+
                 ImGui::TreePop();
             }
             ImGui::End();

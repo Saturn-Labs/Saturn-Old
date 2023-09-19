@@ -36,6 +36,7 @@ namespace Saturn
 		virtual void SetDrawMode(DrawMode mode) = 0;
 
 		virtual void DrawIndexed(const VertexArray* vertexArray) = 0;
+		virtual void DrawIndexed(const VertexArray* vertexArray, UInt32 count) = 0;
 
 		inline static API GetRendererAPI()
 		{

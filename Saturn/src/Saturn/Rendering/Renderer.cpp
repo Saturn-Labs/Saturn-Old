@@ -2,6 +2,8 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "Saturn/Rendering/Renderer.h"
 #include "Saturn/Rendering/Renderer2D.h"
+#include <glad/glad.h>
+#include "Saturn/Rendering/Helper.h"
 
 namespace Saturn
 {
@@ -14,64 +16,80 @@ namespace Saturn
 	{
 		RenderCommand::Initialize();
 
-		float vertices[5 * 24]{
-			 -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  // A 0
-			0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  // B 1
-			0.5f,  0.5f, -0.5f,  1.0f, 1.0f,  // C 2
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,  // D 3
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,  // E 4
-			0.5f, -0.5f,  0.5f,  1.0f, 0.0f,   // F 5
-			0.5f,  0.5f,  0.5f,  1.0f, 1.0f,   // G 6
-			-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,   // H 7
+		glm::vec3 vertices[8]{
+			{  0.5f, -0.5f, -0.5f },
+			{ -0.5f, -0.5f, -0.5f },
+			{ -0.5f,  0.5f, -0.5f },
+			{  0.5f,  0.5f, -0.5f },
 
-			-0.5f,  0.5f, -0.5f,  0.0f, 0.0f,  // D 8
-			-0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  // A 9
-			-0.5f, -0.5f,  0.5f,  1.0f, 1.0f,  // E 10
-			-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,  // H 11
-			0.5f, -0.5f, -0.5f,  0.0f, 0.0f,   // B 12
-			0.5f,  0.5f, -0.5f,  1.0f, 0.0f,   // C 13
-			0.5f,  0.5f,  0.5f,  1.0f, 1.0f,   // G 14
-			0.5f, -0.5f,  0.5f,  0.0f, 1.0f,   // F 15
-
-			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  // A 16
-			0.5f, -0.5f, -0.5f,  1.0f, 0.0f,   // B 17
-			0.5f, -0.5f,  0.5f,  1.0f, 1.0f,   // F 18
-			-0.5f, -0.5f,  0.5f,  0.0f, 1.0f,  // E 19
-			0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  // C 20
-			-0.5f,  0.5f, -0.5f,  1.0f, 0.0f,  // D 21
-			-0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  // H 22
-			0.5f,  0.5f,  0.5f,   0.0f, 1.0f,  // G 23
+			{  0.5f, -0.5f,  0.5f },
+			{  0.5f, -0.5f, -0.5f },
+			{  0.5f,  0.5f, -0.5f },
+			{  0.5f,  0.5f,  0.5f },
 		};
-		unsigned int indices[3 * 12]{
-			// front and back
-			   0, 3, 2,
-			   2, 1, 0,
-			   4, 5, 6,
-			   6, 7 ,4,
-			   // left and right
-			   11, 8, 9,
-			   9, 10, 11,
-			   12, 13, 14,
-			   14, 15, 12,
-			   // bottom and top
-			   16, 17, 18,
-			   18, 19, 16,
-			   20, 21, 22,
-			   22, 23, 20
+
+		glm::vec3 normals[8] = {
+			Helper::CalculateNormal(vertices[0], vertices[1], vertices[2]),
+			Helper::CalculateNormal(vertices[0], vertices[1], vertices[2]),
+			Helper::CalculateNormal(vertices[2], vertices[3], vertices[0]),
+			Helper::CalculateNormal(vertices[2], vertices[3], vertices[0]),
+		};
+
+		glm::vec2 texCoords[8]{
+			{ 1.0f, 0.0f },
+			{ 0.0f, 0.0f },
+			{ 0.0f, 1.0f },
+			{ 1.0f, 1.0f },
+
+			{ 1.0f, 0.0f },
+			{ 0.0f, 0.0f },
+			{ 0.0f, 1.0f },
+			{ 1.0f, 1.0f },
+		};
+
+		unsigned int indices[12]{
+			0, 1, 2, 2, 3, 0,
+			4, 5, 6, 6, 7, 4,
 		};
 
 		s_RenderData->CubeVertexArray = VertexArray::Create();
-		Ref<VertexBuffer> vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
-		BufferLayout layout = {
-			{ ShaderDataType::Float3, "VertexPosition" },
-			{ ShaderDataType::Float2, "TextureUV" }
-		};
 
-		vertexBuffer->SetLayout(layout);
-		s_RenderData->CubeVertexArray->AddVertexBuffer(vertexBuffer);
-		s_RenderData->CubeVertexArray->SetIndexBuffer(IndexBuffer::Create(indices, 3 * 12));
+		//vertices
+		{
+			Ref<VertexBuffer> vertexBuffer = VertexBuffer::Create((float*)vertices, sizeof(vertices));
+			BufferLayout layout = {
+				{ ShaderDataType::Float3, "VertexPosition" }
+			};
 
-		s_RenderData->DefaultShader = Shader::Create("resources/shaders/Sprites-Default.sshader");
+			vertexBuffer->SetLayout(layout);
+			s_RenderData->CubeVertexArray->AddVertexBuffer(vertexBuffer);
+		}
+
+		//texcoords
+		{
+			Ref<VertexBuffer> vertexBuffer = VertexBuffer::Create((float*)texCoords, sizeof(texCoords));
+			BufferLayout layout = {
+				{ ShaderDataType::Float2, "TextureUV" }
+			};
+
+			vertexBuffer->SetLayout(layout);
+			s_RenderData->CubeVertexArray->AddVertexBuffer(vertexBuffer);
+		}
+
+		//normals
+		{
+			Ref<VertexBuffer> vertexBuffer = VertexBuffer::Create((float*)normals, sizeof(normals));
+			BufferLayout layout = {
+				{ ShaderDataType::Float3, "Normal" }
+			};
+
+			vertexBuffer->SetLayout(layout);
+			s_RenderData->CubeVertexArray->AddVertexBuffer(vertexBuffer);
+		}
+
+		s_RenderData->CubeVertexArray->SetIndexBuffer(IndexBuffer::Create(indices, sizeof(indices) / sizeof(UInt32)));
+
+		s_RenderData->DefaultShader = Shader::Create("resources/shaders/FlatColor-Default.sshader");
 
 		s_RenderData->DefaultTexture = Texture2D::Create(1, 1, 4);
 
@@ -91,10 +109,12 @@ namespace Saturn
 		return RenderCommand::GetTime();
 	}
 
-	void Renderer::BeginScene(const OrthoCamera& camera)
+	void Renderer::BeginScene(const OrthoCamera& camera, const LightParams& params)
 	{
-		s_SceneData->ViewProjection = camera.GetViewProjectionMatrix();
-		s_RenderData->DefaultShader->UploadUniformMat4("ViewProjectionMatrix", s_SceneData->ViewProjection);
+		s_SceneData->Projection = camera.GetProjectionMatrix();
+		s_RenderData->DefaultShader->UploadUniformMat4("ViewProjectionMatrix", s_SceneData->Projection);
+		s_RenderData->DefaultShader->UploadUniformFloat3("LightPosition", params.LightPosition);
+		s_RenderData->DefaultShader->UploadUniformFloat4("LightColor", params.LightColor);
 		s_InScene = true;
 	}
 
@@ -119,7 +139,7 @@ namespace Saturn
 			ST_CORE_ASSERT(false, "[Saturn renderer submit] Shader or VertexArray is nullptr!");
 
 		shader->Bind();
-		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjection);
+		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->Projection);
 		shader->UploadUniformMat4("u_Transformation", transformation);
 
 		vertexArray->Bind();

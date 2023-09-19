@@ -1,9 +1,10 @@
 #include "SaturnPch.h"
 #include "Saturn/Shader/ShaderPreprocessor.h"
+#include "Saturn/IO/IO.h"
 
 namespace Saturn
 {
-	ShaderData ShaderPreprocessor::Preprocess(const std::string& sshader)
+	ShaderData ShaderPreprocessor::Preprocess(const std::string& baseIncPath, const std::string& sshader)
 	{
 		ST_PROFILE_FUNCTION();
 		if (!sshader.empty())
@@ -79,6 +80,48 @@ namespace Saturn
 
 						parsedVert += globalData + "\n";
 						parsedFrag += globalData + "\n";
+					}
+
+					size_t incOffset = 0;
+					if (incOffset = line.find("includefile:") != line.npos)
+					{
+						size_t incDtOff = incOffset + 11;
+						incDtOff = line.find("\"");
+						incDtOff++;
+
+						std::string incPath;
+						while (line[incDtOff] != '\"')
+						{
+							incPath += line[incDtOff];
+							incDtOff++;
+						}
+
+						//parsedVert += incPath + "\n";
+						//parsedFrag += incPath + "\n";
+
+						std::string filePath = (std::filesystem::path(baseIncPath) / std::filesystem::path(incPath)).string();
+						if (!IO::File::Exists(filePath))
+						{
+							ST_CORE_ERROR("[Saturn shader preprocessor] Invalid shader include path: \"{0}\" not found!\nComplete path: \"{1}\"", incPath, filePath);
+						}
+						else
+						{
+							std::string includeContent = IO::File::ReadAllText(filePath);
+
+							if (inVertexBlock)
+							{
+								parsedVert += "//included from \"" + incPath + "\"\n";
+								parsedVert += includeContent + "\n";
+							}
+
+							if (inFragmentBlock)
+							{
+								parsedFrag += "//included from \"" + incPath + "\"\n";
+								parsedFrag += includeContent + "\n";
+							}
+						}
+
+						line = "\n";
 					}
 
 					if (line.find(":vertex") != line.npos)

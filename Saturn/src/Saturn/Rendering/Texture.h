@@ -22,5 +22,7 @@ namespace Saturn
 
 		virtual unsigned char* GetNativeTextureData() const = 0;
 		virtual UInt32 GetTextureNativeID() const = 0;
+
+		virtual bool operator==(const Texture& other) const = 0;
 	};
 }

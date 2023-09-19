@@ -163,7 +163,10 @@ namespace Saturn
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
 
+		virtual void SetData(void* data, UInt32 size) = 0;
+
 		static Ref<VertexBuffer> Create(float* vertices, UInt32 size, Int32 drawMode = 0x88E4);
+		static Ref<VertexBuffer> Create(UInt32 size, Int32 drawMode = 0x88E8);
 	};
 
 	class IndexBuffer
