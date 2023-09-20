@@ -33,6 +33,10 @@ namespace Saturn
 		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera");
 		Component::CameraComponent& cameraComponent = m_CameraEntity.AddComponent<Component::CameraComponent>();
 		cameraComponent.Camera.SetOrthoSize(5);
+
+		ScriptableBehaviour& cameraBehaviour = m_CameraEntity.AddScript<CameraBehaviour>();
+
+		m_SceneHierarchy = CreateRef<SceneHierarchyPanel>(m_ActiveScene);
 	}
 
 	void EditorLayer::OnDetach()
@@ -42,15 +46,6 @@ namespace Saturn
 
 	void EditorLayer::OnUpdate(Time time)
 	{
-		if (FramebufferSpecification spec = m_Framebuffer->GetSpecs();
-			m_SceneViewportSize.x > 0.0f && m_SceneViewportSize.y > 0.0f &&
-			(spec.Width != m_SceneViewportSize.x || spec.Height != m_SceneViewportSize.y))
-		{
-			//m_Framebuffer->Resize((UInt32)m_SceneViewportSize.x, (UInt32)m_SceneViewportSize.y);
-
-			
-		}
-
 		m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
@@ -101,6 +96,8 @@ namespace Saturn
 			ImGui::PopStyleVar(2);
 
 		ImGuiIO& io = ImGui::GetIO();
+		ImGuiStyle& style = ImGui::GetStyle();
+		style.WindowMinSize.x = 370.0f;
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
 		{
 			ImGuiID dockspace_id = ImGui::GetID("Dockspace");
@@ -119,48 +116,12 @@ namespace Saturn
 			ImGui::EndMenuBar();
 		}
 
-		if (m_ShowImGuiLayer)
+		if (m_ShowUILayer)
 		{
-			Component::Transform& transform = m_SquareEntity.GetTransform();
-			Component::SpriteRenderer& spriteRenderer = m_SquareEntity.GetComponent<Component::SpriteRenderer>();
-			Component::Tag& tag = m_SquareEntity.GetTag();
+			
+			m_SceneHierarchy->OnImGuiRender();
 
-			ImGui::Begin("EditorLayer properties", &m_ShowImGuiLayer);
-			if (ImGui::BeginMenu("Metrics"))
-			{
-				ImGui::Text("Dear ImGui %s", ImGui::GetVersion());
-				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-				ImGui::Text("%d vertices, %d indices (%d triangles)", io.MetricsRenderVertices, io.MetricsRenderIndices, io.MetricsRenderIndices / 3);
-				ImGui::Text("%d visible windows, %d active allocations", io.MetricsRenderWindows, io.MetricsActiveAllocations);
-				ImGui::EndMenu();
-			}
-			ImGui::Spacing();
-			ImGui::Text("%s", tag.Name.c_str());
-			ImGui::ColorEdit4("My Entt Tint Color", &spriteRenderer.Color[0]);
-			if (ImGui::TreeNode("Position"))
-			{
-				ImGui::SliderFloat("X", &transform.Position[0], -2.0f, 2.0f);
-				ImGui::SliderFloat("Y", &transform.Position[1], -2.0f, 2.0f);
-				ImGui::SliderFloat("Z", &transform.Position[2], -2.0f, 2.0f);
-				ImGui::TreePop();
-			}
-			if (ImGui::TreeNode("Rotation"))
-			{
-				ImGui::SliderAngle("X", &transform.Rotation.x, -180.0f, 180.0f);
-				ImGui::SliderAngle("Y", &transform.Rotation.y, -180.0f, 180.0f);
-				ImGui::SliderAngle("Z", &transform.Rotation.z, -180.0f, 180.0f);
-				ImGui::TreePop();
-			}
-			if (ImGui::TreeNode("Scale"))
-			{
-				ImGui::DragFloat("X", &transform.Scale[0], 1.0f, -3.0f, 3.0f);
-				ImGui::DragFloat("Y", &transform.Scale[1], 1.0f, -3.0f, 3.0f);
-				ImGui::DragFloat("Z", &transform.Scale[2], 1.0f, -3.0f, 3.0f);
-				ImGui::TreePop();
-			}
-
-			//ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-			ImGui::Begin("Viewport");
+			ImGui::Begin("Viewport", NULL);
 
 			m_ViewportFocused = ImGui::IsWindowFocused();
 			m_ViewportHovered = ImGui::IsWindowHovered();
@@ -176,14 +137,12 @@ namespace Saturn
 			}
 
 			ImGui::Image((void*)m_Framebuffer->GetColorAttachmentID(), ImVec2(m_SceneViewportSize.x, m_SceneViewportSize.y), ImVec2{ 0,1 }, ImVec2{ 1,0 });
-			ImGui::End();
-			//ImGui::PopStyleVar();
-
+			
 			ImGui::End();
 		}
 
 		if (Input::GetKeyDown(KeyCode::Insert))
-			m_ShowImGuiLayer = !m_ShowImGuiLayer;
+			m_ShowUILayer = !m_ShowUILayer;
 
 		ImGui::End();
 	}

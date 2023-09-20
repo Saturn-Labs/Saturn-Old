@@ -29,7 +29,7 @@ namespace Sandbox
 
 		Saturn::Ref<Saturn::Texture2D> m_Texture;
 
-		bool m_ShowImGuiLayer = false;
+		bool m_ShowUILayer = false;
 		bool m_Attached = false;
 
 		ImGuiIO* m_ImGuiIO = nullptr;

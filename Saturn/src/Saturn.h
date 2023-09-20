@@ -7,6 +7,9 @@
 #include "Saturn/Scene/Components/Transform.h"
 #include "Saturn/Scene/Components/Tag.h"
 #include "Saturn/Scene/Components/CameraComponent.h"
+#include "Saturn/Scene/Components/NativeScript.h"
+#include "Saturn/Scene/Behaviours/ScriptableBehaviour.h"
+#include "Saturn/Scene/Behaviours/CameraBehaviour.h"
 #include "Saturn/Scene/Entity/Entity.h"
 
 #include "Saturn/Events/Event.h"

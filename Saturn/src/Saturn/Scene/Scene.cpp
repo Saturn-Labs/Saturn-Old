@@ -5,6 +5,7 @@
 #include "Components/Tag.h"
 #include "Components/SpriteRenderer.h"
 #include "Components/CameraComponent.h"
+#include "Components/NativeScript.h"
 #include "Saturn/Rendering/Renderer2D.h"
 #include "Entity/Entity.h"
 
@@ -12,6 +13,8 @@ namespace Saturn
 {
 	Scene::Scene()
 	{
+		m_Registry.on_construct<Component::NativeScript>().connect<&Scene::OnConstructComponent>(this);
+		m_Registry.on_destroy<Component::NativeScript>().connect<&Scene::OnDestroyComponent>(this);
 	}
 
 	Scene::~Scene()
@@ -24,6 +27,11 @@ namespace Saturn
 		entity.AddComponent<Component::Tag>(name);
 		entity.AddComponent<Component::Transform>(Position, Rotation, Scale);
 		return entity;
+	}
+
+	void Scene::RemoveEntity(Entity entity)
+	{
+		m_Registry.destroy(entity);
 	}
 
 	void Scene::OnUpdate(Time time)
@@ -45,6 +53,16 @@ namespace Saturn
 			}
 		}
 
+		{
+			m_Registry.view<Component::NativeScript>().each([=](auto entity, Component::NativeScript& nativeScript)
+			{
+				if (nativeScript.Behaviour)
+				{
+					nativeScript.OnUpdate(time);
+				}
+			});
+		}
+
 		if (mainCameraComponent && mainCameraTransform)
 		{
 			Renderer2D::BeginScene(TransformedCamera(*mainCameraTransform, *mainCameraComponent));
@@ -53,7 +71,7 @@ namespace Saturn
 				auto group = m_Registry.group<Component::Transform>(entt::get<Component::SpriteRenderer>);
 				for (auto entity : group)
 				{
-					auto& [transform, spriteRenderer] = group.get<Component::Transform, Component::SpriteRenderer>(entity);
+					auto [transform, spriteRenderer] = group.get<Component::Transform, Component::SpriteRenderer>(entity);
 					Renderer2D::DrawQuad(transform, spriteRenderer);
 				}
 			}
@@ -78,5 +96,58 @@ namespace Saturn
 				cameraComponent.Camera.SetViewportSize(width, height);
 			}
 		}
+	}
+
+	void Scene::OnConstructComponent(entt::registry& registry, entt::entity entity)
+	{
+		registry.view<Component::NativeScript>().each([=](auto entity, Component::NativeScript& nativeScript)
+		{
+			if (nativeScript.Behaviour)
+			{
+				nativeScript.OnCreate();
+			}
+		});
+	}
+	void Scene::OnDestroyComponent(entt::registry& registry, entt::entity entity)
+	{
+		registry.view<Component::NativeScript>().each([=](auto entity, Component::NativeScript& nativeScript)
+		{
+			if (nativeScript.Behaviour)
+			{
+				nativeScript.OnDestroy();
+			}
+		});
+	}
+
+	template<typename T>
+	void Scene::OnComponentAdded(Entity entity, T& component)
+	{
+		static_assert(false);
+	}
+
+	template<>
+	void Scene::OnComponentAdded<Component::Transform>(Entity entity, Component::Transform& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<Component::Tag>(Entity entity, Component::Tag& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<Component::SpriteRenderer>(Entity entity, Component::SpriteRenderer& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<Component::NativeScript>(Entity entity, Component::NativeScript& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<Component::CameraComponent>(Entity entity, Component::CameraComponent& component)
+	{
+		component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
 }

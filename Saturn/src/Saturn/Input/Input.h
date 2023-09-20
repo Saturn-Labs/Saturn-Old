@@ -91,6 +91,8 @@ namespace Saturn
 
 			for (auto& [key, state] : s_FrameMouseButtonMap)
 				state = InputState::NullState;
+
+			MouseScrollDelta = { 0.0f, 0.0f };
 		}
 
 		inline static std::unordered_map<Saturn::KeyCode, InputState>& GetFrameKeyMap()

@@ -10,6 +10,7 @@ namespace Saturn
 	class Scene
 	{
 		friend class Entity;
+		friend class SceneHierarchyPanel;
 	public:
 		Scene();
 		~Scene();
@@ -18,9 +19,15 @@ namespace Saturn
 			const Vector3& Position = Vector3 { 0.0f, 0.0f, 0.0f },
 			const Vector3& Rotation = Vector3 { 0.0f, 0.0f, 0.0f },
 			const Vector3& Scale = Vector3 { 1.0f, 1.0f, 1.0f });
+		void RemoveEntity(Entity entity);
 
 		void OnUpdate(Time time);
 		void OnViewportResize(UInt32 width, UInt32 height);
+
+		void OnConstructComponent(entt::registry& registry, entt::entity entity);
+		void OnDestroyComponent(entt::registry& registry, entt::entity entity);
+		template<typename T>
+		void OnComponentAdded(Entity entity, T& component);
 	private:
 		entt::registry m_Registry;
 

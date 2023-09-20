@@ -27,7 +27,18 @@ namespace Saturn
 		Component& AddComponent(Args&&... args)
 		{
 			ST_CORE_ASSERT(!HasComponent<Component>(), "Entity already has component!");
-			return m_SceneReference->m_Registry.emplace<Component>(m_EntityHandle, std::forward<Args>(args)...);
+			auto& c = m_SceneReference->m_Registry.emplace<Component>(m_EntityHandle, std::forward<Args>(args)...);
+			m_SceneReference->OnComponentAdded<Component>(*this, (Component&)c);
+			return (Component&)c;
+		}
+
+		template<typename S>
+		S& AddScript()
+		{
+			ST_CORE_ASSERT(!HasComponent<Component::NativeScript>(), "Entity already has script component!");
+			Component::NativeScript& component = m_SceneReference->m_Registry.emplace<Component::NativeScript>(m_EntityHandle);
+			S& scriptBeh = component.Bind<S>(*this);
+			return scriptBeh;
 		}
 
 		template<typename Component>
@@ -41,12 +52,32 @@ namespace Saturn
 		void RemoveComponent()
 		{
 			ST_CORE_ASSERT(HasComponent<Component>(), "Entity doesn't have the component!");
-			m_Scene->m_Registry.remove<Component>(m_EntityHandle);
+			m_SceneReference->m_Registry.remove<Component>(m_EntityHandle);
 		}
 
 		operator bool() const
 		{
 			return m_EntityHandle != entt::null;
+		}
+
+		operator UInt32() const
+		{
+			return (UInt32)m_EntityHandle;
+		}
+
+		operator entt::entity() const
+		{
+			return m_EntityHandle;
+		}
+
+		bool operator==(const Entity& other) const
+		{
+			return m_EntityHandle == other.m_EntityHandle && m_SceneReference == other.m_SceneReference;
+		}
+
+		bool operator!=(const Entity& other) const
+		{
+			return !((*this) == other);
 		}
 
 		Component::Transform& GetTransform()

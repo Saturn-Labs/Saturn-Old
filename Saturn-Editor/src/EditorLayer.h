@@ -1,5 +1,6 @@
 #pragma once
 #include "Saturn.h"
+#include "Panels/SceneHierarchy.h"
 
 namespace Saturn
 {
@@ -29,11 +30,15 @@ namespace Saturn
 		Entity m_SquareEntity;
 		Entity m_CameraEntity;
 
-		bool m_ShowImGuiLayer = true;
+		bool m_ShowUILayer = true;
 
 		glm::vec2 m_SceneViewportSize = glm::vec2();
 
 		bool m_ViewportFocused = false;
 		bool m_ViewportHovered = false;
+
+		#pragma region Panels
+		Ref<SceneHierarchyPanel> m_SceneHierarchy;
+		#pragma endregion
 	};
 }

@@ -192,7 +192,10 @@
     <ClInclude Include="src\Saturn\Rendering\TransformationMatrix.h" />
     <ClInclude Include="src\Saturn\Rendering\TransformedCamera.h" />
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Saturn\Scene\Behaviours\CameraBehaviour.h" />
+    <ClInclude Include="src\Saturn\Scene\Behaviours\ScriptableBehaviour.h" />
     <ClInclude Include="src\Saturn\Scene\Components\CameraComponent.h" />
+    <ClInclude Include="src\Saturn\Scene\Components\NativeScript.h" />
     <ClInclude Include="src\Saturn\Scene\Components\SpriteRenderer.h" />
     <ClInclude Include="src\Saturn\Scene\Components\Tag.h" />
     <ClInclude Include="src\Saturn\Scene\Components\Transform.h" />

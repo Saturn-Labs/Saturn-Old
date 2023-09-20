@@ -64,9 +64,9 @@ namespace Sandbox
 	{
 		ST_PROFILE_FUNCTION();
 
-		if (m_Attached && m_ShowImGuiLayer && m_ImGuiIO)
+		if (m_Attached && m_ShowUILayer && m_ImGuiIO)
 		{
-			ImGui::Begin("Sandbox2DLayer properties", &m_ShowImGuiLayer);
+			ImGui::Begin("Sandbox2DLayer properties", &m_ShowUILayer);
 			if (ImGui::BeginMenu("Metrics"))
 			{
 				ImGui::Text("Dear ImGui %s", ImGui::GetVersion());
@@ -106,7 +106,7 @@ namespace Sandbox
 		}
 
 		if (Saturn::Input::GetKeyDown(Saturn::KeyCode::Insert))
-			m_ShowImGuiLayer = !m_ShowImGuiLayer;
+			m_ShowUILayer = !m_ShowUILayer;
 	}
 
 	void Sandbox2DLayer::OnEvent(Saturn::Event& event)

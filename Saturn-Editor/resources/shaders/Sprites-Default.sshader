@@ -39,7 +39,7 @@ program:
                 smath_rotate(identity, CameraRotation.y, vec3(0, 1, 0)) * 
                 smath_rotate(identity, CameraRotation.z, vec3(0, 0, 1));
 
-            Vertex_Out_Position = Projection * view * model *
+            Vertex_Out_Position = Projection * (smath_inverse(view) * model) *
                 vec4(VertexPosition, 1.0);
         }
     :vertex
