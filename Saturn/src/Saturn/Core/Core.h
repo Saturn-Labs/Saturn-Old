@@ -35,6 +35,14 @@ namespace Saturn
 	}
 
 	template<typename T>
+	using WeakRef = std::weak_ptr<T>;
+	template<typename T>
+	constexpr WeakRef<T> GetWeakRef(Ref<T> ref)
+	{
+		return ref;
+	}
+
+	template<typename T>
 	using Scoped = std::unique_ptr<T>;
 	template<typename T, typename... Args>
 	constexpr Scoped<T> CreateScoped(Args&&... args)

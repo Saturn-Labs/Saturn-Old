@@ -1,10 +1,10 @@
 #include "SaturnPch.h"
-#include "Saturn/Shader/ShaderPreprocessor.h"
+#include "Saturn/Shader/ShaderProcessor.h"
 #include "Saturn/IO/IO.h"
 
 namespace Saturn
 {
-	ShaderData ShaderPreprocessor::Preprocess(const std::string& baseIncPath, const std::string& sshader)
+	ShaderData ShaderProcessor::Preprocess(const std::string& baseIncPath, const std::string& sshader)
 	{
 		ST_PROFILE_FUNCTION();
 		if (!sshader.empty())
@@ -203,5 +203,10 @@ namespace Saturn
 				ST_CORE_ERROR("[Shader preprocessor error] One or more headers missing!");
 		}
 		return { "", "", false };
+	}
+
+	ShaderData ShaderProcessor::PostProcess(const ShaderData& data)
+	{
+		return data;
 	}
 }

@@ -14,9 +14,9 @@ namespace Saturn
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-		glFrontFace(GL_CCW);
+		//glEnable(GL_CULL_FACE);
+		//glCullFace(GL_BACK);
+		//glFrontFace(GL_CCW);
 	}
 
 	void OpenGLRendererAPI::SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height)

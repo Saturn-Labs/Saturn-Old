@@ -13,7 +13,7 @@ namespace Saturn
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Saturn Application", UInt32 windowWidth = 640, UInt32 windowHeight = 360);
 		virtual ~Application();
 
 		void Run();
@@ -21,6 +21,11 @@ namespace Saturn
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
+
+		inline static void Close()
+		{
+			Get().m_Running = false;
+		}
 
 		inline static Application& Get()
 		{
@@ -30,6 +35,11 @@ namespace Saturn
 		inline Window& GetWindow() const
 		{
 			return *m_Window;
+		}
+
+		ImGuiLayer* GetImGuiLayer()
+		{
+			return m_ImGuiLayer;
 		}
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);

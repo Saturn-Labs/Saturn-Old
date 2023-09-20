@@ -10,9 +10,10 @@ namespace Saturn
 		const bool valid;
 	};
 
-	class ShaderPreprocessor
+	class ShaderProcessor
 	{
 	public:
 		static ShaderData Preprocess(const std::string& baseIncPath, const std::string& sshader);
+		static ShaderData PostProcess(const ShaderData& data);
 	};
 }

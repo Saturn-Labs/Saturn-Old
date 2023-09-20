@@ -1,6 +1,6 @@
 workspace "Saturn"
     architecture "x64"
-    startproject "Sandbox"
+    startproject "Saturn-Editor"
 
     configurations
     {
@@ -17,6 +17,7 @@ IncludeDir["Glad"] = "Saturn/vendor/Glad/include"
 IncludeDir["ImGui"] = "Saturn/vendor/imgui"
 IncludeDir["glm"] = "Saturn/vendor/glm"
 IncludeDir["stb"] = "Saturn/vendor/stb"
+IncludeDir["entt"] = "Saturn/vendor/entt/include"
 
 group "Dependencies"
     include "Saturn/vendor/GLFW"
@@ -58,7 +59,8 @@ project "Saturn"
         "%{IncludeDir.ImGui}/backends",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.stb}"
+        "%{IncludeDir.stb}",
+        "%{IncludeDir.entt}"
     }
 
     links
@@ -121,8 +123,10 @@ project "Sandbox"
     {
         "Saturn/vendor/spdlog/include",
         "Saturn/src",
+        "Saturn/vendor",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.entt}"
     }
 
     links
@@ -152,3 +156,61 @@ project "Sandbox"
         defines "ST_DIST"
         runtime "Release"
         optimize "On"
+
+
+project "Saturn-Editor"
+        location "Saturn-Editor"
+        kind "ConsoleApp"
+        language "C++"
+        cppdialect "C++17"
+        staticruntime "on"
+    
+        targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+        objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    
+        files 
+        {
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.hpp",
+            "%{prj.name}/src/**.cpp",
+            "%{prj.name}/src/**.cc",
+            "%{prj.name}/src/**.c"
+        }
+    
+        includedirs
+        {
+            "Saturn/vendor/spdlog/include",
+            "Saturn/src",
+            "Saturn/vendor",
+            "%{IncludeDir.glm}",
+            "%{IncludeDir.ImGui}",
+            "%{IncludeDir.entt}"
+        }
+    
+        links
+        {
+            "Saturn"
+        }
+    
+        filter "system:windows"
+            systemversion "latest"
+    
+            defines
+            {
+                "ST_PLATFORM_WINDOWS"
+            }
+    
+        filter "configurations:Debug"
+            defines "ST_DEBUG"
+            runtime "Debug"
+            symbols "On"
+    
+        filter "configurations:Release"
+            defines "ST_RELEASE"
+            runtime "Release"
+            optimize "On"
+    
+        filter "configurations:Dist"
+            defines "ST_DIST"
+            runtime "Release"
+            optimize "On"

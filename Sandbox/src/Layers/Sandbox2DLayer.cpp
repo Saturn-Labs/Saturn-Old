@@ -33,18 +33,26 @@ namespace Sandbox
 		Saturn::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Saturn::RenderCommand::Clear();
 
+		if (sinVal > 180)
+			sinIncVal = -5.0f;
+		else if (sinVal < -180)
+			sinIncVal = 5.0f;
+		sinVal += sinIncVal * time;
+
+		sinValRes = sinf(sinVal);
+
 		if (m_Attached)
 		{
 			Saturn::Renderer2D::ResetStats();
 			Saturn::Renderer2D::BeginScene(m_OrthoCameraController.GetCamera());
 			
-			for (float x = -10.0f; x < 10.0f; x += 0.5f)
-			{
-				for (float y = -10.0f; y < 10.0f; y += 0.5f)
-				{
-					glm::vec4 color = { (x + 10.0f) / 10.0f, 0.3f, (y + 10.0f) / 10.0f, 1.0f };
+			Saturn::Renderer2D::DrawQuad(glm::vec3(m_Position.x + (sinValRes * 2.0f), m_Position.y + (sinValRes * 2.0f), 0.0f), m_RadianRotation, m_Scale, m_Texture, m_Color);
 
-					Saturn::Renderer2D::DrawQuad(glm::vec3(x, y, 0), m_RadianRotation, glm::vec3(0.5f), color * m_Color);
+			for (float x = -7.0f; x < 7.0f; x += 0.5f)
+			{
+				for (float y = -7.0f; y < 7.0f; y += 0.5f)
+				{
+					Saturn::Renderer2D::DrawQuad(glm::vec3{ x, y, 0.0f } + m_Position, m_RadianRotation, glm::vec3(0.45f), glm::vec4{ (x + 7.0f) / 7.0f, 0.2f, (y + 7.0f) / 7.0f, 0.55f } * m_Color);
 				}
 			}
 
@@ -69,15 +77,6 @@ namespace Sandbox
 			}
 			ImGui::Spacing();
 			ImGui::ColorEdit4("Quad Tint Color", &m_Color[0]);
-			ImGui::ColorEdit4("Light Color", &m_LightColor[0]);
-
-			if (ImGui::TreeNode("Light Position"))
-			{
-				ImGui::SliderFloat("X", &m_LightPosition[0], -2.0f, 2.0f);
-				ImGui::SliderFloat("Y", &m_LightPosition[1], -2.0f, 2.0f);
-				ImGui::SliderFloat("Z", &m_LightPosition[2], -2.0f, 2.0f);
-				ImGui::TreePop();
-			}
 
 			if (ImGui::TreeNode("Position"))
 			{

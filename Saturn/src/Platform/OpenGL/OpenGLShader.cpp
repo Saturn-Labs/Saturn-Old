@@ -1,7 +1,7 @@
 #include "SaturnPch.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
-#include "Saturn/Shader/ShaderPreprocessor.h"
+#include "Saturn/Shader/ShaderProcessor.h"
 #include "Saturn/Core/Core.h"
 #include "Saturn/IO/Log.h"
 #include "Saturn/IO/IO.h"
@@ -15,12 +15,12 @@ namespace Saturn
 		: Shader(std::filesystem::path(sshaderFile).stem().string())
 	{
 		ST_PROFILE_FUNCTION();
-		ShaderData data = ShaderPreprocessor::Preprocess(std::filesystem::path(sshaderFile).parent_path().string(), IO::File::ReadAllText(sshaderFile));
+		ShaderData data = ShaderProcessor::Preprocess(std::filesystem::path(sshaderFile).parent_path().string(), IO::File::ReadAllText(sshaderFile));
 		if (data.valid)
 		{
 			m_Id = OpenGLShader::CompileOpenGLShaderProgram(data.vertex, data.fragment);
 
-			#if 1
+			#if 0
 			ST_CORE_TRACE("SSPP VTX: \n{0}", data.vertex);
 			ST_CORE_TRACE("SSPP FRG: \n{0}", data.fragment);
 			#endif
@@ -35,7 +35,7 @@ namespace Saturn
 		: Shader(name)
 	{
 		ST_PROFILE_FUNCTION();
-		ShaderData data = ShaderPreprocessor::Preprocess("resources/shaders", src);
+		ShaderData data = ShaderProcessor::Preprocess("resources/shaders", src);
 		if (data.valid)
 		{
 			m_Id = OpenGLShader::CompileOpenGLShaderProgram(data.vertex, data.fragment);

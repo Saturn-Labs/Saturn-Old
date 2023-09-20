@@ -1,10 +1,15 @@
 #pragma once
-#include "Saturn/Camera/OrthoCamera.h"
+#include "Saturn/Camera/Camera.h"
 
 #include "VertexArray.h"
 #include "Saturn/Shader/Shader.h"
 #include "Saturn/Rendering/TransformationMatrix.h"
 #include "Saturn/Rendering/Texture2D.h"
+#include "Saturn/Rendering/SubTexture2D.h"
+#include "Saturn/Scene/Components/Transform.h"
+#include "Saturn/Scene/Components/SpriteRenderer.h"
+#include "Saturn/Scene/Components/Tag.h"
+#include "TransformedCamera.h"
 
 namespace Saturn
 {
@@ -82,7 +87,7 @@ namespace Saturn
 		static void Initialize();
 		static void Shutdown();
 
-		static void BeginScene(const OrthoCamera& camera);
+		static void BeginScene(const TransformedCamera& transformedCamera);
 		static void EndScene();
 		static void Flush();
 
@@ -90,6 +95,9 @@ namespace Saturn
 		#pragma region DrawPrimitives
 		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const glm::vec4& color);
 		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec4& color = glm::vec4(1.0f));
+		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec2 textureCoords[4], const glm::vec4& color = glm::vec4(1.0f));
+		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<SubTexture2D>& subTexture, const glm::vec4& color = glm::vec4(1.0f));
+		static void DrawQuad(const Component::Transform& transform, const Component::SpriteRenderer& renderer);
 		#pragma endregion
 
 		static void ResetStats()

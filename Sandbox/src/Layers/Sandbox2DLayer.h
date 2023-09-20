@@ -21,11 +21,11 @@ namespace Sandbox
 		glm::vec3 m_Position = glm::vec3(0.0f);
 		glm::vec3 m_RadianRotation = glm::vec3(0.0f);
 		glm::vec3 m_Scale = glm::vec3(1.0f);
-
 		glm::vec4 m_Color = glm::vec4(1.0f);
 
-		glm::vec3 m_LightPosition = glm::vec3(0.0f);
-		glm::vec4 m_LightColor = glm::vec4(1.0f);
+		float sinVal = 0.0f;
+		float sinValRes = 0.0f;
+		float sinIncVal = 15.0f;
 
 		Saturn::Ref<Saturn::Texture2D> m_Texture;
 

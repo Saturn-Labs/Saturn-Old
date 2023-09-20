@@ -109,14 +109,14 @@ namespace Saturn
 		return RenderCommand::GetTime();
 	}
 
-	void Renderer::BeginScene(const OrthoCamera& camera, const LightParams& params)
-	{
-		s_SceneData->Projection = camera.GetProjectionMatrix();
-		s_RenderData->DefaultShader->UploadUniformMat4("ViewProjectionMatrix", s_SceneData->Projection);
-		s_RenderData->DefaultShader->UploadUniformFloat3("LightPosition", params.LightPosition);
-		s_RenderData->DefaultShader->UploadUniformFloat4("LightColor", params.LightColor);
-		s_InScene = true;
-	}
+	//void Renderer::BeginScene(const OrthoCamera& camera, const LightParams& params)
+	//{
+	//	s_SceneData->Projection = camera.GetProjectionMatrix();
+	//	s_RenderData->DefaultShader->UploadUniformMat4("ViewProjectionMatrix", s_SceneData->Projection);
+	//	s_RenderData->DefaultShader->UploadUniformFloat3("LightPosition", params.LightPosition);
+	//	s_RenderData->DefaultShader->UploadUniformFloat4("LightColor", params.LightColor);
+	//	s_InScene = true;
+	//}
 
 	void Renderer::EndScene()
 	{

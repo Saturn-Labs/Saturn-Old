@@ -102,12 +102,12 @@ namespace Saturn
 		delete s_Data;
 	}
 
-	void Renderer2D::BeginScene(const OrthoCamera& camera)
+	void Renderer2D::BeginScene(const TransformedCamera& transformedCamera)
 	{
 		s_Data->SpritesDefaultShader->Bind();
-		s_Data->SpritesDefaultShader->UploadUniformMat4("Projection", camera.GetProjectionMatrix());
-		s_Data->SpritesDefaultShader->UploadUniformFloat3("CameraPosition", camera.GetPosition());
-		s_Data->SpritesDefaultShader->UploadUniformFloat("CameraRotation", camera.GetRotation());
+		s_Data->SpritesDefaultShader->UploadUniformMat4("Projection", transformedCamera.CameraComponent.Camera.GetProjection());
+		s_Data->SpritesDefaultShader->UploadUniformFloat3("CameraPosition", transformedCamera.TransformComponent.Position);
+		s_Data->SpritesDefaultShader->UploadUniformFloat3("CameraRotation", transformedCamera.TransformComponent.Rotation);
 
 		s_Data->QuadVertexBufferPointer = s_Data->QuadVertexBufferBase;
 		s_Data->QuadIndexCount = 0;
@@ -204,5 +204,88 @@ namespace Saturn
 		s_Data->QuadIndexCount += 6;
 
 		Stats.QuadsCount++;
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec2 textureCoords[4], const glm::vec4& color)
+	{
+		ST_PROFILE_FUNCTION();
+
+		if (s_Data->QuadIndexCount >= Renderer2D::Data::MaxIndicesPerBatch)
+			FlushAndReset();
+
+		float textureIndex = 0.0f;
+		for (UInt32 i = 1; i < s_Data->TextureSlotIndex; i++)
+		{
+			if (*s_Data->TextureSlots[i].get() == *texture.get())
+			{
+				textureIndex = (float)i;
+				break;
+			}
+		}
+		if (textureIndex == 0.0f)
+		{
+			textureIndex = (float)s_Data->TextureSlotIndex;
+			s_Data->TextureSlots[s_Data->TextureSlotIndex] = texture;
+			s_Data->TextureSlotIndex++;
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			s_Data->QuadVertexBufferPointer->VertexPosition = s_Data->QuadVertices[i];
+			s_Data->QuadVertexBufferPointer->Color = color;
+			s_Data->QuadVertexBufferPointer->TextureCoord = textureCoords[i];
+			s_Data->QuadVertexBufferPointer->TextureIndex = textureIndex;
+			s_Data->QuadVertexBufferPointer->ModelPosition = position;
+			s_Data->QuadVertexBufferPointer->ModelRotation = rotation;
+			s_Data->QuadVertexBufferPointer->ModelScale = scale;
+			s_Data->QuadVertexBufferPointer++;
+		}
+		s_Data->QuadIndexCount += 6;
+
+		Stats.QuadsCount++;
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<SubTexture2D>& subTexture, const glm::vec4& color)
+	{
+		ST_PROFILE_FUNCTION();
+
+		if (s_Data->QuadIndexCount >= Renderer2D::Data::MaxIndicesPerBatch)
+			FlushAndReset();
+
+		float textureIndex = 0.0f;
+		for (UInt32 i = 1; i < s_Data->TextureSlotIndex; i++)
+		{
+			if (*s_Data->TextureSlots[i].get() == *subTexture->GetTexture2D().get())
+			{
+				textureIndex = (float)i;
+				break;
+			}
+		}
+		if (textureIndex == 0.0f)
+		{
+			textureIndex = (float)s_Data->TextureSlotIndex;
+			s_Data->TextureSlots[s_Data->TextureSlotIndex] = subTexture->GetTexture2D();
+			s_Data->TextureSlotIndex++;
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			s_Data->QuadVertexBufferPointer->VertexPosition = s_Data->QuadVertices[i];
+			s_Data->QuadVertexBufferPointer->Color = color;
+			s_Data->QuadVertexBufferPointer->TextureCoord = { subTexture->GetUV(i).u, subTexture->GetUV(i).v };
+			s_Data->QuadVertexBufferPointer->TextureIndex = textureIndex;
+			s_Data->QuadVertexBufferPointer->ModelPosition = position;
+			s_Data->QuadVertexBufferPointer->ModelRotation = rotation;
+			s_Data->QuadVertexBufferPointer->ModelScale = scale;
+			s_Data->QuadVertexBufferPointer++;
+		}
+		s_Data->QuadIndexCount += 6;
+
+		Stats.QuadsCount++;
+	}
+
+	void Renderer2D::DrawQuad(const Component::Transform& transform, const Component::SpriteRenderer& renderer)
+	{
+		DrawQuad(transform.Position, transform.Rotation, transform.Scale, renderer.Color);
 	}
 }

@@ -9,12 +9,12 @@ namespace Saturn
 {
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name, UInt32 windowWidth, UInt32 windowHeight)
 	{
 		ST_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		m_Window = Scoped<Window>(Window::Create());
+		m_Window = Scoped<Window>(Window::Create({ name, windowWidth, windowHeight }));
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
 		Renderer::Initialize();

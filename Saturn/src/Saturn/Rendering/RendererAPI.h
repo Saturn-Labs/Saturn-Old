@@ -27,6 +27,7 @@ namespace Saturn
 		};
 
 	public:
+		virtual ~RendererAPI() = default;
 		virtual void Initialize() = 0;
 		virtual void SetViewport(UInt32 x, UInt32 y, UInt32 width, UInt32 height) = 0;
 		virtual float GetTime() = 0;
