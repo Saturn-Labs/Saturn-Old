@@ -1,4 +1,8 @@
 #include "EditorLayer.h"
+#include "Saturn/Serialization/SceneSerializer.h"
+
+#include "Saturn/Common/PlatformUtils.h"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Saturn
 {
@@ -108,6 +112,21 @@ namespace Saturn
 		{
 			if (ImGui::BeginMenu("Editor"))
 			{
+				if (ImGui::MenuItem("New", "Ctrl+N"))
+				{
+					EditorLayer::NewScene();
+				}
+
+				if (ImGui::MenuItem("Open...", "Ctrl+O"))
+				{
+					EditorLayer::OpenScene();
+				}
+
+				if (ImGui::MenuItem("Save As..", "Ctrl+Shift+S"))
+				{
+					EditorLayer::SaveAsScene();
+				}
+
 				if (ImGui::MenuItem("Exit", NULL, false))
 					Application::Close();
 				ImGui::EndMenu();
@@ -137,7 +156,37 @@ namespace Saturn
 			}
 
 			ImGui::Image((void*)m_Framebuffer->GetColorAttachmentID(), ImVec2(m_SceneViewportSize.x, m_SceneViewportSize.y), ImVec2{ 0,1 }, ImVec2{ 1,0 });
+
+			// Gizmos
+			Entity selectedEntity = m_SceneHierarchy->GetSelectedEntity();
+			if (selectedEntity && m_GizmoType != -1)
+			{
+				ImGuizmo::SetOrthographic(false);
+
+				ImGuizmo::SetDrawlist();
+				ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
 			
+				//camera
+				auto cameraEntity = m_ActiveScene->GetMainCamera();
+
+				const auto& transform = cameraEntity.GetComponent<Component::Transform>();
+				auto& entityTransform = selectedEntity.GetComponent<Component::Transform>();
+				const auto& camera = cameraEntity.GetComponent<Component::CameraComponent>().Camera;
+
+				const Matrix4x4& CameraProjection = camera.GetProjection();
+				const Matrix4x4& CameraView = transform.GetInverseMatrix();
+				Matrix4x4 GizmoModelMatrix = entityTransform.GetMatrix();
+
+				ImGuizmo::Manipulate(glm::value_ptr(CameraView), glm::value_ptr(CameraProjection),
+					(ImGuizmo::OPERATION)m_GizmoType,
+					ImGuizmo::LOCAL, glm::value_ptr(GizmoModelMatrix));
+
+				if (ImGuizmo::IsUsing())
+				{
+					entityTransform.SetMatrix(GizmoModelMatrix);
+				}
+			}
+
 			ImGui::End();
 		}
 
@@ -149,7 +198,87 @@ namespace Saturn
 
 	void EditorLayer::OnEvent(Event& event)
 	{
-		
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<KeyPressedEvent>(ST_BIND_EVENTFN(&EditorLayer::OnKeyPressed));
+	}
+
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
+	{
+		if (e.GetRepeatCount() > 0)
+			return false;
+
+		bool isControlDown = Input::GetKeyCurrentState(KeyCode::LeftCtrl) == InputState::Down ||
+			Input::GetKeyCurrentState(KeyCode::RightCtrl) == InputState::Down;
+
+		bool isShiftDown = Input::GetKeyCurrentState(KeyCode::RightShift) == InputState::Down ||
+			Input::GetKeyCurrentState(KeyCode::LeftShift) == InputState::Down;
+
+		switch (e.GetKeyCode())
+		{
+			case KeyCode::Q:
+				m_GizmoType = ImGuizmo::TRANSLATE;
+				return true;
+			case KeyCode::E:
+				m_GizmoType = ImGuizmo::ROTATE;
+				return true;
+			case KeyCode::R:
+				m_GizmoType = ImGuizmo::SCALE;
+				return true;
+
+			case KeyCode::N:
+			{
+				if (isControlDown)
+					EditorLayer::NewScene();
+				return true;
+			}
+
+			case KeyCode::O:
+			{
+				if (isControlDown)
+					EditorLayer::OpenScene();
+				return true;
+			}
+
+			case KeyCode::S:
+			{
+				if (isControlDown && isShiftDown)
+					EditorLayer::SaveAsScene();
+				return true;
+			}
+			default:
+				return false;
+		}
+	}
+
+	void EditorLayer::NewScene()
+	{
+		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene->OnViewportResize((UInt32)m_SceneViewportSize.x, (UInt32)m_SceneViewportSize.y);
+		m_SceneHierarchy->SetContext(m_ActiveScene);
+	}
+
+	void EditorLayer::OpenScene()
+	{
+		std::string filepath = FileDialog::OpenFile("Saturn Scene (*.saturn)\0*.saturn\0");
+		if (!filepath.empty())
+		{
+			m_ActiveScene = CreateRef<Scene>();
+			m_ActiveScene->OnViewportResize((UInt32)m_SceneViewportSize.x, (UInt32)m_SceneViewportSize.y);
+			m_SceneHierarchy->SetContext(m_ActiveScene);
+
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Deserialize(filepath);
+		}
+	}
+
+	void EditorLayer::SaveAsScene()
+	{
+		std::string filepath = FileDialog::SaveFile("Saturn Scene (*.saturn)\0*.saturn\0");
+		if (!filepath.empty())
+		{
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Serialize(filepath);
+		}
 	}
 }
 

@@ -23,17 +23,7 @@ namespace Saturn
 
 		virtual void OnUpdate(Time time) override
 		{
-			if (m_CameraTransform)
-			{
-				if (Input::GetKeyCurrentState(KeyCode::A) == InputState::Down)
-					m_CameraTransform->Position.x -= m_CameraSpeed * time;
-				if (Input::GetKeyCurrentState(KeyCode::D) == InputState::Down)
-					m_CameraTransform->Position.x += m_CameraSpeed * time;
-				if (Input::GetKeyCurrentState(KeyCode::W) == InputState::Down)
-					m_CameraTransform->Position.y += m_CameraSpeed * time;
-				if (Input::GetKeyCurrentState(KeyCode::S) == InputState::Down)
-					m_CameraTransform->Position.y -= m_CameraSpeed * time;
-			}
+			
 		}
 
 		virtual void OnDestroy() override

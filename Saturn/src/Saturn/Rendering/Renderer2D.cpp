@@ -22,9 +22,10 @@ namespace Saturn
 				{ ShaderDataType::Float4, "Color" },
 				{ ShaderDataType::Float2, "TextureCoord" },
 				{ ShaderDataType::Float, "TextureIndex" },
-				{ ShaderDataType::Float3, "ModelPosition" },
-				{ ShaderDataType::Float3, "ModelRotation" },
-				{ ShaderDataType::Float3, "ModelScale" },
+				{ ShaderDataType::Float4, "ObjT0" },
+				{ ShaderDataType::Float4, "ObjT1" },
+				{ ShaderDataType::Float4, "ObjT2" },
+				{ ShaderDataType::Float4, "ObjT3" }
 			});
 			s_Data->QuadVertexArray->AddVertexBuffer(s_Data->QuadVertexBuffer);
 		}
@@ -106,8 +107,7 @@ namespace Saturn
 	{
 		s_Data->SpritesDefaultShader->Bind();
 		s_Data->SpritesDefaultShader->UploadUniformMat4("Projection", transformedCamera.CameraComponent.Camera.GetProjection());
-		s_Data->SpritesDefaultShader->UploadUniformFloat3("CameraPosition", transformedCamera.TransformComponent.Position);
-		s_Data->SpritesDefaultShader->UploadUniformFloat3("CameraRotation", transformedCamera.TransformComponent.Rotation);
+		s_Data->SpritesDefaultShader->UploadUniformMat4("View", transformedCamera.TransformComponent.GetInverseMatrix());
 
 		s_Data->QuadVertexBufferPointer = s_Data->QuadVertexBufferBase;
 		s_Data->QuadIndexCount = 0;
@@ -134,7 +134,6 @@ namespace Saturn
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray.get(), s_Data->QuadIndexCount);
 		Stats.DrawCalls++;
 	}
-
 	void Renderer2D::FlushAndReset()
 	{
 		EndScene();
@@ -144,7 +143,7 @@ namespace Saturn
 		s_Data->TextureSlotIndex = 1;
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const Matrix4x4& transformationMatrix, const glm::vec4& color)
 	{
 		ST_PROFILE_FUNCTION();
 
@@ -157,17 +156,14 @@ namespace Saturn
 			s_Data->QuadVertexBufferPointer->Color = color;
 			s_Data->QuadVertexBufferPointer->TextureCoord = s_Data->QuadTexCoords[i];
 			s_Data->QuadVertexBufferPointer->TextureIndex = 0.0f;
-			s_Data->QuadVertexBufferPointer->ModelPosition = position;
-			s_Data->QuadVertexBufferPointer->ModelRotation = rotation;
-			s_Data->QuadVertexBufferPointer->ModelScale = scale;
+			s_Data->QuadVertexBufferPointer->ObjectTransformation = transformationMatrix;
 			s_Data->QuadVertexBufferPointer++;
 		}
 		s_Data->QuadIndexCount += 6;
 
 		Stats.QuadsCount++;
 	}
-
-	void Renderer2D::DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const Matrix4x4& transformationMatrix, const Ref<Texture2D>& texture, const glm::vec4& color)
 	{
 		ST_PROFILE_FUNCTION();
 
@@ -196,17 +192,14 @@ namespace Saturn
 			s_Data->QuadVertexBufferPointer->Color = color;
 			s_Data->QuadVertexBufferPointer->TextureCoord = s_Data->QuadTexCoords[i];
 			s_Data->QuadVertexBufferPointer->TextureIndex = textureIndex;
-			s_Data->QuadVertexBufferPointer->ModelPosition = position;
-			s_Data->QuadVertexBufferPointer->ModelRotation = rotation;
-			s_Data->QuadVertexBufferPointer->ModelScale = scale;
+			s_Data->QuadVertexBufferPointer->ObjectTransformation = transformationMatrix;
 			s_Data->QuadVertexBufferPointer++;
 		}
 		s_Data->QuadIndexCount += 6;
 
 		Stats.QuadsCount++;
 	}
-
-	void Renderer2D::DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec2 textureCoords[4], const glm::vec4& color)
+	void Renderer2D::DrawQuad(const Matrix4x4& transformationMatrix, const Ref<Texture2D>& texture, const glm::vec2 textureCoords[4], const glm::vec4& color)
 	{
 		ST_PROFILE_FUNCTION();
 
@@ -235,17 +228,14 @@ namespace Saturn
 			s_Data->QuadVertexBufferPointer->Color = color;
 			s_Data->QuadVertexBufferPointer->TextureCoord = textureCoords[i];
 			s_Data->QuadVertexBufferPointer->TextureIndex = textureIndex;
-			s_Data->QuadVertexBufferPointer->ModelPosition = position;
-			s_Data->QuadVertexBufferPointer->ModelRotation = rotation;
-			s_Data->QuadVertexBufferPointer->ModelScale = scale;
+			s_Data->QuadVertexBufferPointer->ObjectTransformation = transformationMatrix;
 			s_Data->QuadVertexBufferPointer++;
 		}
 		s_Data->QuadIndexCount += 6;
 
 		Stats.QuadsCount++;
 	}
-
-	void Renderer2D::DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<SubTexture2D>& subTexture, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const Matrix4x4& transformationMatrix, const Ref<SubTexture2D>& subTexture, const glm::vec4& color)
 	{
 		ST_PROFILE_FUNCTION();
 
@@ -274,18 +264,15 @@ namespace Saturn
 			s_Data->QuadVertexBufferPointer->Color = color;
 			s_Data->QuadVertexBufferPointer->TextureCoord = { subTexture->GetUV(i).u, subTexture->GetUV(i).v };
 			s_Data->QuadVertexBufferPointer->TextureIndex = textureIndex;
-			s_Data->QuadVertexBufferPointer->ModelPosition = position;
-			s_Data->QuadVertexBufferPointer->ModelRotation = rotation;
-			s_Data->QuadVertexBufferPointer->ModelScale = scale;
+			s_Data->QuadVertexBufferPointer->ObjectTransformation = transformationMatrix;
 			s_Data->QuadVertexBufferPointer++;
 		}
 		s_Data->QuadIndexCount += 6;
 
 		Stats.QuadsCount++;
 	}
-
 	void Renderer2D::DrawQuad(const Component::Transform& transform, const Component::SpriteRenderer& renderer)
 	{
-		DrawQuad(transform.Position, transform.Rotation, transform.Scale, renderer.Color);
+		DrawQuad(transform.GetMatrix(), renderer.Color);
 	}
 }

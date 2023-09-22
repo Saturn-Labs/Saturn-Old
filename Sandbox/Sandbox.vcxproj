@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>ST_PLATFORM_WINDOWS;ST_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Saturn\vendor\spdlog\include;..\Saturn\src;..\Saturn\vendor;..\Saturn\vendor\glm;..\Saturn\vendor\imgui;..\Saturn\vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Saturn\vendor\spdlog\include;..\Saturn\src;..\Saturn\vendor;..\Saturn\vendor\glm;..\Saturn\vendor\imgui;..\Saturn\vendor\entt\include;..\Saturn\vendor\yaml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -96,7 +96,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>ST_PLATFORM_WINDOWS;ST_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Saturn\vendor\spdlog\include;..\Saturn\src;..\Saturn\vendor;..\Saturn\vendor\glm;..\Saturn\vendor\imgui;..\Saturn\vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Saturn\vendor\spdlog\include;..\Saturn\src;..\Saturn\vendor;..\Saturn\vendor\glm;..\Saturn\vendor\imgui;..\Saturn\vendor\entt\include;..\Saturn\vendor\yaml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -117,7 +117,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>ST_PLATFORM_WINDOWS;ST_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Saturn\vendor\spdlog\include;..\Saturn\src;..\Saturn\vendor;..\Saturn\vendor\glm;..\Saturn\vendor\imgui;..\Saturn\vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Saturn\vendor\spdlog\include;..\Saturn\src;..\Saturn\vendor;..\Saturn\vendor\glm;..\Saturn\vendor\imgui;..\Saturn\vendor\entt\include;..\Saturn\vendor\yaml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -145,6 +145,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Saturn\Saturn.vcxproj">
       <Project>{A21698D0-8EB8-C2A6-7773-D6FA63B449F7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Saturn\vendor\yaml\yaml-cpp.vcxproj">
+      <Project>{88F1A057-74BE-FB62-9DD7-E90A890331F1}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

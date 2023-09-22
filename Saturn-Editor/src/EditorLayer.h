@@ -2,6 +2,8 @@
 #include "Saturn.h"
 #include "Panels/SceneHierarchy.h"
 
+#include "ImGuizmo/ImGuizmo.h"
+
 namespace Saturn
 {
 	class EditorLayer : public Layer
@@ -15,8 +17,14 @@ namespace Saturn
 		virtual void OnUpdate(Time time) override;
 		virtual void OnImGuiRender() override;
 		virtual void OnEvent(Event& event) override;
+		virtual bool OnKeyPressed(KeyPressedEvent& e);
 
+		void NewScene();
+		void OpenScene();
+		void SaveAsScene();
 	private:
+		int m_GizmoType = -1;
+
 		glm::vec3 m_Position = glm::vec3(0.0f);
 		glm::vec3 m_RadianRotation = glm::vec3(0.0f);
 		glm::vec3 m_Scale = glm::vec3(1.0f);

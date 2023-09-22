@@ -1,0 +1,47 @@
+Scene: Untitled
+Entities:
+  - Entity: 327467404365487
+    Component::Tag:
+      Name: Green Square
+    Component::Transform:
+      Position: [-1.04999995, 1.12, 0]
+      Rotation: [0, -0.0157079622, 0]
+      Scale: [1, 1, 1]
+    Component::SpriteRenderer:
+      Color: [0.054054141, 1, 0, 1]
+  - Entity: 327467404365487
+    Component::Tag:
+      Name: Test Object
+    Component::Transform:
+      Position: [-1.57758522, -1.02806282, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    Component::SpriteRenderer:
+      Color: [1, 0, 0, 1]
+  - Entity: 327467404365487
+    Component::Tag:
+      Name: Main Camera
+    Component::Transform:
+      Position: [-0.54107666, -0.394439697, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    Component::CameraComponent:
+      Camera:
+        ProjectionType: 0
+        FieldOfView: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthoSize: 5
+        OrthoNear: -1
+        OrthoFar: 1
+      IsMain: true
+      FixedAspectRatio: false
+  - Entity: 327467404365487
+    Component::Tag:
+      Name: Square Entity
+    Component::Transform:
+      Position: [0.600000024, -0.529999971, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    Component::SpriteRenderer:
+      Color: [0, 0.733590841, 1, 1]

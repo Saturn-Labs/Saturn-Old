@@ -22,10 +22,7 @@ namespace Saturn
 			glm::vec4 Color;
 			glm::vec2 TextureCoord;
 			float TextureIndex;
-
-			glm::vec3 ModelPosition;
-			glm::vec3 ModelRotation;
-			glm::vec3 ModelScale;
+			Matrix4x4 ObjectTransformation;
 		};
 		struct Data
 		{
@@ -93,10 +90,10 @@ namespace Saturn
 
 
 		#pragma region DrawPrimitives
-		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const glm::vec4& color);
-		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec4& color = glm::vec4(1.0f));
-		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<Texture2D>& texture, const glm::vec2 textureCoords[4], const glm::vec4& color = glm::vec4(1.0f));
-		static void DrawQuad(const glm::vec3 position, const glm::vec3 rotation, const glm::vec3 scale, const Ref<SubTexture2D>& subTexture, const glm::vec4& color = glm::vec4(1.0f));
+		static void DrawQuad(const Matrix4x4& transformationMatrix, const glm::vec4& color);
+		static void DrawQuad(const Matrix4x4& transformationMatrix, const Ref<Texture2D>& texture, const glm::vec4& color = glm::vec4(1.0f));
+		static void DrawQuad(const Matrix4x4& transformationMatrix, const Ref<Texture2D>& texture, const glm::vec2 textureCoords[4], const glm::vec4& color = glm::vec4(1.0f));
+		static void DrawQuad(const Matrix4x4& transformationMatrix, const Ref<SubTexture2D>& subTexture, const glm::vec4& color = glm::vec4(1.0f));
 		static void DrawQuad(const Component::Transform& transform, const Component::SpriteRenderer& renderer);
 		#pragma endregion
 

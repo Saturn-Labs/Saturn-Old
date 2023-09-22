@@ -11,6 +11,7 @@ namespace Saturn
 	{
 		friend class Entity;
 		friend class SceneHierarchyPanel;
+		friend class SceneSerializer;
 	public:
 		Scene();
 		~Scene();
@@ -28,6 +29,8 @@ namespace Saturn
 		void OnDestroyComponent(entt::registry& registry, entt::entity entity);
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
+
+		Entity GetMainCamera();
 	private:
 		entt::registry m_Registry;
 

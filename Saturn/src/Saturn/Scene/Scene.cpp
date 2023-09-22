@@ -150,4 +150,16 @@ namespace Saturn
 	{
 		component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
+
+	Entity Scene::GetMainCamera()
+	{
+		auto view = m_Registry.view<Component::CameraComponent>();
+		for (auto entity : view)
+		{
+			const auto& camera = view.get<Component::CameraComponent>(entity);
+			if (camera.Main)
+				return Entity(entity, this);
+		}
+		return {};
+	}
 }

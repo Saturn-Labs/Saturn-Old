@@ -4,6 +4,8 @@
 #include "Saturn/Core/Core.h"
 #include "../Components/Transform.h"
 #include "../Components/Tag.h"
+#include "../Components/CameraComponent.h"
+#include "../Components/SpriteRenderer.h"
 
 namespace Saturn
 {
@@ -39,6 +41,15 @@ namespace Saturn
 			Component::NativeScript& component = m_SceneReference->m_Registry.emplace<Component::NativeScript>(m_EntityHandle);
 			S& scriptBeh = component.Bind<S>(*this);
 			return scriptBeh;
+		}
+
+		template<typename Component, typename... CArgs>
+		Component& GetOrAddComponent(CArgs&&... args)
+		{
+			if (HasComponent<Component>())
+				return GetComponent<Component>();
+			else
+				return AddComponent<Component>(std::forward<CArgs>(args)...);
 		}
 
 		template<typename Component>

@@ -1,0 +1,29 @@
+Scene: Untitled
+Entities:
+  - Entity: 327467404365487
+    Component::Tag:
+      Name: Main Camera
+    Component::Transform:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    Component::CameraComponent:
+      Camera:
+        ProjectionType: 0
+        FieldOfView: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthoSize: 5
+        OrthoNear: -1
+        OrthoFar: 1
+      IsMain: true
+      FixedAspectRatio: false
+  - Entity: 327467404365487
+    Component::Tag:
+      Name: Square Entity
+    Component::Transform:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    Component::SpriteRenderer:
+      Color: [0.300000012, 0.600000024, 0.400000006, 1]

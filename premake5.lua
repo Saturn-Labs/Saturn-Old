@@ -18,11 +18,14 @@ IncludeDir["ImGui"] = "Saturn/vendor/imgui"
 IncludeDir["glm"] = "Saturn/vendor/glm"
 IncludeDir["stb"] = "Saturn/vendor/stb"
 IncludeDir["entt"] = "Saturn/vendor/entt/include"
+IncludeDir["yaml"] = "Saturn/vendor/yaml/include"
+IncludeDir["ImGuizmo"] = "Saturn/vendor/ImGuizmo"
 
 group "Dependencies"
     include "Saturn/vendor/GLFW"
     include "Saturn/vendor/Glad"
     include "Saturn/vendor/imgui"
+    include "Saturn/vendor/yaml"
 group ""
 
 project "Saturn"
@@ -46,7 +49,9 @@ project "Saturn"
         "%{prj.name}/vendor/stb/stb_image.h",
         "%{prj.name}/vendor/stb/stb_image.cpp",
         "%{prj.name}/src/**.cc",
-        "%{prj.name}/src/**.c"
+        "%{prj.name}/src/**.c",
+        "Saturn/vendor/ImGuizmo/ImGuizmo.h",
+        "Saturn/vendor/ImGuizmo/ImGuizmo.cpp",
     }
 
     includedirs
@@ -60,7 +65,9 @@ project "Saturn"
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.yaml}",
+        "%{IncludeDir.ImGuizmo}"
     }
 
     links
@@ -68,8 +75,12 @@ project "Saturn"
         "GLFW",
         "Glad",
         "ImGui",
+        "yaml-cpp",
         "opengl32.lib"
     }
+
+    filter "files:Saturn/vendor/ImGuizmo/**.cpp"
+        flags { "NoPCH" }
 
     defines
     {
@@ -126,12 +137,14 @@ project "Sandbox"
         "Saturn/vendor",
         "%{IncludeDir.glm}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.yaml}"
     }
 
     links
     {
-        "Saturn"
+        "Saturn",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -184,7 +197,8 @@ project "Saturn-Editor"
             "Saturn/vendor",
             "%{IncludeDir.glm}",
             "%{IncludeDir.ImGui}",
-            "%{IncludeDir.entt}"
+            "%{IncludeDir.entt}",
+            "%{IncludeDir.yaml}"
         }
     
         links

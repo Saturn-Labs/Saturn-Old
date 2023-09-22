@@ -10,3 +10,9 @@
 [submodule "Saturn/vendor/glm"]
 	path = Saturn/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "Saturn/vendor/yaml"]
+	path = Saturn/vendor/yaml
+	url = https://github.com/thecherno/yaml-cpp
+[submodule "Saturn/vendor/ImGuizmo"]
+	path = Saturn/vendor/ImGuizmo
+	url = https://github.com/thecherno/Imguizmo

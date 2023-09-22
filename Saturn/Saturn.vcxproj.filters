@@ -49,17 +49,26 @@
     <Filter Include="src\Saturn\Scene">
       <UniqueIdentifier>{B61B04A1-A214-23F3-CB46-0878B79E02FF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Saturn\Scene\Behaviours">
+      <UniqueIdentifier>{5D0BB4AA-C918-E290-52FF-DD7BBE0BAE47}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Saturn\Scene\Components">
       <UniqueIdentifier>{0B838E4B-7790-BC31-0077-B81C6C8388E8}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Saturn\Scene\Entity">
       <UniqueIdentifier>{421FB287-AE56-FA1E-B760-5E4223172118}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Saturn\Serialization">
+      <UniqueIdentifier>{2690F7F8-12B5-4679-3B00-2C0927844597}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Saturn\Shader">
       <UniqueIdentifier>{5FB1DFC1-CBC7-DD57-143F-69798094AEDF}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ImGuizmo">
+      <UniqueIdentifier>{73BF7F4C-DF4A-ED10-E85B-700554664911}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor\stb">
       <UniqueIdentifier>{8BD3C5A8-778B-07F6-E092-E051CC69A2E6}</UniqueIdentifier>
@@ -100,6 +109,9 @@
       <Filter>src\Saturn\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Common\Math.h">
+      <Filter>src\Saturn\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Common\PlatformUtils.h">
       <Filter>src\Saturn\Common</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Common\Types.h">
@@ -213,7 +225,16 @@
     <ClInclude Include="src\Saturn\Rendering\VertexArray.h">
       <Filter>src\Saturn\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\Scene\Behaviours\CameraBehaviour.h">
+      <Filter>src\Saturn\Scene\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Scene\Behaviours\ScriptableBehaviour.h">
+      <Filter>src\Saturn\Scene\Behaviours</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Scene\Components\CameraComponent.h">
+      <Filter>src\Saturn\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Saturn\Scene\Components\NativeScript.h">
       <Filter>src\Saturn\Scene\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Saturn\Scene\Components\SpriteRenderer.h">
@@ -231,6 +252,9 @@
     <ClInclude Include="src\Saturn\Scene\Scene.h">
       <Filter>src\Saturn\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Saturn\Serialization\SceneSerializer.h">
+      <Filter>src\Saturn\Serialization</Filter>
+    </ClInclude>
     <ClInclude Include="src\Saturn\Shader\Shader.h">
       <Filter>src\Saturn\Shader</Filter>
     </ClInclude>
@@ -243,12 +267,12 @@
     <ClInclude Include="src\SaturnPch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="vendor\ImGuizmo\ImGuizmo.h">
+      <Filter>vendor\ImGuizmo</Filter>
+    </ClInclude>
     <ClInclude Include="vendor\stb\stb_image.h">
       <Filter>vendor\stb</Filter>
     </ClInclude>
-    <ClInclude Include="src\Saturn\Scene\Components\NativeScript.h" />
-    <ClInclude Include="src\Saturn\Scene\Behaviours\ScriptableBehaviour.h" />
-    <ClInclude Include="src\Saturn\Scene\Behaviours\CameraBehaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -271,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp">
+      <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
@@ -341,6 +368,9 @@
     <ClCompile Include="src\Saturn\Scene\Scene.cpp">
       <Filter>src\Saturn\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Saturn\Serialization\SceneSerializer.cpp">
+      <Filter>src\Saturn\Serialization</Filter>
+    </ClCompile>
     <ClCompile Include="src\Saturn\Shader\Shader.cpp">
       <Filter>src\Saturn\Shader</Filter>
     </ClCompile>
@@ -352,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="src\SaturnPch.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\ImGuizmo\ImGuizmo.cpp">
+      <Filter>vendor\ImGuizmo</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stb\stb_image.cpp">
       <Filter>vendor\stb</Filter>

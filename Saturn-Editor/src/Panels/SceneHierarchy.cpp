@@ -1,6 +1,7 @@
 #include "SceneHierarchy.h"
 #include "imgui.h"
 #include "imgui_internal.h"
+#include "Saturn/Common/Math.h"
 
 namespace Saturn
 {
@@ -12,6 +13,7 @@ namespace Saturn
 	void SceneHierarchyPanel::SetContext(const Ref<Scene>& scene)
 	{
 		m_Context = scene;
+		m_SelectionContext = {};
 	}
 
 	void SceneHierarchyPanel::OnImGuiRender()
@@ -105,10 +107,13 @@ namespace Saturn
 			
 	}
 
-	static void DrawVec3Control(const std::string label,
+	static bool DrawVec3Control(const std::string label,
 		Vector3& vector, float resetValue = 0.0f,
 		float collumnWidth = 100.0f, float speed = 0.1f, float min = 0.0f, float max = 0.0f, const char* format = "%.2f", const char* uuid = nullptr)
 	{
+		bool dinteracting = false;
+		bool binteracting = false;
+
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
 
@@ -133,10 +138,14 @@ namespace Saturn
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
 		ImGui::PushFont(boldFont);
 		if (ImGui::Button("X", buttonSize))
+		{
 			vector.x = resetValue;
+			binteracting = true;
+		}
 		ImGui::PopFont();
 		ImGui::SameLine();
-		ImGui::DragFloat("##X", &vector.x, speed, min, max, format);
+		if (ImGui::DragFloat("##X", &vector.x, speed, min, max, format))
+			dinteracting = true;
 		ImGui::PopItemWidth();
 		ImGui::SameLine();
 		ImGui::PopStyleColor(3);
@@ -147,10 +156,14 @@ namespace Saturn
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
 		ImGui::PushFont(boldFont);
 		if (ImGui::Button("Y", buttonSize))
+		{
 			vector.y = resetValue;
+			binteracting = true;
+		}
 		ImGui::PopFont();
 		ImGui::SameLine();
-		ImGui::DragFloat("##Y", &vector.y, speed, min, max, format);
+		if (ImGui::DragFloat("##Y", &vector.y, speed, min, max, format))
+			dinteracting = true;
 		ImGui::PopItemWidth();
 		ImGui::SameLine();
 		ImGui::PopStyleColor(3);
@@ -161,10 +174,14 @@ namespace Saturn
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
 		ImGui::PushFont(boldFont);
 		if (ImGui::Button("Z", buttonSize))
+		{
 			vector.z = resetValue;
+			binteracting = true;
+		}
 		ImGui::PopFont();
 		ImGui::SameLine();
-		ImGui::DragFloat("##Z", &vector.z, speed, min, max, format);
+		if (ImGui::DragFloat("##Z", &vector.z, speed, min, max, format))
+			dinteracting = true;
 		ImGui::PopItemWidth();
 		ImGui::PopStyleColor(3);
 
@@ -173,6 +190,8 @@ namespace Saturn
 		ImGui::Columns(1);
 
 		ImGui::PopID();
+
+		return binteracting || dinteracting;
 	}
 
 	template<typename T, typename UIFunc>
@@ -239,11 +258,17 @@ namespace Saturn
 		DrawComponent<Component::Transform>("Transform", entity, 
 			[](Component::Transform& transform)
 		{
-			static Vector3 radianRotation{};
-			DrawVec3Control("Position", transform.Position, 0.0f, 100.0f, 0.075f, 0.0f, 0.0f, "%.2f", "MTRP");
-			DrawVec3Control("Rotation", radianRotation, 0.0f, 100.0f, 0.15f, 0.0f, 0.0f, "%.2f", "MTRR");
-			transform.Rotation = (radianRotation * 3.14159265359f / 180.0f); //% 360.0f;
-			DrawVec3Control("Scale", transform.Scale, 1.0f, 100.0f, 0.15f, 0.0f, 0.0f, "%.2f", "MTRS");
+			Vector3 translation = transform.GetTranslation();
+			if (DrawVec3Control("Position", translation, 0.0f, 100.0f, 0.075f, 0.0f, 0.0f, "%.2f", "MTRP"))
+				transform.SetTranslation(translation);
+			
+			Vector3 radianRotation = Math::ToDegrees(transform.GetEulerAngles());
+			if (DrawVec3Control("Rotation", radianRotation, 0.0f, 100.0f, 0.15f, 0.0f, 0.0f, "%.2f", "MTRR"))
+				transform.SetEulerAngles(Math::ToRadians(radianRotation));
+
+			Vector3 scale = transform.GetScale();
+			if (DrawVec3Control("Scale", scale, 1.0f, 100.0f, 0.15f, 0.0f, 0.0f, "%.2f", "MTRS"))
+				transform.SetScale(scale);
 		});
 		DrawComponent<Component::CameraComponent>("Camera", entity,
 			[](Component::CameraComponent& camera)
